@@ -1,3 +1,4 @@
+import { ServiceConfirmationComponent } from './service-confirmation/service-confirmation.component';
 import { Routes } from '@angular/router';
 import { TechinicalComponent } from './techinical/techinical.component';
 import { DeleiveryComponent } from './deleivery/deleivery.component';
@@ -18,5 +19,10 @@ export const routes: Routes = [
         path: 'supplier' , 
         component : SupplierComponent , 
         title: 'تسجيل المورد'
-    }
+    },
+    {
+        path: 'serviceconfirmation' ,
+        component : ServiceConfirmationComponent ,
+        title: "عرض سعر"
+        }
 ];

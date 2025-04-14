@@ -1,0 +1,108 @@
+<div class="container py-4 text-white" style="background-color: #0f1e2e;" dir="rtl">
+    <div class="text-center mb-4">
+      <span class="badge bg-warning text-dark fs-5 px-3 py-2 rounded-pill">عرض سعر</span>
+    </div>
+  
+    <h5 class="text-center mb-4">
+      لقد اطلعت علي طلب الخدمة بالكامل و ارغب في تنفيذ الخدمة طبقا الي الاتي :
+    </h5>
+  
+    <form [formGroup]="serviceform" class="h-100 d-flex flex-column justify-content-between" (ngSubmit)="onSubmit()">
+      <div class="row mb-3">
+        <div class="col-md-3 mb-2">
+          <input type="text"  class="form-control rounded-pill" value="المطلوب عمله" readonly>
+        </div>
+        <div class="col-md-8 mb-2">
+          <textarea class="form-control text-end rounded-pill" formControlName="servicename" rows="2" placeholder="المطلوب عمله"></textarea>
+        </div>
+        <div class="form-text text-danger">
+          @if (FormControls['servicename'].invalid && FormControls['servicename'].touched)
+          {
+          @if (FormControls['servicename'].hasError('required'))
+          {
+          <span style="font-size: large;">يجب كتابة المطلوب عمله</span>
+          }
+          }
+         </div>
+      </div>
+  
+      <div class="row mb-3 text-end">
+        <div class="col-md-3 mb-2">
+          <input type="text"  class="form-control rounded-pill" value="الموعد المحدد لبدء الخدمة" readonly>
+        </div>
+        <div class="col-md-3">
+          <input type="date" class="form-control text-end rounded-pill" formControlName="servicedate" lang="ar" placeholder="تاريخ اليوم">
+        </div>
+        <div class="col-md-3">
+          <input type="time" class="form-control text-end rounded-pill" formControlName="servicetime" lang="ar" placeholder="الساعة">
+        </div>
+        <div class="col-md-3">
+          <button type="submit" class="btn btn-warning px-4 py-2 rounded-pill">جاهز الآن</button>
+        </div>
+        <div class="form-text text-danger">
+          @if (FormControls['servicedate'].invalid && FormControls['servicedate'].touched)
+          {
+          @if (FormControls['servicedate'].hasError('required'))
+          {
+          <span style="font-size: large;">يجب تحديد اليوم</span>
+          }
+          }
+         </div>
+         <div class="form-text text-danger">
+          @if (FormControls['servicetime'].invalid && FormControls['servicetime'].touched)
+          {
+          @if (FormControls['servicetime'].hasError('required'))
+          {
+          <span style="font-size: large;">يجب تحديد الساعة</span>
+          }
+          }
+         </div>
+      
+      </div>
+  
+      <div class="row mb-3 text-end">
+         <div class="col-md-3 mb-2">
+          <input type="text"  class="form-control rounded-pill" value="تكلفة الخدمة" readonly>
+        </div>
+        <div class=" mb-2 col-md-6">
+          <input type="text" class="form-control text-end rounded-pill" formControlName="servicecost" placeholder="المبلغ بالجنيه المصري">
+        </div>
+        <div class="form-text text-white mb-2 col-md-2">(شاملة الانتقالات)</div>
+        <div class="form-text text-danger">
+          @if (FormControls['servicecost'].invalid && FormControls['servicecost'].touched)
+          {
+          @if (FormControls['servicecost'].hasError('required'))
+          {
+          <span style="font-size: large;">يجب كتابة السعر المتوقع</span>
+          }
+          }
+         </div>
+      </div>
+  
+      <div class="row mb-3 text-end">
+        <div class="col-md-3 mb-2">
+          <input type="text"  class="form-control rounded-pill" value="الزمن المتوقع لاداء الخدمة" readonly>
+        </div>
+        <div class="col-md-4 mb-2">
+          <input type="text" class="form-control text-end rounded-pill" placeholder="اليوم">
+        </div>
+        <div class="col-md-4">
+          <input type="text" class="form-control text-end rounded-pill" placeholder="الساعة">
+        </div>
+      </div>
+  
+      <div class="row mb-4 text-end">
+        <div class="col-md-3 mb-2">
+          <input type="text"  class="form-control rounded-pill" value="ملاحظات" readonly>
+        </div>
+        <div class="col-md-8 mb-2">
+          <textarea class="form-control text-end rounded-pill" rows="2" placeholder="اكتب ملاحظاتك هنا"></textarea>
+        </div>
+      </div>
+  
+      <div >
+        <input type="submit" value="تأكيد الطلب" class="btn btn-warning  rounded-pill">
+      </div>
+    </form>
+  </div>
+  
