@@ -1,0 +1,37 @@
+<!-- technician-evaluation.component.html -->
+<div class="container mt-4" dir="rtl">
+    <h2 class="text-center mb-4">تقييم الفنيين</h2>
+  
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let tech of technicians">
+        <div class="card h-100">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ tech.name }}</h5>
+  
+            <div class="star-rating">
+              <span 
+                *ngFor="let star of [1, 2, 3, 4, 5]" 
+                (click)="evaluateTechnician(tech.id, star)" 
+                (mouseenter)="setHover(tech.id, star)" 
+                (mouseleave)="clearHover(tech.id)"
+                [ngClass]="{
+                  'star-filled': star <= (tech.hoverRating || tech.rating),
+                  'star-empty': star > (tech.hoverRating || tech.rating)
+                }"
+                style="cursor: pointer; font-size: 24px;"
+              >&#9733;</span>
+            </div>
+            <p class="text-muted">({{ tech.rating }}/5)</p>
+  
+            <textarea class="form-control mb-2" placeholder="اكتب تعليقك هنا" [(ngModel)]="tech.reviewText"></textarea>
+  
+            <p class="card-text">الطلبات المكتملة: {{ tech.completedRequests }}</p>
+            <p class="card-text">عدد التقييمات: {{ tech.reviews }}</p>
+  
+            <button class="btn btn-primary" (click)="evaluateTechnician(tech.id, tech.rating)">إرسال التقييم</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
