@@ -3,6 +3,8 @@ import { TechinicalComponent } from './techinical/techinical.component';
 import { DeleiveryComponent } from './deleivery/deleivery.component';
 import { SupplierComponent } from './supplier/supplier.component';
 import { FooterComponent } from './footer/footer.component';
+import { HomeComponent } from './home/home.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 export const routes: Routes = [
     {
@@ -24,5 +26,19 @@ export const routes: Routes = [
     path: 'footer' , 
         component : FooterComponent , 
  },
+
+ { path: '', 
+    component: HomeComponent 
+ }
+    ,
+
+
+
+
+
+
+ { path: '**', 
+    component: NotfoundComponent,
+     title: '404 Not Found' } ,
 
 ];
