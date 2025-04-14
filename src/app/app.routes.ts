@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { TechinicalComponent } from './techinical/techinical.component';
 import { DeleiveryComponent } from './deleivery/deleivery.component';
 import { SupplierComponent } from './supplier/supplier.component';
+import { FooterComponent } from './footer/footer.component';
 
 export const routes: Routes = [
     {
@@ -18,5 +19,10 @@ export const routes: Routes = [
         path: 'supplier' , 
         component : SupplierComponent , 
         title: 'تسجيل المورد'
-    }
+    },
+ {
+    path: 'footer' , 
+        component : FooterComponent , 
+ },
+
 ];
