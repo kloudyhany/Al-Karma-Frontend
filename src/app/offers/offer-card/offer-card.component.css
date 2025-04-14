@@ -1,0 +1,47 @@
+.offer-card {
+    display: flex;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    margin: 1rem 0;
+    transition: transform 0.2s ease;
+  }
+  .offer-card:hover {
+    transform: scale(1.02);
+  }
+  .provider-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1rem;
+  }
+  .offer-details {
+    flex: 1;
+  }
+  .offer-details .title {
+    font-weight: bold;
+  }
+  .offer-details .price, .time, .rating {
+    margin-top: 0.5rem;
+  }
+  .actions {
+    margin-top: 1rem;
+  }
+  .actions button {
+    margin-right: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .actions button:first-child {
+    background-color: #4CAF50;
+    color: white;
+  }
+  .actions button:last-child {
+    background-color: #f44336;
+    color: white;
+  }
+  

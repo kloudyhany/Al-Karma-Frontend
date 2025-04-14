@@ -5,6 +5,7 @@ import { SupplierComponent } from './supplier/supplier.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { OfferCardComponent } from './offers/offer-card/offer-card.component';
 
 export const routes: Routes = [
     {
@@ -30,10 +31,11 @@ export const routes: Routes = [
  { path: '', 
     component: HomeComponent 
  },
- { path: '', 
-    component: HomeComponent 
- },
 
+ { path: 'offers', 
+    component: OfferCardComponent,
+    title: ' الطلبات' 
+ },
 
 
 
