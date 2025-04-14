@@ -1,0 +1,156 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<div class="container-fluid text-white bg-dark py-4 full-page" dir="rtl">
+  <div class="d-flex align-items-center justify-content-center mb-4">
+    <span class="badge bg-warning text-dark fs-5 px-3 py-2 rounded-pill">الملف الشخصي "مورد"</span>
+    <span class="user-circle d-flex align-items-center justify-content-center me-2">
+      <i class="fas fa-user"></i>
+    </span>
+  </div>
+
+  <form [formGroup]="profileForm" class="h-100 d-flex flex-column justify-content-between" (ngSubmit)="onSubmit()">
+    <div class="row mb-3">
+      <div class="col-md-3 mb-2">
+        <input type="text"  class="form-control rounded-pill" value="الاسم" readonly>
+      </div>
+      <div class="col-md-6 mb-2">
+        <input type="text" name="name" class="form-control rounded-pill" formControlName="name" placeholder="الاسم">
+      </div>
+      <div class="form-text text-danger">
+        @if (FormControls['name'].invalid && FormControls['name'].touched)
+        {
+        @if (FormControls['name'].hasError('required'))
+        {
+        <span style="font-size: large;">يجب كتابة الاسم</span>
+        }
+        }
+       </div>
+    </div>
+  
+
+    <div class="row mb-3">
+      <div class="col-md-3 mb-2">
+        <input type="text" class="form-control rounded-pill" value="نوع التوريدات" readonly>
+      </div>
+      <div class="col-md-6 mb-2">
+        <input type="text" name="supplyType" class="form-control rounded-pill" formControlName="supplyType" placeholder="نوع التوريدات">
+      </div>
+      <div class="form-text text-danger">
+        @if (FormControls['supplyType'].invalid && FormControls['supplyType'].touched)
+        {
+        @if (FormControls['supplyType'].hasError('required'))
+        {
+        <span style="font-size: large;">يجب ملئ نوع التوريدات</span>
+        }
+        }
+       </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 mb-2">
+        <input type="text" class="form-control rounded-pill" value="بطاقة شخصية" readonly>
+      </div>
+      <div class="col-md-6 mb-2">
+        <input type="file" formControlName="nationalIdImages" name="nationalIdImages" class="form-control rounded-pill" 
+        (change)="onFileSelected($event , 'nationalIdImages')" [multiple]="true"
+          accept="image/*" placeholder="صورة البطاقة امامي - صورة البطاقة ضهر">
+      </div>
+      <div *ngIf="fileNames.length > 0">
+        <li>الملفات المحددة :
+          <ul *ngFor="let name of fileNames">{{ name }}</ul>
+        </li>
+      </div>
+      <div class="form-text text-danger">
+        @if (FormControls['nationalIdImages'].invalid && FormControls['nationalIdImages'].touched)
+        {
+        @if (FormControls['nationalIdImages'].hasError('required'))
+        {
+          <span style="font-size: large;">يجب رفع 2 صورة البطاقة : امامي و ضهر</span>
+        }
+        }
+       </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 mb-2">
+        <input type="text" class="form-control rounded-pill" value="قائمة التوريدات" readonly>
+      </div>
+      <div class="col-md-6 mb-2">
+        <input type="file" name="supplyList" class="form-control rounded-pill"  accept="*/*" (change)="onFileSelected($event , 'supplyList')"
+        [multiple]="true" placeholder="قائمة التوريدات">
+      </div>
+      <div class="form-text text-danger">
+        @if (FormControls['supplyList'].invalid && FormControls['supplyList'].touched)
+        {
+       
+        <span style="font-size: large;">يجب رفع قائمة التوريدات</span>
+        
+        }
+       </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 mb-2">
+        <input type="text" class="form-control rounded-pill" value="رفع صور او كتالوجات" readonly>
+      </div>
+      <div class="col-md-6 mb-2">
+        <input type="file" name="catalogs" class="form-control rounded-pill" [multiple]="true" 
+        (change)="onFileSelected($event , 'catalogs')" >
+      </div>
+      <div class="form-text text-danger">
+        @if (FormControls['catalogs'].invalid && FormControls['catalogs'].touched)
+        {
+        @if (FormControls['catalogs'].hasError('required'))
+        {
+        <span style="font-size: large;">يجب رفع صور او كتالوجات</span>
+        }
+        }
+       </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 mb-2">
+        <input type="text" class="form-control rounded-pill" value="العنوان" readonly>
+      </div>
+      <div class="col-md-6 mb-2">
+        <input type="text" name="address" class="form-control rounded-pill" formControlName="address" placeholder="العنوان">
+      </div>
+      <div class="form-text text-danger">
+        @if (FormControls['address'].invalid && FormControls['address'].touched)
+        {
+        @if (FormControls['address'].hasError('required'))
+        {
+        <span style="font-size: large;">يجب ملئ العنوان</span>
+        }
+        }
+       </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-3 mb-2">
+        <input type="text" class="form-control rounded-pill" value="رقم تواصل (واتساب)" readonly>
+      </div>
+      <div class="col-md-6 mb-2">
+        <input type="text" name="whatsapp" class="form-control rounded-pill" formControlName="whatsapp" placeholder="رقم تواصل (واتساب)">
+      </div>
+      <div class="form-text text-danger">
+        @if (FormControls['whatsapp'].invalid && FormControls['whatsapp'].touched)
+        {
+        @if (FormControls['whatsapp'].hasError('required'))
+        {
+        <span style="font-size: large;">يجب ملئ الرقم الخاص بالواتساب</span>
+        }
+        @if (FormControls['whatsapp'].hasError('pattern'))
+        {
+        <span style="font-size: large;">يجب ملئ الرقم بشكل صحيح</span>
+        }
+        }
+      </div>
+    </div>
+
+    <div class="text-center mt-4" style="margin-left: 250px;">
+      <button type="submit" class="btn btn-warning px-5 py-2 rounded-pill" >
+        تسجيل
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,159 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<div class="container-fluid text-white bg-dark py-4 full-page" dir="rtl">
+    <div class="d-flex align-items-center justify-content-center mb-4">
+        <span class="badge bg-warning text-dark fs-5 px-3 py-2 rounded-pill">الملف الشخصي "فني"</span>
+        <span class="user-circle d-flex align-items-center justify-content-center me-2">
+            <i class="fas fa-user"></i>
+        </span>
+    </div>
+
+    <form [formGroup]="profileForm" class="h-100 d-flex flex-column justify-content-between"  (ngSubmit)="onSubmit()">
+        <div class="row mb-3">
+            <div class="col-md-3 mb-2">
+                <input type="text" class="form-control rounded-pill" value="الاسم" readonly>
+            </div>
+            <div class="col-md-6 mb-2">
+                <input type="text" formControlName="name" class="form-control rounded-pill">
+            </div>
+            <div class="form-text text-danger">
+                @if (FormControls['name'].invalid && FormControls['name'].touched)
+                {
+                @if (FormControls['name'].hasError('required'))
+                {
+                <span style="font-size: large;">يجب كتابة الاسم</span>
+                }
+                }
+               </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-3 mb-2">
+                <input type="text" class="form-control rounded-pill" value="المهنة" readonly>
+            </div>
+            <div class="col-md-6 mb-2">
+                <input type="text" formControlName="job" class="form-control rounded-pill" placeholder="نوع الخدمة">
+            </div>
+            <div class="form-text text-danger">
+                @if (FormControls['job'].invalid && FormControls['job'].touched)
+                {
+                @if (FormControls['job'].hasError('required'))
+                {
+                <span style="font-size: large;">يجب كتابة نوع الخدمة</span>
+                }
+                }
+               </div>
+        </div>
+
+
+        <div class="row mb-3">
+            <div class="col-md-3 mb-2">
+                <input type="text" class="form-control rounded-pill" value="بطاقة شخصية" readonly>
+            </div>
+            <div class="col-md-6 mb-2">
+                <input type="file" formControlName="nationalIdImages" class="form-control rounded-pill" (change)="onFileSelected($event, 'nationalIdImages')" [multiple]="true"
+                    accept="image/*" placeholder=" صورة البطاقة امامي - صورة البطاقة ضهر">
+            </div>
+            <div *ngIf="fileNames.length > 0">
+                <li>الملفات المحددة :
+                    <ul *ngFor="let name of fileNames">{{ name }}</ul>
+                </li>
+            </div>
+            <div class="form-text text-danger">
+                @if (FormControls['nationalIdImages'].invalid && FormControls['nationalIdImages'].touched)
+                {
+                @if (FormControls['nationalIdImages'].hasError('required'))
+                {
+                  <span style="font-size: large;">يجب رفع 2 صورة البطاقة : امامي و ضهر</span>
+                }
+                }
+               </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-3 mb-2">
+                <input type="text" class="form-control rounded-pill" value="سابقة الاعمال" readonly>
+            </div>
+            <div class="col-md-6 mb-2">
+                <input type="text" formControlName="previousworkname" class="form-control rounded-pill" placeholder="اسم العمل">
+            </div>
+            <div class="form-text text-danger">
+                @if (FormControls['previousworkname'].invalid && FormControls['previousworkname'].touched)
+                {
+                @if (FormControls['previousworkname'].hasError('required'))
+                {
+                <span style="font-size: large;">يجب كتابة اسم العمل</span>
+                }
+                }
+               </div>
+
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-3 mb-2">
+                <input type="text" class="form-control rounded-pill" value="رفع صور الاعمال" readonly>
+            </div>
+            <div class="col-md-6 mb-2">
+                <input type="file" formControlName="previousworkimgs" class="form-control rounded-pill" (change)="onFileSelected($event, 'previousworkimgs')" [multiple]="true"
+                    accept="image/*" placeholder="رفع صور الاعمال">
+            </div>
+            <div class="form-text text-danger">
+                @if (FormControls['previousworkimgs'].invalid && FormControls['previousworkimgs'].touched)
+                {
+                @if (FormControls['previousworkimgs'].hasError('required'))
+                {
+                  <span style="font-size: large;">يجب رفع صور الاعمال</span>
+                }
+                }
+               </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-3 mb-2">
+                <input type="text" class="form-control rounded-pill" value="رقم موبايل" readonly>
+            </div>
+            <div class="col-md-6 mb-2">
+                <input type="text" formControlName="phone" class="form-control rounded-pill" placeholder="رقم تواصل (موبايل)" required >
+            </div>
+            <div class="form-text text-danger">
+                @if (FormControls['phone'].invalid && FormControls['phone'].touched)
+                {
+                @if (FormControls['phone'].hasError('required'))
+                {
+                <span style="font-size: large;">يجب ملئ الرقم </span>
+                }
+                @if (FormControls['phone'].hasError('pattern'))
+                {
+                <span style="font-size: large;">يجب ملئ الرقم بشكل صحيح</span>
+                }
+                }
+              </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-3 mb-2">
+                <input type="text" class="form-control rounded-pill" value="رقم تواصل (واتساب)" readonly>
+            </div>
+            <div class="col-md-6 mb-2">
+                <input type="text" formControlName="whatsapp" class="form-control rounded-pill" placeholder="رقم تواصل (واتساب)" required>
+            </div>
+            <div class="form-text text-danger">
+                @if (FormControls['whatsapp'].invalid && FormControls['whatsapp'].touched)
+                {
+                @if (FormControls['whatsapp'].hasError('required'))
+                {
+                <span style="font-size: large;">يجب ملئ الرقم الخاص بالواتساب</span>
+                }
+                @if (FormControls['whatsapp'].hasError('pattern'))
+                {
+                <span style="font-size: large;">يجب ملئ الرقم بشكل صحيح</span>
+                }
+                }
+              </div>
+        </div>
+        <div class="text-center mt-4" style="margin-left: 250px;">
+            <button type="submit" class="btn btn-warning px-5 py-2 rounded-pill" >
+                تسجيل
+            </button>
+        </div>
+
+
+    </form>
+</div>
