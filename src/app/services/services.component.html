@@ -1,0 +1,11 @@
+<section class="services-wrapper" dir="rtl">
+    <div class="header">
+      <h2>الخدمات</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-box" *ngFor="let service of services">
+        <i [class]="service.icon"></i>
+        <span>{{ service.title }}</span>
+      </div>
+    </div>
+  </section>

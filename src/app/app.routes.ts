@@ -24,13 +24,11 @@ export const routes: Routes = [
         component : SupplierComponent , 
         title: 'تسجيل المورد'
     },
-<<<<<<< HEAD
     {
         path: 'serviceconfirmation' ,
         component : ServiceConfirmationComponent ,
         title: "عرض سعر"
-        }
-=======
+        },
  {
     path: 'footer' , 
         component : FooterComponent , 
@@ -53,5 +51,4 @@ export const routes: Routes = [
     component: NotfoundComponent,
      title: '404 Not Found' } ,
 
->>>>>>> 44e61c9a03a841c8937cf0e0a08eb39445b149b3
 ];
