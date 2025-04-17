@@ -7,6 +7,8 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { OfferCardComponent } from './offers/offer-card/offer-card.component';
+import { ClientProfileComponent } from './client-profile/client-profile.component';
+import { SupplierProfileComponent } from './supplier-profile/supplier-profile.component';
 
 export const routes: Routes = [
     {
@@ -14,11 +16,11 @@ export const routes: Routes = [
         component : TechinicalComponent,
         title: 'تسجيل الفني'
     } , 
-    {
-        path :'deleivery'
-        , component : DeleiveryComponent ,
-        title: 'تسجيل السائق'
-    } , 
+    // {
+    //     path :'deleivery'
+    //     , component : DeleiveryComponent ,
+    //     title: 'تسجيل السائق'
+    // } , 
     {
         path: 'supplier' , 
         component : SupplierComponent , 
@@ -41,6 +43,10 @@ export const routes: Routes = [
  { path: 'offers', 
     component: OfferCardComponent,
     title: ' الطلبات' 
+ },
+ { path: 'profile', 
+    component: SupplierProfileComponent,
+    title: ' الملف الشخصي' 
  },
 
 

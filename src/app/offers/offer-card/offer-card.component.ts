@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
-import { Offer } from '../../models/model'; 
-
+import { Offer } from '../../models/offer';
 @Component({
   selector: 'app-offer-card',
   imports: [],
