@@ -1,14 +1,13 @@
 import { ServiceConfirmationComponent } from './service-confirmation/service-confirmation.component';
 import { Routes } from '@angular/router';
 import { TechinicalComponent } from './techinical/techinical.component';
-import { DeleiveryComponent } from './deleivery/deleivery.component';
 import { SupplierComponent } from './supplier/supplier.component';
-import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { OfferCardComponent } from './offers/offer-card/offer-card.component';
 import { ClientProfileComponent } from './client-profile/client-profile.component';
 import { SupplierProfileComponent } from './supplier-profile/supplier-profile.component';
+import { ClientServiceComponent } from './client-service/client-service.component';
 
 export const routes: Routes = [
     {
@@ -27,14 +26,21 @@ export const routes: Routes = [
         title: 'تسجيل المورد'
     },
     {
+      path: 'clientprofile' ,
+      component : ClientProfileComponent , 
+      title: ' الملف الشخصي للعميل'
+  },
+  {
+   path: 'client_service' ,
+   component : ClientServiceComponent , 
+   title: 'خدمة العملاء'
+},
+  
+    {
         path: 'serviceconfirmation' ,
         component : ServiceConfirmationComponent ,
         title: "عرض سعر"
         },
- {
-    path: 'footer' , 
-        component : FooterComponent , 
- },
 
  { path: '', 
     component: HomeComponent 

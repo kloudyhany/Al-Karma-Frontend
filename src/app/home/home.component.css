@@ -152,4 +152,52 @@
     text-align: center;
     padding: 20px;
   }
+  .custom-footer {
+    background-color: #003366;
+  }
+  
+  .custom-footer a {
+    color: lab(3.71% 0.32 0.11) !important;
+    transition: color 0.3s ease;
+  }
+  
+  .custom-footer a:hover {
+    color: #ffcc00;
+  }
+  
+  .custom-footer p {
+    color: #0a0a0a;
+    font-size: 0.9rem;
+  }
+  .custom-footer {
+    background: linear-gradient(45deg, #92e1e4, #8fc7d8);
+    color: rgb(25, 39, 226);
+    font-family: 'Arial', sans-serif;
+  }
+
+  .custom-footer p {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .custom-footer a {
+    font-size: 1rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  .custom-footer a:hover {
+    color: #FFD700;
+    text-decoration: underline;
+  }
+
+  .custom-footer ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  .custom-footer li {
+    list-style: none;
+  }
+
   

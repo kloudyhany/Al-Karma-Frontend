@@ -1,3 +1,5 @@
+
+
 .dashboard {
     background-color: #061b29;
     height: 100vh;
@@ -9,7 +11,7 @@
     font-family: 'Cairo', sans-serif;
   
     .home-btn {
-      position: absolute;
+      position: right;
       top: 20px;
       left: 20px;
       font-size: 24px;
