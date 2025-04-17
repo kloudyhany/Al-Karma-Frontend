@@ -1,1 +1,16 @@
-<p>service-type works!</p>
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="serviceType">Type of Service</label>
+      <select id="serviceType" formControlName="serviceType" class="form-control" required>
+        <option value="عميل">عميل</option>
+        <option value="فني">فني</option>
+        <option value="مزود خدمة">مزود خدمة</option>
+        <option value="ادمن">ادمن</option>
+      </select>
+      <div *ngIf="serviceType?.invalid && (serviceType?.dirty || serviceType?.touched)" class="text-danger">
+        <small>Type of Service is required</small>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="registrationForm.invalid">Submit</button>
+  </form>
+  

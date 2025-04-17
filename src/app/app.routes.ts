@@ -8,13 +8,21 @@ import { OfferCardComponent } from './offers/offer-card/offer-card.component';
 import { ClientProfileComponent } from './client-profile/client-profile.component';
 import { SupplierProfileComponent } from './supplier-profile/supplier-profile.component';
 import { ClientServiceComponent } from './client-service/client-service.component';
+import { ServiceTypeComponent } from './service-type/service-type.component';
 
 export const routes: Routes = [
     {
         path: 'techinical',
         component : TechinicalComponent,
         title: 'تسجيل الفني'
-    } , 
+    } ,
+  
+
+    {
+        path: 'Registeration',
+        component : ServiceTypeComponent,
+        title: ' نوع الخدمه'
+    } ,
     // {
     //     path :'deleivery'
     //     , component : DeleiveryComponent ,
