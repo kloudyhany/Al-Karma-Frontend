@@ -15,7 +15,6 @@ export class TechnicalProfileComponent {
 
   constructor(private profileService: ServiceProfileService, private fb: FormBuilder) {
     this.profileForm = this.fb.group({
-      // Define form controls here, e.g., 'name': ['']
     });
   }
 
