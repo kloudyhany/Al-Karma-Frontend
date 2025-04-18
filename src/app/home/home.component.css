@@ -7,7 +7,6 @@
 body,
 .app-container {
   font-family: 'Cairo', sans-serif;
-  background-image: url('/src/app/Assets/images/logo.jpeg');
   color: var(--color-text);
   margin: 0;
   padding: 0;
@@ -22,7 +21,7 @@ footer,
   text-align: center;
   padding: 2rem 1rem;
   border-radius: var(--box-radius);
-  margin-top: 3rem;
+  margin-top: 1rem;
   transition: background-color 0.3s ease;
 }
 
@@ -46,12 +45,12 @@ footer a:hover,
 
 /* --- Hero Section --- */
 .hero {
-  background:#f97316;
+  background:#ec8134;
   color: black;
   text-align: center;
   padding: 4rem 2rem;
   border-radius: var(--box-radius);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .hero h1 {
@@ -70,25 +69,24 @@ footer a:hover,
 
 /* --- Sections --- */
 section {
-  background: var(--color-light);
-  /* color: #333; */
-  padding: 2rem;
-  margin: 3rem 0;
+  background: var(--color-text);
+  padding: 1rem;
+  margin: 1rem 0;
   border-radius: var(--box-radius);
   box-shadow: var(--box-shadow);
 }
 
 /* --- Headings --- */
 h1, h2 {
-  color: var(--color-primary);
+  color: white;
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   font-weight: 700;
   font-size: 2rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   line-height: 1.2;
-  color: #000;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 p {
@@ -103,7 +101,7 @@ p {
   padding: 2rem;
   border-radius: var(--box-radius);
   box-shadow: var(--box-shadow);
-  margin: 2rem 0;
+  margin: 1rem 0;
   color: #000;
 }
 
