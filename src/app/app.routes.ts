@@ -15,23 +15,36 @@ export const routes: Routes = [
         path: 'techinical',
         component: TechinicalComponent,
         title: 'تسجيل الفني'
-    },
-    {
-        path: 'deleivery'
-        , component: DeleiveryComponent,
-        title: 'تسجيل السائق'
-    },
+},
+{
+    path: 'Registeration',
+    component: ServiceTypeComponent,
+    title: ' نوع الخدمه'
+},
     {
         path: 'supplier',
         component: SupplierComponent,
         title: 'تسجيل المورد'
     },
+
+    {
+      path: 'clientprofile' ,
+      component : ClientProfileComponent , 
+      title: ' الملف الشخصي للعميل'
+  },
+  {
+   path: 'client_service' ,
+   component : ClientServiceComponent , 
+   title: 'خدمة العملاء'
+},
+  
+ 
     {
         path: 'serviceconfirmation',
         component: ServiceConfirmationComponent,
         title: "عرض سعر"
     },
-  
+
     {
         path: '',
         component: HomeComponent
@@ -45,5 +58,29 @@ export const routes: Routes = [
         path: '**',
         component: NotfoundComponent,
         title: '404 Not Found'
-    }
+    },
+
+        
+
+ { path: '', 
+    component: HomeComponent 
+ },
+
+ { path: 'offers', 
+    component: OfferCardComponent,
+    title: ' الطلبات' 
+ },
+ { path: 'profile', 
+    component: SupplierProfileComponent,
+    title: ' الملف الشخصي' 
+ },
+
+
+
+
+
+ { path: '**', 
+    component: NotfoundComponent,
+     title: '404 Not Found' } ,
+
 ];

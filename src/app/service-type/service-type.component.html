@@ -1,16 +1,17 @@
 <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="serviceType">Type of Service</label>
-      <select id="serviceType" formControlName="serviceType" class="form-control" required>
+      <select id="serviceType" formControlName="serviceType" class="form-control" required pattern="^(عميل|فني|مزود خدمة|ادمن)$" aria-placeholder="اختر فني او عميل او ادمن او مزود خدمه">
         <option value="عميل">عميل</option>
         <option value="فني">فني</option>
         <option value="مزود خدمة">مزود خدمة</option>
         <option value="ادمن">ادمن</option>
       </select>
       <div *ngIf="serviceType?.invalid && (serviceType?.dirty || serviceType?.touched)" class="text-danger">
-        <small>Type of Service is required</small>
+        <small>اختر فني او عميل او ادمن او مزود خدمه</small>
       </div>
     </div>
+    
     <button type="submit" class="btn btn-primary" [disabled]="registrationForm.invalid">Submit</button>
   </form>
   
