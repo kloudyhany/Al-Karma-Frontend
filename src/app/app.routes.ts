@@ -15,57 +15,23 @@ export const routes: Routes = [
         path: 'techinical',
         component: TechinicalComponent,
         title: 'تسجيل الفني'
-<<<<<<< HEAD
     },
     {
         path: 'deleivery'
         , component: DeleiveryComponent,
         title: 'تسجيل السائق'
     },
-=======
-    } ,
-  
-
-    {
-        path: 'Registeration',
-        component : ServiceTypeComponent,
-        title: ' نوع الخدمه'
-    } ,
-    // {
-    //     path :'deleivery'
-    //     , component : DeleiveryComponent ,
-    //     title: 'تسجيل السائق'
-    // } , 
->>>>>>> e4a9bb9700359d4405c83ea37c82d2c477ef31e8
     {
         path: 'supplier',
         component: SupplierComponent,
         title: 'تسجيل المورد'
     },
-<<<<<<< HEAD
-=======
-    {
-      path: 'clientprofile' ,
-      component : ClientProfileComponent , 
-      title: ' الملف الشخصي للعميل'
-  },
-  {
-   path: 'client_service' ,
-   component : ClientServiceComponent , 
-   title: 'خدمة العملاء'
-},
-  
->>>>>>> e4a9bb9700359d4405c83ea37c82d2c477ef31e8
     {
         path: 'serviceconfirmation',
         component: ServiceConfirmationComponent,
         title: "عرض سعر"
-<<<<<<< HEAD
     },
-    {
-        path: 'footer',
-        component: FooterComponent,
-    },
+  
     {
         path: '',
         component: HomeComponent
@@ -80,29 +46,4 @@ export const routes: Routes = [
         component: NotfoundComponent,
         title: '404 Not Found'
     }
-=======
-        },
-
- { path: '', 
-    component: HomeComponent 
- },
-
- { path: 'offers', 
-    component: OfferCardComponent,
-    title: ' الطلبات' 
- },
- { path: 'profile', 
-    component: SupplierProfileComponent,
-    title: ' الملف الشخصي' 
- },
-
-
-
-
-
- { path: '**', 
-    component: NotfoundComponent,
-     title: '404 Not Found' } ,
-
->>>>>>> e4a9bb9700359d4405c83ea37c82d2c477ef31e8
 ];
