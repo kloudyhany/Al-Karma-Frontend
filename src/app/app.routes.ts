@@ -9,78 +9,71 @@ import { ClientProfileComponent } from './client-profile/client-profile.componen
 import { SupplierProfileComponent } from './supplier-profile/supplier-profile.component';
 import { ClientServiceComponent } from './client-service/client-service.component';
 import { ServiceTypeComponent } from './service-type/service-type.component';
+import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
-    {
-        path: 'techinical',
-        component: TechinicalComponent,
-        title: 'تسجيل الفني'
-},
-{
-    path: 'Registeration',
-    component: ServiceTypeComponent,
-    title: ' نوع الخدمه'
-},
-    {
-        path: 'supplier',
-        component: SupplierComponent,
-        title: 'تسجيل المورد'
-    },
-
-    {
-      path: 'clientprofile' ,
-      component : ClientProfileComponent , 
-      title: ' الملف الشخصي للعميل'
+  {
+    path: 'techinical',
+    component: TechinicalComponent,
+    title: 'تسجيل الفني',
   },
   {
-   path: 'client_service' ,
-   component : ClientServiceComponent , 
-   title: 'خدمة العملاء'
-},
-  
- 
-    {
-        path: 'serviceconfirmation',
-        component: ServiceConfirmationComponent,
-        title: "عرض سعر"
-    },
+    path: 'Registeration',
+    component: ServiceTypeComponent,
+    title: ' نوع الخدمه',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    title: 'تسجيل الدخول',
+  },
 
-    {
-        path: '',
-        component: HomeComponent
-    },
-    {
-        path: 'offers',
-        component: OfferCardComponent,
-        title: ' الطلبات'
-    },
-    {
-        path: '**',
-        component: NotfoundComponent,
-        title: '404 Not Found'
-    },
+  {
+    path: 'supplier',
+    component: SupplierComponent,
+    title: 'تسجيل المورد',
+  },
 
-        
+  {
+    path: 'clientprofile',
+    component: ClientProfileComponent,
+    title: ' الملف الشخصي للعميل',
+  },
+  {
+    path: 'client_service',
+    component: ClientServiceComponent,
+    title: 'خدمة العملاء',
+  },
 
- { path: '', 
-    component: HomeComponent 
- },
+  {
+    path: 'serviceconfirmation',
+    component: ServiceConfirmationComponent,
+    title: 'عرض سعر',
+  },
 
- { path: 'offers', 
+  {
+    path: '',
+    component: HomeComponent,
+  },
+  {
+    path: 'offers',
     component: OfferCardComponent,
-    title: ' الطلبات' 
- },
- { path: 'profile', 
-    component: SupplierProfileComponent,
-    title: ' الملف الشخصي' 
- },
-
-
-
-
-
- { path: '**', 
+    title: ' الطلبات',
+  },
+  {
+    path: '**',
     component: NotfoundComponent,
-     title: '404 Not Found' } ,
+    title: '404 Not Found',
+  },
 
+  { path: '', component: HomeComponent },
+
+  { path: 'offers', component: OfferCardComponent, title: ' الطلبات' },
+  {
+    path: 'profile',
+    component: SupplierProfileComponent,
+    title: ' الملف الشخصي',
+  },
+
+  { path: '**', component: NotfoundComponent, title: '404 Not Found' },
 ];

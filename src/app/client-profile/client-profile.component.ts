@@ -11,7 +11,7 @@ import { loadStripe } from '@stripe/stripe-js';
 })
 export class ClientProfileComponent  {
   async pay() {
-    const stripe = await loadStripe('pk_test_YOUR_PUBLIC_KEY');
+   const stripe = await loadStripe('pk_test_YOUR_PUBLIC_KEY');
 
     const { error } = await stripe!.redirectToCheckout({
       lineItems: [{ price: 'price_1YOUR_PRICE_ID', quantity: 1 }],

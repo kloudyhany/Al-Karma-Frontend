@@ -1,0 +1,42 @@
+<div class="container-fluid text-white bg-dark py-4 full-page" dir="rtl">
+    <div class="d-flex align-items-center justify-content-center mb-4">
+      <span class="badge bg-warning text-dark fs-5 px-3 py-2 rounded-pill">تسجيل الدخول</span>
+      <span class="user-circle d-flex align-items-center justify-content-center me-2">
+        <i class="fas fa-sign-in-alt"></i>
+      </span>
+    </div>
+  
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="row mb-3">
+        <div class="col-md-3 mb-2">
+          <input type="text" class="form-control rounded-pill" value="رقم الموبايل" readonly />
+        </div>
+        <div class="col-md-6 mb-2">
+          <input type="text" formControlName="phone" class="form-control rounded-pill" placeholder="رقم الهاتف" />
+          <div class="form-text text-danger" *ngIf="FormControls['phone'].touched && FormControls['phone'].invalid">
+            <span *ngIf="FormControls['phone'].errors?.['required']">الرقم مطلوب</span>
+            <span *ngIf="FormControls['phone'].errors?.['pattern']">الرقم غير صحيح</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row mb-3">
+        <div class="col-md-3 mb-2">
+          <input type="text" class="form-control rounded-pill" value="كلمة السر" readonly />
+        </div>
+        <div class="col-md-6 mb-2">
+          <input type="password" formControlName="password" class="form-control rounded-pill" placeholder="كلمة السر" />
+          <div class="form-text text-danger" *ngIf="FormControls['password'].touched && FormControls['password'].invalid">
+            <span *ngIf="FormControls['password'].errors?.['required']">كلمة السر مطلوبة</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="text-center mt-4" style="margin-left: 250px;">
+        <button type="submit" class="btn btn-warning px-5 py-2 rounded-pill">
+          دخول
+        </button>
+      </div>
+    </form>
+  </div>
+  
