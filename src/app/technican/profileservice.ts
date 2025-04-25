@@ -17,6 +17,7 @@ export class profileService {
     formData.append('job', form.job);
     formData.append('password', form.password);
     formData.append('serviceType', form.serviceType);
+    formData.append('service', form.serviceType);
     formData.append('previousworkname', form.previousworkname);
     formData.append('clientSection', form.clientSection);
     formData.append('phone', form.phone);

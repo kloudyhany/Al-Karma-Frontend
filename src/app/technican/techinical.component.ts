@@ -22,6 +22,7 @@ export class TechinicalComponent {
       job: ['', Validators.required],
       password: ['', Validators.required],
       serviceType: ['', Validators.required],
+      service: ['', Validators.required],
       nationalIdImages: [null],
       previousworkname: [null],
       previousworkimgs: [null],
@@ -34,7 +35,7 @@ export class TechinicalComponent {
       const roleDivMap: { [key: string]: { divId: string; controls: string[] } } = {
         'فني': { divId: 'previouswork', controls: ['previousworkname', 'previousworkimgs'] },
         'عميل': { divId: 'clientSection', controls: ['clientSection'] },
-        'مزود خدمة': { divId: 'providerSection', controls: [] },
+        'مزود خدمة': { divId: 'serviceSection', controls: [] },
         'ادمن': { divId: 'adminSection', controls: [] }
       };
 

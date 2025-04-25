@@ -45,6 +45,35 @@
                </div>
            }
         </div>
+        <div class="row mb-3" id="serviceSection" style="display:none">
+            <div class="col-md-3 mb-2">
+                <input type="text" class="form-control rounded-pill" value="نوع الخدمة" readonly>
+            </div>
+            <div class="col-md-6 mb-2">
+                <select id="service" formControlName="service" class="form-control">
+                    <option value="بناء">بناء</option>
+                    <option value="سباكة">سباكة</option>
+                    <option value="كهرباء">كهرباء</option>
+                    <option value="أرضيات وجدران">أرضيات وجدران</option>
+                    <option value="دهان">دهان</option>
+                    <option value="نجارة">نجارة</option>
+                    <option value="زجاج وألوميتال">زجاج وألوميتال</option>
+                    <option value="حدادة أساسية">حدادة أساسية</option>
+                    <option value="عزل">عزل</option>
+                    <option value="عمالة منتظمة">عمالة منتظمة</option>
+                    <option value="جبسم بورد">جبسم بورد</option>
+                    <option value="تنظيف">تنظيف</option>
+                    <option value="توصيل">توصيل</option>
+                    <option value="مورد">مورد</option>
+                  </select>         
+           </div>
+           @if (FormControls['service'].invalid && (FormControls['service'].dirty || FormControls['service'].touched))
+           {
+               <div class="text-danger">
+                   <small style="color: white;">اختر نوع الخدمة</small>
+               </div>
+           }
+        </div>
         <div class="row mb-3">
             <div class="col-md-3 mb-2">
                 <input type="text" class="form-control rounded-pill" value="كلمة السر" readonly>
