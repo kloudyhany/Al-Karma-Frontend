@@ -1,0 +1,94 @@
+<div class="container mt-4" [@fadeIn]>
+    <!-- الفلاتر -->
+    <div class="row mb-4">
+      <div class="col-md-3">
+        <select class="form-select" [(ngModel)]="selectedCity" (change)="filterServices()">
+          <option value="">الكل</option>
+          <option value="الشروق">الشروق</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select class="form-select" [(ngModel)]="selectedCategory" (change)="filterServices()">
+          <option value="">كل الخدمات</option>
+          <option value="كهرباء">كهرباء</option>
+          <option value="سباكة">سباكة</option>
+          <option value="دهان">دهان</option>
+            <option value="نجارة">نجارة</option>
+            <option value="تنظيف">تنظيف</option>
+            <option value="تكييف">تكييف</option>
+            <option value="مباني">مباني</option>
+            <option value="ارضيات وحوائط">ارضيات وحوائط</option>
+            <option value="الوميتال">الوميتال</option>
+            <option value="كريتال">كريتال</option>
+            <option value="عماله عاديه">عماله عاديه</option>
+            <option value="جيبسون بورد">جيبسون بورد</option>
+            <option value="العزل">العزل</option>
+            <option value="التنظيف">التنظيف</option>
+            
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select class="form-select" [(ngModel)]="selectedSort" (change)="filterServices()">
+          <option value="">ترتيب</option>
+          <option value="price-asc">السعر تصاعدي</option>
+          <option value="price-desc">السعر تنازلي</option>
+        </select>
+      </div>
+    </div>
+  
+    <!-- عرض الخدمات -->
+    <div *ngIf="userType === 'provider'" class="row">
+      <div class="col-md-4 mb-4" *ngFor="let service of filteredServices" [@fadeIn]>
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ service.name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ service.city }}</h6>
+            <p class="card-text">
+              السعر: {{ service.price }} جنيه
+              <br>
+              التقييم: ⭐ {{ service.rating }}
+              <br>
+              عدد الطلبات: {{ service.orders }}
+            </p>
+            <span [class]="getStatusText(service.status)">
+              {{ service.status === 'pending' ? 'قيد الانتظار' : service.status === 'in_progress' ? 'قيد التنفيذ' : 'مكتمل' }}
+            </span>
+            <button class="btn btn-primary w-100 mt-3" (click)="openRequestModal(service)">طلب الخدمة</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="userType === 'technician'">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>الخدمة</th>
+            <th>المدينة</th>
+            <th>السعر</th>
+            <th>عدد الطلبات</th>
+            <th>الحالة</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let service of filteredServices" [@fadeIn]>
+            <td>{{ service.name }}</td>
+            <td>{{ service.city }}</td>
+            <td>{{ service.price }} جنيه</td>
+            <td>{{ service.orders }}</td>
+            <td><span [class]="getStatusText(service.status)">
+              {{ service.status === 'pending' ? 'قيد الانتظار' : service.status === 'in_progress' ? 'قيد التنفيذ' : 'مكتمل' }}
+            </span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [disabled]="loading">إلغاء</button>
+    <button type="button" class="btn btn-primary" (click)="confirmRequest()" [disabled]="loading">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      <span *ngIf="!loading">تأكيد الطلب</span>
+    </button>
+  </div>
