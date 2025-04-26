@@ -18,17 +18,18 @@ export const routes: Routes = [
     title: ' تسجيل الدخول',
   },
   {
+    path: 'technican',
+    component: LoginComponent,
+    title: '  مستخدم جديد',
+  },
+  {
     path: 'services',
     component: ServicesPageComponent,
     title: ' خدماتنا',
   },
 
   
-  {
-    path: 'login',
-    component: LoginComponent,
-    title: 'تسجيل الدخول',
-  },
+
 
   {
     path: 'supplier',
