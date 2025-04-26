@@ -1,7 +1,7 @@
 <div class="container py-5">
   <!-- روابط سريعة -->
   <div class="d-flex justify-content-end mb-4">
-    <a routerLink="/profile" class="btn btn-outline-secondary me-2">صفحتي الشخصية</a>
+    <a routerLink="/client-profile" class="btn btn-outline-secondary me-2">صفحتي الشخصية</a>
     <a routerLink="/my-orders" class="btn btn-outline-primary">طلباتي</a>
   </div>
 
@@ -20,15 +20,15 @@
     <div class="row">
       <div class="col-md-4 mb-4" *ngFor="let service of services">
         <div class="card h-100 shadow-sm">
-          <img [src]="service.imageUrl" class="card-img-top" alt="Service Image">
+          <img [src]="service['imageUrl']" class="card-img-top" alt="Service Image">
           <div class="card-body">
-            <h5 class="card-title">{{ service.name }}</h5>
-            <p class="card-text">{{ service.description }}</p>
+            <h5 class="card-title">{{ service['name'] }}</h5>
+            <p class="card-text">{{ service['description'] }}</p>
             <div class="rating mb-2">
               <ng-container *ngFor="let star of [1,2,3,4,5]">
                 <i class="bi" [ngClass]="{
-                  'bi-star-fill text-warning': star <= service.rating,
-                  'bi-star': star > service.rating
+                  'bi-star-fill text-warning': star <= service['rating'],
+                  'bi-star': star > service['rating']
                 }"></i>
               </ng-container>
             </div>

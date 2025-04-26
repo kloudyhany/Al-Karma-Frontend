@@ -7,27 +7,25 @@ import { OfferCardComponent } from './offers/offer-card/offer-card.component';
 import { ClientProfileComponent } from './client-profile/client-profile.component';
 import { SupplierProfileComponent } from './supplier-profile/supplier-profile.component';
 import { ClientServiceComponent } from './client-service/client-service.component';
-import { loginComponent as LoginComponent } from './login/login.component';
+import { loginComponent } from './login/login.component';
 import { ServicesPageComponent } from './services-page/services-page.component';
+import { TechinicalComponent } from './techinical/techinical.component';
 
 export const routes: Routes = [
-
   {
     path: 'login',
-    component: LoginComponent,
+    component: loginComponent,
     title: ' تسجيل الدخول',
+  },
+  {
+    path: 'techinical',
+    component: TechinicalComponent,
+    title: '  مستخدم جديد',
   },
   {
     path: 'services',
     component: ServicesPageComponent,
     title: ' خدماتنا',
-  },
-
-  
-  {
-    path: 'login',
-    component: LoginComponent,
-    title: 'تسجيل الدخول',
   },
 
   {

@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';  
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { loginservice } from './loginservice';
@@ -7,12 +8,18 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule ,FormsModule , ReactiveFormsModule],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule  
+  ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class loginComponent {
-  loginForm!: FormGroup ;
+  loginForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private loginService: loginservice) {}
 
@@ -37,7 +44,6 @@ export class loginComponent {
     this.loginService.login(this.loginForm.value).subscribe({
       next: (response) => {
         alert('تم تسجيل الدخول بنجاح!');
-        // Handle success (e.g., store token, redirect)
       },
       error: (error) => {
         alert('فشل تسجيل الدخول. تأكد من البيانات.');
