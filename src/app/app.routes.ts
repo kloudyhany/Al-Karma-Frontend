@@ -1,6 +1,5 @@
 import { ServiceConfirmationComponent } from './service-confirmation/service-confirmation.component';
 import { Routes } from '@angular/router';
-import { TechinicalComponent } from './techinical/techinical.component';
 import { SupplierComponent } from './supplier/supplier.component';
 import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
@@ -8,20 +7,23 @@ import { OfferCardComponent } from './offers/offer-card/offer-card.component';
 import { ClientProfileComponent } from './client-profile/client-profile.component';
 import { SupplierProfileComponent } from './supplier-profile/supplier-profile.component';
 import { ClientServiceComponent } from './client-service/client-service.component';
-import { ServiceTypeComponent } from './service-type/service-type.component';
-import { LoginComponent } from './login/login.component';
+import { loginComponent as LoginComponent } from './login/login.component';
+import { ServicesPageComponent } from './services-page/services-page.component';
 
 export const routes: Routes = [
+
   {
-    path: 'techinical',
-    component: TechinicalComponent,
-    title: 'تسجيل الفني',
+    path: 'login',
+    component: LoginComponent,
+    title: ' تسجيل الدخول',
   },
   {
-    path: 'Registeration',
-    component: ServiceTypeComponent,
-    title: ' نوع الخدمه',
+    path: 'services',
+    component: ServicesPageComponent,
+    title: ' خدماتنا',
   },
+
+  
   {
     path: 'login',
     component: LoginComponent,

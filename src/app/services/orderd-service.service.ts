@@ -14,4 +14,10 @@ export class OrderdServiceService {
   getServiceById(id: number): Observable<Offer[]> {
     return this.http.get<Offer[]>(`https://your-api-url/api/services/${id}/offers`);
   }
+  getmyOrders(): Observable<any[]> {
+    return this.http.get<any[]>(`https://your-api-url/api/orders/myOrders`);
+  }
+  getMyOrdersById(id: number): Observable<any[]> {
+    return this.http.get<any[]>(`https://your-api-url/api/orders/${id}`);
+  }
 }
