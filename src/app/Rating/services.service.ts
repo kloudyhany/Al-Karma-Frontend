@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ServicesService {
 
-  private baseUrl = 'https://your-api-url.com/api/ratings';
+  private baseUrl = 'apiiiiiiiiiiiiiiii heeeeeeeeeeeeeer';
 
   constructor(private http: HttpClient) {}
 
