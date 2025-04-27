@@ -1,5 +1,5 @@
 import { ServiceConfirmationComponent } from './service-confirmation/service-confirmation.component';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { ClientProfileComponent } from './client-profile/client-profile.component';
@@ -12,6 +12,9 @@ import { OfferListComponent } from './offer-list/offer-list.component';
 import { TechinicalComponent } from './techinical/techinical.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
+import { NgModule } from '@angular/core';
+
+
 
 export const routes: Routes = [
   {
@@ -26,14 +29,11 @@ export const routes: Routes = [
   { path: 'transactions', component:TransactionListComponent, title: 'قائمة المعاملات' },
   { path: 'transactions/:id', component: TransactionDetailComponent, title: 'تفاصيل المعاملة' },
   {
-<<<<<<< HEAD
-=======
     path: 'technican',
     component: TechinicalComponent,
     title: '  مستخدم جديد',
   },
   {
->>>>>>> 255ed4782d2b45afa200eba291b99a9c65217984
     path: 'services',
     component: ServicesPageComponent,
     title: ' خدماتنا',
@@ -90,3 +90,9 @@ export const routes: Routes = [
 
   { path: '**', component: NotfoundComponent, title: '404 Not Found' },
 ];
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+
+})
+export class AppRoutingModule { }
