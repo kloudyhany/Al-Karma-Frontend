@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-client-profile',
   imports: [CommonModule],
-  templateUrl: './client-profile.component.html',
+  standalone: true,
+  templateUrl:'./client-profile.component.html',
   
   styleUrl: './client-profile.component.css'
 })
@@ -33,13 +34,18 @@ export class ClientProfileComponent {
       console.error('Payment error:', error.message);
     }
   }
-  redirectToPayment() {
-
-    this.makePayment();
-    this.router.navigate(['/Transactions']);
-
+  redirectToOfferList(): void {
+    console.log('Redirecting to the offer list...');
+    this.router.navigate(['/offers']); 
   }
+  pay(): void {
+    console.log('Payment button clicked!');
+    this.makePayment(); // Call the payment function here
   
+    this.router.navigate(['/transactions']); // Redirect to the transactions page after payment
+    
+  }
+
 }
 
  
