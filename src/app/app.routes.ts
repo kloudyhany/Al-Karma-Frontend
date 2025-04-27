@@ -32,6 +32,7 @@ export const routes: Routes = [
     path: 'technican',
     component: TechinicalComponent,
     title: '  مستخدم جديد',
+    canActivate: []
   },
   {
     path: 'services',
