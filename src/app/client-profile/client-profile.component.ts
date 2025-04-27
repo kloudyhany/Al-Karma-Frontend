@@ -1,15 +1,21 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { loadStripe } from '@stripe/stripe-js';
+import { Router } from '@angular/router';
+import { ServiceConfirmationComponent } from '../service-confirmation/service-confirmation.component';
+
 
 @Component({
   selector: 'app-client-profile',
-  imports: [CommonModule],
+  imports: [CommonModule , ServiceConfirmationComponent],
   templateUrl: './client-profile.component.html',
   
   styleUrl: './client-profile.component.css'
 })
 export class ClientProfileComponent  {
+
+  constructor(private router: Router) { }
+
   async pay() {
    const stripe = await loadStripe('pk_test_YOUR_PUBLIC_KEY');
 
@@ -23,6 +29,10 @@ export class ClientProfileComponent  {
     if (error) {
       console.error('Payment error:', error);
     }
+  }
+  ordering(){
+    console.log("Ordering...");
+    this.router.navigate(['/service-confirmation']);
   }
 }
 

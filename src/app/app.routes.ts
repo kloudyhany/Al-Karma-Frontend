@@ -21,11 +21,6 @@ export const routes: Routes = [
     component: TechinicalComponent,
   },
   {
-    path: 'technican',
-    component: loginComponent,
-    title: '  مستخدم جديد',
-  },
-  {
     path: 'services',
     component: ServicesPageComponent,
     title: ' خدماتنا',
@@ -49,7 +44,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'serviceconfirmation',
+    path: 'service-confirmation',
     component: ServiceConfirmationComponent,
     title: 'عرض سعر',
   },
