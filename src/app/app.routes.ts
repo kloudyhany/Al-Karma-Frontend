@@ -6,20 +6,25 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { ClientProfileComponent } from './client-profile/client-profile.component';
 import { SupplierProfileComponent } from './supplier-profile/supplier-profile.component';
 import { ClientServiceComponent } from './client-service/client-service.component';
-import { loginComponent as LoginComponent } from './login/login.component';
+import { loginComponent } from './login/login.component';
 import { ServicesPageComponent } from './services-page/services-page.component';
 import { OfferListComponent } from './offer-list/offer-list.component';
 
-export const routes: Routes = [
+import { TechinicalComponent } from './techinical/techinical.component';
 
+export const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent,
+    component: loginComponent,
     title: ' تسجيل الدخول',
   },
   {
+    path: 'techinical',
+    component: TechinicalComponent,
+  },
+  {
     path: 'technican',
-    component: LoginComponent,
+    component: loginComponent,
     title: '  مستخدم جديد',
   },
   {
@@ -27,9 +32,6 @@ export const routes: Routes = [
     component: ServicesPageComponent,
     title: ' خدماتنا',
   },
-
-  
-
 
   {
     path: 'supplier',

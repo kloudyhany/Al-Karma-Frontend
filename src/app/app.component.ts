@@ -5,7 +5,7 @@ import { HeaderComponent } from './header/header.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ReactiveFormsModule, HeaderComponent],
+  imports: [RouterOutlet, ReactiveFormsModule, HeaderComponent,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
