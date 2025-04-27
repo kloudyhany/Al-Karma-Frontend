@@ -1,4 +1,3 @@
-import { HttpClientModule } from '@angular/common/http';  
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { loginservice } from './loginservice';
@@ -13,7 +12,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule  
+     
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']

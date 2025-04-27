@@ -1,0 +1,33 @@
+<div class="container my-4">
+    <h2>Offers</h2>
+  
+    <div *ngIf="offers.length === 0" class="alert alert-info">
+      No offers available.
+    </div>
+  
+    <div *ngFor="let offer of offers" class="card my-3 shadow-sm">
+      <div class="card-body d-flex align-items-center">
+        <img [src]="offer.providerImageUrl" class="rounded-circle" width="60" height="60" alt="Provider">
+        <div class="ms-3 flex-grow-1">
+          <h5>{{ offer.providerName }}</h5>
+          <p class="mb-1">{{ offer.message }}</p>
+          <small class="text-muted">Delivery: {{ offer.deliveryTime }} | Price: {{ offer.price | currency }}</small>
+        </div>
+        <div class="text-end">
+          <span class="badge" [ngClass]="{
+            'bg-secondary': offer.status === 'Pending',
+            'bg-success': offer.status === 'Accepted',
+            'bg-danger': offer.status === 'Rejected'
+          }">
+            {{ offer.status }}
+          </span>
+  
+          <div *ngIf="offer.status === 'Pending'" class="mt-2">
+            <button (click)="acceptOffer(offer.id)" class="btn btn-sm btn-success me-2">Accept</button>
+            <button (click)="rejectOffer(offer.id)" class="btn btn-sm btn-outline-danger">Reject</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

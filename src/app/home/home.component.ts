@@ -7,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  
+  redirectToOfferList() {
+    window.location.href = '/offers'; 
+    
+  }
+  redirectToServices() {
+    window.location.href = '/services'; 
+  }
+  redirectToLogin() {
+    window.location.href = '/login'; 
+  }
 
 }
