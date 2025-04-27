@@ -1,12 +1,12 @@
 export interface Offer {
-    providerImageUrl: string;
+    id: number;
     providerName: string;
-    title: string;
-    description: string;
+    providerImageUrl: string;
     price: number;
-    estimatedTime: string;
-    rating: number;
-}
+    deliveryTime: string; 
+    message: string;
+    status: 'Pending' | 'Accepted' | 'Rejected';
+  }
 export interface Service {
     id: number;
     name: string;
@@ -14,7 +14,7 @@ export interface Service {
     price: number;
     category: string;
     imageUrl: string;
-    offers: Offer[]; // إضافة هذا السطر
+    offers: Offer[]; 
 }
 export interface Order {
     id: number;

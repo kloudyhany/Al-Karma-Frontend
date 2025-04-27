@@ -8,6 +8,7 @@ import { SupplierProfileComponent } from './supplier-profile/supplier-profile.co
 import { ClientServiceComponent } from './client-service/client-service.component';
 import { loginComponent as LoginComponent } from './login/login.component';
 import { ServicesPageComponent } from './services-page/services-page.component';
+import { OfferListComponent } from './offer-list/offer-list.component';
 
 export const routes: Routes = [
 
@@ -70,7 +71,7 @@ export const routes: Routes = [
 
   { path: '', component: HomeComponent },
 
-  // { path: 'offers', component: OfferCardComponent, title: ' الطلبات' },
+  { path: 'offers', component: OfferListComponent, title: ' الطلبات' },
   {
     path: 'profile',
     component: SupplierProfileComponent,
