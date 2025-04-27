@@ -10,8 +10,8 @@
     </div>
   
     <div class="main-action">
-      <i class="fas fa-concierge-bell"></i>
-      <span>طلب لخدمة</span>
+      <i class="bg-success"></i>
+      <button (click)="redirectToOfferList()">طلب لخدمة</button>
     </div>
   
     <!-- Sidebar Actions -->
@@ -23,6 +23,7 @@
       <button><i class="fas fa-times-circle"></i> خدمات ملغاه</button>
       <button><i class="fas fa-sticky-note"></i> ملاحظاتي</button>
       <button class="pay-btn" (click)="pay()">
+        
         <i class="fas fa-credit-card"></i> دفع الآن
       </button>
     </div>

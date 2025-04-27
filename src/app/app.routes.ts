@@ -1,6 +1,5 @@
 import { ServiceConfirmationComponent } from './service-confirmation/service-confirmation.component';
 import { Routes } from '@angular/router';
-import { SupplierComponent } from './supplier/supplier.component';
 import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { ClientProfileComponent } from './client-profile/client-profile.component';
@@ -11,6 +10,8 @@ import { ServicesPageComponent } from './services-page/services-page.component';
 import { OfferListComponent } from './offer-list/offer-list.component';
 
 import { TechinicalComponent } from './techinical/techinical.component';
+import { TransactionListComponent } from './transaction-list/transaction-list.component';
+import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
 
 export const routes: Routes = [
   {
@@ -18,13 +19,15 @@ export const routes: Routes = [
     component: loginComponent,
     title: ' تسجيل الدخول',
   },
-  {
-    path: 'techinical',
-    component: TechinicalComponent,
-  },
+  // {
+  //   path: 'techinical',
+  //   component: TechinicalComponent,
+  // },
+  { path: 'transactions', component:TransactionListComponent, title: 'قائمة المعاملات' },
+  { path: 'transactions/:id', component: TransactionDetailComponent, title: 'تفاصيل المعاملة' },
   {
     path: 'technican',
-    component: loginComponent,
+    component: TechinicalComponent,
     title: '  مستخدم جديد',
   },
   {
@@ -33,11 +36,7 @@ export const routes: Routes = [
     title: ' خدماتنا',
   },
 
-  {
-    path: 'supplier',
-    component: SupplierComponent,
-    title: 'تسجيل المورد',
-  },
+ 
 
   {
     path: 'clientprofile',
@@ -60,11 +59,17 @@ export const routes: Routes = [
     path: '',
     component: HomeComponent,
   },
-  // {
-  //   path: 'offers',
-  //   component: OfferCardComponent,
-  //   title: ' الطلبات',
-  // },
+  {
+    path: 'offers',
+    component: OfferListComponent,
+    title: ' الطلبات',
+  },
+  {
+    path: 'client_service',
+    component: ClientServiceComponent,
+    title: ' خدمه العملاء',
+  },
+
   {
     path: '**',
     component: NotfoundComponent,

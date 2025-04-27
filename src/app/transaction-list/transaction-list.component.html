@@ -1,0 +1,28 @@
+<div class="transaction-list">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Transaction ID</th>
+          <th>Amount</th>
+          <th>Payment Method</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transaction of transactions">
+          <td>{{ transaction.id }}</td>
+          <td>{{ transaction.amount }}</td>
+          <td>{{ transaction.paymentMethod }}</td>
+          <td>{{ transaction.status }}</td>
+          <td>{{ transaction.date }}</td>
+          <td>
+            <button (click)="viewTransaction(transaction)">View</button>
+            <button (click)="deleteTransaction(transaction.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

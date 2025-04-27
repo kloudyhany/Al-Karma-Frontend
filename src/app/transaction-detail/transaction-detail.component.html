@@ -1,0 +1,9 @@
+<div [@If]="transaction">
+    <h2>Transaction Details</h2>
+    <p><strong>Transaction ID:</strong> {{ transaction?.id }}</p>
+    <p><strong>Amount:</strong> {{ transaction?.amount }}</p>
+    <p><strong>Payment Method:</strong> {{ transaction?.paymentMethod }}</p>
+    <p><strong>Status:</strong> {{ transaction?.status }}</p>
+    <p><strong>Date:</strong> {{ transaction?.date }}</p>
+  </div>
+  

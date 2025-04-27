@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { loadStripe } from '@stripe/stripe-js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-profile',
@@ -9,20 +10,41 @@ import { loadStripe } from '@stripe/stripe-js';
   
   styleUrl: './client-profile.component.css'
 })
-export class ClientProfileComponent  {
-  async pay() {
-   const stripe = await loadStripe('pk_test_YOUR_PUBLIC_KEY');
+export class ClientProfileComponent {
+  private router = inject(Router);
+  async makePayment() {
+    const stripe = await loadStripe('your-publishable-key-here'); // Replace with your Stripe publishable key
 
-    const { error } = await stripe!.redirectToCheckout({
-      lineItems: [{ price: 'price_1YOUR_PRICE_ID', quantity: 1 }],
+    if (!stripe) {
+      console.error('Stripe failed to load.');
+      return;
+    }
+
+    const { error } = await stripe.redirectToCheckout({
+      lineItems: [
+        { price: 'price_1Hh1Y2IyNTgGDV2kX9eX9eX9', quantity: 1 } // Replace with your price ID
+      ],
       mode: 'payment',
-      successUrl: 'https://your-site.com/success',
-      cancelUrl: 'https://your-site.com/cancel',
+      successUrl: window.location.origin + '/success',
+      cancelUrl: window.location.origin + '/cancel',
     });
 
     if (error) {
-      console.error('Payment error:', error);
+      console.error('Payment error:', error.message);
     }
   }
+  redirectToPayment() {
+
+    this.makePayment();
+    this.router.navigate(['/Transactions']);
+
+  }
+  
 }
+
+ 
+
+   
+
+
 
