@@ -3,7 +3,6 @@ import { Routes } from '@angular/router';
 import { SupplierComponent } from './supplier/supplier.component';
 import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { OfferCardComponent } from './offers/offer-card/offer-card.component';
 import { ClientProfileComponent } from './client-profile/client-profile.component';
 import { SupplierProfileComponent } from './supplier-profile/supplier-profile.component';
 import { ClientServiceComponent } from './client-service/client-service.component';
@@ -20,6 +19,10 @@ export const routes: Routes = [
   {
     path: 'techinical',
     component: TechinicalComponent,
+  },
+  {
+    path: 'technican',
+    component: loginComponent,
     title: '  مستخدم جديد',
   },
   {
@@ -55,11 +58,11 @@ export const routes: Routes = [
     path: '',
     component: HomeComponent,
   },
-  {
-    path: 'offers',
-    component: OfferCardComponent,
-    title: ' الطلبات',
-  },
+  // {
+  //   path: 'offers',
+  //   component: OfferCardComponent,
+  //   title: ' الطلبات',
+  // },
   {
     path: '**',
     component: NotfoundComponent,
@@ -68,7 +71,7 @@ export const routes: Routes = [
 
   { path: '', component: HomeComponent },
 
-  { path: 'offers', component: OfferCardComponent, title: ' الطلبات' },
+  // { path: 'offers', component: OfferCardComponent, title: ' الطلبات' },
   {
     path: 'profile',
     component: SupplierProfileComponent,
