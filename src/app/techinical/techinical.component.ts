@@ -2,12 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component , NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { profileService } from './profileservice';
-import { HttpClientModule } from '@angular/common/http';
 
 
 @Component({
   selector: 'app-techinical',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule , HttpClientModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule ],
   templateUrl: './techinical.component.html',
   styleUrl: './techinical.component.css'
 })

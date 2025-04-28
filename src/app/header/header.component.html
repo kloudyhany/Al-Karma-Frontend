@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-light shadow-sm custom-navbar">
-  <div class="container-fluid">
-    <!-- Logo -->
+  <div class="container-fluid"> 
+     
     <a class="navbar-brand d-flex align-items-center">
       <img src="/src/app/Assets/images/logo.jpeg" alt="Logo" class="logo-img hover-effect" style="cursor: pointer;" />
     </a>
@@ -11,7 +11,7 @@
     </button>
 
     <!-- Navbar links -->
-    <div class="collapse navbar-collapse" id="mainNavbar">
+     <div class="collapse navbar-collapse" id="mainNavbar">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
@@ -19,13 +19,13 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active">
+          <a class="nav-link" routerLink="/logindashboard" routerLinkActive="active">
             <i class="bi bi-gear-fill me-1"></i> تسجيل الدخول
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="./technical" routerLinkActive="active">
-            <i class="bi bi-gear-fill me-1"></i>  حساب جديد
+          <a class="nav-link" routerLink="/technican" routerLinkActive="active">
+            <i class="bi bi-gear-fill me-1"></i> حساب جديد
           </a>
         </li>
         <li class="nav-item">
@@ -33,23 +33,23 @@
             <i class="bi bi-list-task me-1"></i> الطلبات
           </a>
         </li>
-        
         <li class="nav-item">
           <a class="nav-link" routerLink="/clientprofile" routerLinkActive="active">
             <i class="bi bi-person-circle me-1"></i> الملف الشخصي
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/client_service" routerLinkActive="active">
+          <a class="nav-link" routerLink="/transactions" routerLinkActive="active">
             <i class="bi bi-headset me-1"></i> خدمة العملاء
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" routerLink="" routerLinkActive="active">
             <i class="bi bi-info-circle-fill me-1"></i> عن الموقع
           </a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
-</nav>
+</nav> 
+
