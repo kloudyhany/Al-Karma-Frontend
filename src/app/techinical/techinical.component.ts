@@ -1,17 +1,18 @@
+import { routes } from './../app.routes';
 import { CommonModule } from '@angular/common';
 import { Component , NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { profileService } from './profileservice';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-techinical',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule  ],
   templateUrl: './techinical.component.html',
   styleUrl: './techinical.component.css'
 })
 export class TechinicalComponent {
-  constructor(private fb: FormBuilder, private profileService: profileService) {}
+  constructor(private fb: FormBuilder, private profileService: profileService , private router:Router) {}
 
   profileForm!: FormGroup;
   selectedFiles: File[] = [];
@@ -22,12 +23,12 @@ export class TechinicalComponent {
       name: ['', Validators.required],
       job: ['', Validators.required],
       password: ['', Validators.required],
+      address: ['', Validators.required],
       serviceType: ['', Validators.required],
       service: ['', Validators.required],
       nationalIdImages: [null],
       previousworkname: [null],
       previousworkimgs: [null],
-      clientSection: [null],
       phone: ['', [Validators.required, Validators.pattern(/^01\d{9}$/)]],
       whatsapp: ['', [Validators.required, Validators.pattern(/^01\d{9}$/)]]
     });
@@ -85,8 +86,14 @@ export class TechinicalComponent {
 
     const formValue = this.profileForm.value;
     this.profileService.submitProfile(formValue).subscribe({
-      next: response => alert('تم التسجيل بنجاح!'),
-      error: error => alert('حدث خطأ أثناء الإرسال.')
+      next: response => {
+        alert('تم التسجيل بنجاح!');
+        this.router.navigate(['/login']); 
+      },
+      error: error => {
+        alert('حدث خطأ أثناء الإرسال.');
+      }
     });
+    
   }
 }

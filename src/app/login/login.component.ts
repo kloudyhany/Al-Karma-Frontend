@@ -4,6 +4,7 @@ import { loginservice } from './loginservice';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ import { FormsModule } from '@angular/forms';
 export class loginComponent {
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private loginService: loginservice) {}
+  constructor(private fb: FormBuilder, private loginService: loginservice , private router:Router) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -43,6 +44,7 @@ export class loginComponent {
     this.loginService.login(this.loginForm.value).subscribe({
       next: (response) => {
         alert('تم تسجيل الدخول بنجاح!');
+        this.router.navigate(['/clientprofile']);
       },
       error: (error) => {
         alert('فشل تسجيل الدخول. تأكد من البيانات.');

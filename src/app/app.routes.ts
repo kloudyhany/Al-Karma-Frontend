@@ -13,6 +13,7 @@ import { TechinicalComponent } from './techinical/techinical.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
 import { NgModule } from '@angular/core';
+import { RatingAllComponent } from './rating-all/rating-all.component';
 
 
 
@@ -66,12 +67,10 @@ export const routes: Routes = [
     component: ServiceConfirmationComponent,
     title: 'عرض سعر',
   },
-
-
   {
-    path: 'offers',
-    component: OfferListComponent,
-    title: ' الطلبات',
+    path: 'rating',
+    component: RatingAllComponent,
+    title: 'تقييمات',
   },
   {
     path: 'client_service',
