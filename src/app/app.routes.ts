@@ -15,6 +15,10 @@ import { TransactionDetailComponent } from './transaction-detail/transaction-det
 
 export const routes: Routes = [
   {
+    path: '',
+    component: HomeComponent,
+  },
+  {
     path: 'login',
     component: loginComponent,
     title: ' تسجيل الدخول',
@@ -24,7 +28,7 @@ export const routes: Routes = [
   //   component: TechinicalComponent,
   // },
   { path: 'transactions', component:TransactionListComponent, title: 'قائمة المعاملات' },
-  { path: 'transactions/:id', component: TransactionDetailComponent, title: 'تفاصيل المعاملة' },
+  // { path: 'transactions/:id', component: TransactionDetailComponent, title: 'تفاصيل المعاملة' },
   {
     path: 'technican',
     component: TechinicalComponent,
@@ -36,6 +40,11 @@ export const routes: Routes = [
     title: ' خدماتنا',
   },
 
+  {
+    path: 'transactions',
+    component: TransactionDetailComponent,
+    title: 'تفاصيل المعاملة',
+  },
  
 
   {
@@ -44,7 +53,7 @@ export const routes: Routes = [
     title: ' الملف الشخصي للعميل',
   },
   {
-    path: 'client_service',
+    path: 'clientservice',
     component: ClientServiceComponent,
     title: 'خدمة العملاء',
   },
@@ -55,10 +64,7 @@ export const routes: Routes = [
     title: 'عرض سعر',
   },
 
-  {
-    path: '',
-    component: HomeComponent,
-  },
+
   {
     path: 'offers',
     component: OfferListComponent,
@@ -69,15 +75,6 @@ export const routes: Routes = [
     component: ClientServiceComponent,
     title: ' خدمه العملاء',
   },
-
-  {
-    path: '**',
-    component: NotfoundComponent,
-    title: '404 Not Found',
-  },
-
-  { path: '', component: HomeComponent },
-
   { path: 'offers', component: OfferListComponent, title: ' الطلبات' },
   {
     path: 'profile',
