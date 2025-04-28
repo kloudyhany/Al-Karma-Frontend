@@ -31,7 +31,6 @@ export const routes: Routes = [
   //   component: TechinicalComponent,
   // },
   { path: 'transactions', component:TransactionListComponent, title: 'قائمة المعاملات' },
-  // { path: 'transactions/:id', component: TransactionDetailComponent, title: 'تفاصيل المعاملة' },
   {
     path: 'technican',
     component: TechinicalComponent,
@@ -45,7 +44,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'transactions',
+    path: 'transactions/:id',
     component: TransactionDetailComponent,
     title: 'تفاصيل المعاملة',
   },
