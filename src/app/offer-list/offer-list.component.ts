@@ -34,6 +34,7 @@ export class OfferListComponent implements OnInit {
   acceptOffer(offerId: number) {
     this.offerService.acceptOffer(offerId).subscribe(() => {
       this.loadOffers(); // Refresh the list
+      localStorage.setItem('acceptedOffer', JSON.stringify(this.offers.find(offer => offer.id === offerId)));
     });
   }
 

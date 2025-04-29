@@ -36,7 +36,7 @@ export class ClientProfileComponent {
   }
   redirectToOfferList(): void {
     console.log('Redirecting to the offer list...');
-    this.router.navigate(['/offers']); 
+    this.router.navigate(['/requests']); // Redirect to the offer list page
   }
   pay(): void {
     console.log('Payment button clicked!');
