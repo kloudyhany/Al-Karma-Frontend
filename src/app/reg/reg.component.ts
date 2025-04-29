@@ -1,4 +1,4 @@
-import { routes } from './../app.routes';
+import { routes } from '../app.routes';
 import { CommonModule } from '@angular/common';
 import { Component , NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, Validators, FormGroup, FormBuilder } from '@angular/forms';
@@ -6,12 +6,12 @@ import { profileService } from './profileservice';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-techinical',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule  ],
-  templateUrl: './techinical.component.html',
-  styleUrl: './techinical.component.css'
+  selector: 'app-reg',
+  imports: [FormsModule , ReactiveFormsModule, CommonModule],
+  templateUrl: './reg.component.html',
+  styleUrl: './reg.component.css'
 })
-export class TechinicalComponent {
+export class RegComponent {
   constructor(private fb: FormBuilder, private profileService: profileService , private router:Router) {}
 
   profileForm!: FormGroup;

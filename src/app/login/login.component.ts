@@ -9,24 +9,23 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-     
-  ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class loginComponent {
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private loginService: loginservice , private router:Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private loginService: loginservice,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       phone: ['', [Validators.required, Validators.pattern(/^01\d{9}$/)]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 
@@ -48,7 +47,7 @@ export class loginComponent {
       },
       error: (error) => {
         alert('فشل تسجيل الدخول. تأكد من البيانات.');
-      }
+      },
     });
   }
 }

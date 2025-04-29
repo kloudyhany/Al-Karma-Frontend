@@ -8,12 +8,14 @@ import { ClientServiceComponent } from './client-service/client-service.componen
 import { loginComponent } from './login/login.component';
 import { ServicesPageComponent } from './services-page/services-page.component';
 import { OfferListComponent } from './offer-list/offer-list.component';
-
-import { TechinicalComponent } from './techinical/techinical.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
 import { NgModule } from '@angular/core';
 import { RatingAllComponent } from './rating-all/rating-all.component';
+import { RegComponent } from './reg/reg.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { create } from 'domain';
+import { CreatenewpasswordComponent } from './createnewpassword/createnewpassword.component';
 
 
 
@@ -27,16 +29,22 @@ export const routes: Routes = [
     component: loginComponent,
     title: ' تسجيل الدخول',
   },
-  // {
-  //   path: 'techinical',
-  //   component: TechinicalComponent,
-  // },
-  { path: 'transactions', component:TransactionListComponent, title: 'قائمة المعاملات' },
+  { path: 'transactions', component: TransactionListComponent, title: 'قائمة المعاملات' },
   {
-    path: 'technican',
-    component: TechinicalComponent,
-    title: '  مستخدم جديد',
-    canActivate: []
+    path: 'registration',
+    component: RegComponent,
+    title: 'تسجيل حساب جديد',
+  },
+  {
+    path : 'resetpassword',
+    component : ResetpasswordComponent,
+    title : 'تغيير كلمة المرور',
+
+  },
+  {
+    path : 'createnewpassword' , 
+    component : CreatenewpasswordComponent,
+    title : 'إنشاء كلمة مرور جديدة',
   },
   {
     path: 'services',
@@ -49,7 +57,7 @@ export const routes: Routes = [
     component: TransactionDetailComponent,
     title: 'تفاصيل المعاملة',
   },
- 
+
 
   {
     path: 'clientprofile',
