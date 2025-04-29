@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, NgModule } from '@angular/core';
 import { FormGroup, FormsModule, NgModel, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ResetpassService } from '../resetpass.service';
 
 @Component({
   selector: 'app-resetpassword',
@@ -13,7 +14,7 @@ export class ResetpasswordComponent {
 
   resetForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router , private resetservice:ResetpassService) { }
 
   ngOnInit(): void {
     this.resetForm = this.fb.group({
@@ -26,39 +27,40 @@ export class ResetpasswordComponent {
   }
 
   onSendCode(): void {
-    // Logic to send the reset code to the user's phone
-    const phoneControl = this.resetForm.get('phone');
-  if (phoneControl && phoneControl.valid) {
-      // this.apiService.sendResetCode(phone).subscribe({
-      //   next: () => {
-      //     alert("تم إرسال الكود إلى رقم الهاتف الخاص بك.");
-      //   },
-      console.log("Reset code sent to the user's phone.");
-      document.getElementById("codecheck")!.style.display = "block";
+     const phone = this.resetForm.get('phone')?.value;
+    // if (phone && this.resetForm.get('phone')?.valid) {
+    //   this.resetservice.sendResetCode(phone).subscribe({
+    //     next: () => {
+    //       alert('تم إرسال الكود إلى رقم الهاتف الخاص بك.');
+    //       document.getElementById("codecheck")!.style.display = "block";
+    //     },
+    //     error: () => alert('حدث خطأ أثناء إرسال الكود. حاول مرة أخرى.')
+    //   });
+    // }
+    if (phone && this.resetForm.get('phone')?.valid) {
+    document.getElementById("codecheck")!.style.display = "block";
     }
   }
+  
   onSendCodeagain(): void {
-    // const phone = this.resetForm.get('phone')?.value;
-    // if (!phone) {
-    //   alert("يرجى إدخال رقم الهاتف لإعادة إرسال الكود.");
-    //   return;
-    // }
-    // this.apiService.resendResetCode(phone).subscribe({
-    //   next: () => {
-    //     alert("تم إرسال الكود مرة أخرى إلى رقم الهاتف الخاص بك.");
-    //   },
-    //  }
-
-    // Logic to send the reset code again to the user's phone
-    console.log("Reset code sent again to the user's phone.");
+   // const phone = this.resetForm.get('phone')?.value;
+    // if (phone) {
+    //   this.resetservice.resendResetCode(phone).subscribe({
+    //     next: () => alert('تم إرسال الكود مرة أخرى.'),
+    //     error: () => alert('فشل في إعادة إرسال الكود.')
+    //   });
+   // }
   }
+  
   onSubmit(): void {
-    // logic to compare the code entered by the user with the code sent to the user's phone
-    // if (this.resetForm.get('accesscode')?.value !== sentCode) {
+    // const phone = this.resetForm.get('phone')?.value;
+    // const code = this.resetForm.get('accesscode')?.value;
+  
+    // this.resetservice.verifyResetCode(phone, code).subscribe({
+    //   next: () => this.router.navigate(['./createnewpassword']),
+    //   error: () => alert('الكود المدخل غير صحيح.')
+    // });
     this.router.navigate(['./createnewpassword']);
-    //}else {
-    // alert("الكود المدخل غير صحيح. يرجى التحقق من الكود المدخل.");
-    //}
-
   }
+  
 }
