@@ -14,8 +14,8 @@ import { NgModule } from '@angular/core';
 import { RatingAllComponent } from './rating-all/rating-all.component';
 import { RegComponent } from './reg/reg.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
-import { create } from 'domain';
 import { CreatenewpasswordComponent } from './createnewpassword/createnewpassword.component';
+import { TechnicalProfileComponent } from './technical-profile/technical-profile.component';
 
 
 
@@ -64,6 +64,17 @@ export const routes: Routes = [
     component: ClientProfileComponent,
     title: ' الملف الشخصي للعميل',
   },
+  {
+    path: 'technicalprofile',
+
+    component: TechnicalProfileComponent,
+    title: ' الملف الشخصي للفني ',
+  },
+  // {
+  //   path: 'adminprofile',
+  //   component: ClientProfileComponent,
+  //   title: ' الملف الشخصي للعميل',
+  // },
   {
     path: 'clientservice',
     component: ClientServiceComponent,

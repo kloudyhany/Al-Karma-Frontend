@@ -1,31 +1,46 @@
-<div class="dashboard">
-    <div class="home-btn">
-      <!-- <i ></i> -->
-      <a  class="fas fa-home" href=""></a>
-    </div>
-  
-    <div class="user-info">
-      <i class="fas fa-user-circle"></i>
-      <span>حساب عميل</span>
-    </div>
-  
-    <div class="main-action">
-      <i class="bg-success"></i>
-      <button (click)="redirectToOfferList()">طلب لخدمة</button>
-    </div>
-  
-    <!-- Sidebar Actions -->
-    <div class="sidebar">
-      <button><i class="fas fa-user"></i> الملف الشخصي</button>
-      <button><i class="fas fa-cog"></i> الحساب</button>
-      <button><i class="fas fa-tasks"></i> خدمات مطلوبة</button>
-      <button><i class="fas fa-check-circle"></i> خدمات منجزه</button>
-      <button><i class="fas fa-times-circle"></i> خدمات ملغاه</button>
-      <button><i class="fas fa-sticky-note"></i> ملاحظاتي</button>
-      <button class="pay-btn" (click)="pay()">
-        
-        <i class="fas fa-credit-card"></i> دفع الآن
-      </button>
-    </div>
+<div class="dashboard" dir="rtl">
+  <div class="user-info">
+    <i class="fas fa-user-circle"></i>
+    <span>الملف الشخصي</span>
   </div>
-  
+
+  <!-- Profile Image -->
+  <div class="profile-image">
+    <img [src]="user.image" alt="Profile Image" />
+    <img *ngIf="!user.image" src="assets/default-avatar.png" alt="Default Avatar" />
+    <div class="image-upload">
+      <i class="fas fa-camera"></i>
+      <span>تغيير الصورة الشخصية</span>
+    </div>
+
+    <input type="file" (change)="onFileSelected($event)"/>
+    <div class="error" *ngIf="imageError" style="height: 10px;width: 10px;">{{ imageError }}</div>
+  </div>
+
+  <!-- Profile Info Form -->
+  <div class="form-section">
+    <label>الاسم</label>
+    <input type="text" [(ngModel)]="user.name" />
+
+    <label>رقم الهاتف</label>
+    <input type="text" [(ngModel)]="user.phone" />
+
+
+    <button class="main-action" (click)="saveProfile()">
+      <i class="fas fa-save"></i> حفظ البيانات
+    </button>
+  </div>
+
+  <!-- Change Password -->
+  <div class="form-section">
+    <label>كلمة المرور الحالية</label>
+    <input type="password" [(ngModel)]="currentPassword" />
+
+    <label>كلمة المرور الجديدة</label>
+    <input type="password" [(ngModel)]="newPassword" />
+
+    <button class="main-action" (click)="changePassword()">
+      <i class="fas fa-key"></i> تغيير كلمة المرور
+    </button>
+  </div>
+</div>
