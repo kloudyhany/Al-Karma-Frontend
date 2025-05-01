@@ -16,6 +16,7 @@ import { RegComponent } from './reg/reg.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { CreatenewpasswordComponent } from './createnewpassword/createnewpassword.component';
 import { TechnicalProfileComponent } from './technical-profile/technical-profile.component';
+import { RequestFormComponent } from './request-form/request-form.component';
 
 
 
@@ -23,6 +24,7 @@ export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    title: ' الصفحة الرئيسية',
   },
   {
     path: 'login',
@@ -106,6 +108,11 @@ export const routes: Routes = [
   {
     path: 'techprofile',
     component : TechnicalProfileComponent
+  },
+  {
+    path: 'request',
+    component : RequestFormComponent,
+    title : 'طلب خدمة',
   },
 
   { path: '**', component: NotfoundComponent, title: '404 Not Found' },

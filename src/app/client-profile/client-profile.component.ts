@@ -1,11 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { loadStripe } from '@stripe/stripe-js';   // Import Stripe.js
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';  
-import { Router } from '@angular/router';
-import { NgModule } from '@angular/core';
-// import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { ProfileService } from '../services/profile.service';
+import { Profile } from '../models/offer'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-profile',
@@ -15,92 +13,62 @@ import { FormsModule } from '@angular/forms';
   
   styleUrl: './client-profile.component.css'
 })
-export class ClientProfileComponent {
-  // private router = inject(Router);
-  // async makePayment() {
-  //   const stripe = await loadStripe('your-publishable-key-here'); // Replace with your Stripe publishable key
+export class ClientProfileComponent implements OnInit {
+  user: any = {};
+  imageUrl: string = 'assets/default-user.png';
+  isEditing = false;
 
-  //   if (!stripe) {
-  //     console.error('Stripe failed to load.');
-  //     return;
-  //   }
+  constructor(private profileService: ProfileService) {}
 
-  //   const { error } = await stripe.redirectToCheckout({
-  //     lineItems: [
-  //       { price: 'price_1Hh1Y2IyNTgGDV2kX9eX9eX9', quantity: 1 } // Replace with your price ID
-  //     ],
-  //     mode: 'payment',
-  //     successUrl: window.location.origin + '/success',
-  //     cancelUrl: window.location.origin + '/cancel',
-  //   });
+  ngOnInit(): void {
+    this.loadProfile();
+  }
 
-  //   if (error) {
-  //     console.error('Payment error:', error.message);
-  //   }
-  // }
-  // redirectToOfferList(): void {
-  //   console.log('Redirecting to the offer list...');
-  //   this.router.navigate(['/requests']); // Redirect to the offer list page
-  // }
-  // pay(): void {
-  //   console.log('Payment button clicked!');
-  //   this.makePayment(); // Call the payment function here
-  
-  //   this.router.navigate(['/transactions']); // Redirect to the transactions page after payment
-    
-  // }
+  loadProfile(): void {
+    this.profileService.getUserProfile().subscribe({
+      next: (data) => {
+        this.user = data;
+        this.imageUrl = data.imageUrl || 'assets/default-user.png';
+      },
+      error: (err) => console.error('خطأ في تحميل البيانات:', err),
+    });
+  }
 
+  toggleEdit(): void {
+    this.isEditing = !this.isEditing;
+  }
 
-  user = {
-    name: 'أحمد محمد',
-    phone: '0123456789',
-    email: 'ahmed@example.com',
-    image: 'assets/default-avatar.png'
-  };
+  saveChanges(): void {
+    this.profileService.updateUserProfile(this.user).subscribe({
+      next: () => {
+        this.isEditing = false;
+        console.log('تم حفظ التعديلات');
+      },
+      error: (err) => console.error('فشل في الحفظ:', err),
+    });
+  }
 
-  currentPassword = '';
-  newPassword = '';
-
-  selectedFile: File | null = null;
-  imageError = '';
-
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    this.imageError = '';
+  onFileSelected(event: Event): void {
+    const fileInput = event.target as HTMLInputElement;
+    const file = fileInput.files?.[0];
 
     if (file) {
-      const isValidType = ['image/jpeg', 'image/png'].includes(file.type);
-      const isValidSize = file.size <= 5 * 1024 * 1024;
-
-      if (!isValidType) {
-        this.imageError = 'الملف يجب أن يكون بصيغة JPG أو PNG فقط.';
-        return;
-      }
-
-      if (!isValidSize) {
-        this.imageError = 'أقصى حجم للصورة هو 5 ميجا.';
-        return;
-      }
-
-      this.selectedFile = file;
-
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.user.image = e.target.result;
+        this.imageUrl = e.target.result;
       };
       reader.readAsDataURL(file);
+
+      this.profileService.uploadProfileImage(file).subscribe({
+        next: (res) => {
+          console.log('تم رفع الصورة بنجاح');
+          this.user.imageUrl = res.imageUrl;
+        },
+        error: (err) => console.error('فشل في رفع الصورة:', err),
+      });
     }
   }
 
-  saveProfile() {
-    console.log('✅ حفظ البيانات:', this.user);
-    // TODO: Call service to update profile
-  }
-
-  changePassword() {
-    console.log('🔒 تغيير كلمة المرور:', this.currentPassword, this.newPassword);
-    // TODO: Call service to change password
-  }
 }
 
  

@@ -33,3 +33,16 @@ export interface User {
     role: string; // 'client ' or  'technician'
     imageUrl: string;
 }
+export interface Profile {
+    id: string;
+    name: string;
+    phone: string;
+    email: string;
+    location: string;
+    role: string;
+    rating?: number;
+    experience?: number;
+    tasksCompleted?: number;
+    imageUrl?: string;
+    user: string;
+  }

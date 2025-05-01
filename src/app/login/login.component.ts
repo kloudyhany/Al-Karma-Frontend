@@ -43,7 +43,15 @@ export class loginComponent {
     this.loginService.login(this.loginForm.value).subscribe({
       next: (response) => {
         alert('تم تسجيل الدخول بنجاح!');
-        this.router.navigate(['/clientprofile']);
+        if (response.role === 'admin') {
+          this.router.navigate(['/admin']);
+        } 
+        else if  (response.role === 'client') {
+          this.router.navigate(['/clientprofile']);
+        }
+        else if (response.role === 'technician') {
+        this.router.navigate(['/technicianprofile']);
+        }
       },
       error: (error) => {
         alert('فشل تسجيل الدخول. تأكد من البيانات.');

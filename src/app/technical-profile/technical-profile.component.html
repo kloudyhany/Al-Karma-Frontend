@@ -42,7 +42,7 @@
 
       <!-- الأزرار -->
       <div class="d-flex justify-content-between mt-4">
-        <button type="button" class="btn btn-outline-warning" (click)="changePassword()">تغيير كلمة المرور</button>
+        <button type="button" class="btn btn-outline-warning" >تغيير كلمة المرور</button>
         <div>
           <button type="button" class="btn btn-outline-primary me-2" *ngIf="!isEditing" (click)="toggleEdit()">تعديل</button>
           <button type="submit" class="btn btn-success" *ngIf="isEditing">حفظ</button>
@@ -56,14 +56,18 @@
       <div class="row g-3">
         <div class="col-6 col-md-4" *ngFor="let img of portfolioImages">
           <img [src]="img" class="img-fluid rounded-3 shadow-sm" alt="عمل سابق">
+          <div class="mt-2 text-center">
+            <button class="btn btn-sm btn-outline-secondary" (click)="onFileSelected($event)">رفع صورة</button>
+            
+          </div>
         </div>
       </div>
     </div>
 
     <!-- رجوع -->
     <div class="text-center mt-4">
-      <a routerLink="/dashboard" class="btn btn-outline-dark mt-3"> تقديم عرض لخدمه</a>
-      <a routerLink="/home" class="btn btn-outline-secondary mt-3">العودة للصفحة الرئيسية</a>
+      <a routerLink="/request" class="btn btn-outline-dark mt-3">تقديم طلب خدمة</a>
+      <a routerLink="" class="btn btn-outline-secondary mt-3">العودة للصفحة الرئيسية</a>
       <a routerLink="/logout" class="btn btn-outline-danger mt-3">تسجيل الخروج</a>
 
     </div>

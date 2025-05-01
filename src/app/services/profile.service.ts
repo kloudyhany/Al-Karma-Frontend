@@ -2,46 +2,56 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-export interface Profile {
-  id: string;
-  name: string;
-  phone: string;
-  email: string;
-  location: string;
-  role: string;
-  rating?: number;
-  experience?: number;
-  tasksCompleted?: number;
-  imageUrl?: string;
-}
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-  profile: Profile | null = null; 
-  userId: string = ''; 
-  role: string = ''; 
-  imageUrl: string = ''; 
-  private apiUrl = 'https://api.example.com/profile'; 
+  private baseUrl = ''; // ✅ Replace with actual base URL
 
   constructor(private http: HttpClient) {}
 
-  // Method to get user profile data from the API
+  // Get profile data
   getUserProfile(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+    return this.http.get(`${this.baseUrl}/profile`);
   }
 
-  // Method to update the user profile
-  updateUserProfile(user: any): Observable<any> {
-    return this.http.put<any>(this.apiUrl, user);
+  // Update profile
+  updateUserProfile(userData: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/update-profile`, userData);
   }
 
-  // Method to change the profile image
-  changeProfileImage(image: File): Observable<any> {
+  // Upload/change profile image
+  changeProfileImage(file: File): Observable<any> {
     const formData = new FormData();
-    formData.append('image', image, image.name);
-    return this.http.post<any>(`${this.apiUrl}/image`, formData);
+    formData.append('image', file);
+    return this.http.post(`${this.baseUrl}/upload-profile-image`, formData);
   }
-}
+  
+
+
+
+  // Update basic profile info (name, phone, etc.)
+  updateProfile(userData: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/update-profile`, userData);
+  }
+
+  // Upload profile image
+  uploadProfileImage(imageFile: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('image', imageFile);
+    return this.http.post(`${this.baseUrl}/upload-profile-image`, formData);
+  }
+
+  // Change password
+  changePassword(currentPassword: string, newPassword: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/change-password`, {
+      currentPassword,
+      newPassword
+    });
+  }
+  }
+  
+
 

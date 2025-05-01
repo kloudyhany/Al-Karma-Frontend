@@ -1,166 +1,186 @@
-.dashboard {
+.client-profile {
   background-color: #061b29;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 5rem 1rem;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 5rem;
-  position: relative;
-  overflow: hidden;
-  margin-top: 4px;
-  margin-bottom: 4px;
-  border-radius: 20px;
-  justify-content: space-between;
-  color: white;
+  justify-content: center;
+  align-items: start;
   font-family: 'Cairo', sans-serif;
+  color: white;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
 
-  .home-btn {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 24px;
-    background: #f57c00;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: all 0.3s ease;
-  
-    color: white;
-    cursor: pointer;
-  }
-
-  .user-info {
-    background: #f57c00;
-    color: white;
-    padding: 12px 30px;
-    border-radius: 25px;
-    display: flex;
-    align-items: center;
-    font-size: 18px;
-    gap: 10px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-
-  .main-action {
-    background: white;
+  .profile-card {
+    background-color: white;
     color: #061b29;
-    margin: 2rem 0;
-    padding: 20px 40px;
-    border-radius: 30px;
-    font-size: 22px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: bold;
-  }
-
-  .sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-
-    button {
-      background: white;
-      color: #061b29;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 25px;
-      font-size: 16px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-
-      &:hover {
-        background: #f0f0f0;
-      }
-    }
-
-    .pay-btn {
-      background-color: #28a745;
-      color: white;
-
-      &:hover {
-        background-color: #218838;
-      }
-    }
-  }
-
-  /* Modal styles */
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.5);
-  }
-
-  .modal {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    width: 400px;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .modal h3 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .modal input[type="file"] {
-    display: block;
-    margin: 20px 0;
-  }
-
-  .cancel-btn {
-    background: #f57c00;
-    color: white;
-    padding: 10px 20px;
-    border: none;
+    padding: 2rem;
     border-radius: 25px;
-    cursor: pointer;
     width: 100%;
+    max-width: 800px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+
+    .text-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .profile-image-container {
+      position: relative;
+      width: 130px;
+      height: 130px;
+
+      .profile-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid #f57c00;
+      }
+
+      label {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background-color: white;
+        border: 2px solid #f57c00;
+        border-radius: 50%;
+        padding: 6px;
+        cursor: pointer;
+
+        i {
+          color: #f57c00;
+        }
+      }
+    }
+
+    h4 {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+
+      .badge {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+      }
+    }
+
+    form {
+      margin-top: 2rem;
+
+      .form-label {
+        font-weight: bold;
+        color: #061b29;
+      }
+
+      .form-control {
+        border-radius: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        font-family: 'Cairo', sans-serif;
+      }
+
+      .btn {
+        border-radius: 25px;
+        padding: 10px 20px;
+        font-weight: bold;
+      }
+
+      .btn-outline-warning {
+        border-color: #f57c00;
+        color: #f57c00;
+
+        &:hover {
+          background-color: #f57c00;
+          color: white;
+        }
+      }
+
+      .btn-outline-primary {
+        border-color: #007bff;
+        color: #007bff;
+
+        &:hover {
+          background-color: #007bff;
+          color: white;
+        }
+      }
+
+      .btn-success {
+        background-color: #28a745;
+        border: none;
+
+        &:hover {
+          background-color: #218838;
+        }
+      }
+    }
+
+    .portfolio {
+      margin-top: 2rem;
+
+      h5 {
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #061b29;
+      }
+
+      img {
+        width: 100%;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .upload-btn {
+        margin-top: 0.5rem;
+        padding: 6px 12px;
+        border-radius: 20px;
+        background-color: #f57c00;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+      }
+    }
+
+    .actions {
+      text-align: center;
+      margin-top: 2rem;
+
+      a {
+        margin: 0.5rem;
+        border-radius: 25px;
+        padding: 10px 20px;
+        font-weight: bold;
+      }
+
+      .btn-outline-dark,
+      .btn-outline-secondary,
+      .btn-outline-danger {
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
   }
 
-  /* Responsive Design */
   @media (max-width: 768px) {
-    .dashboard {
-      padding-top: 1rem;
-    }
+    padding-top: 2rem;
 
-    .user-info {
-      font-size: 16px;
-      padding: 10px 20px;
-    }
-
-    .main-action {
-      padding: 15px 30px;
-      font-size: 20px;
-    }
-
-    .sidebar button {
-      padding: 10px 20px;
+    .profile-card {
+      padding: 1rem;
       font-size: 14px;
-    }
-
-    .modal {
-      width: 100%;
-      padding: 20px;
     }
   }
 }

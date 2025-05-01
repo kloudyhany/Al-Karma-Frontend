@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ServiceProfileService } from '../technical_service-profile.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms'; // Import FormsModule
-import { HttpClient } from '@angular/common/http';
-import { ProfileService } from '../services/profile.service'; // Import ProfileService
+import { FormsModule } from '@angular/forms'; 
+import { ProfileService } from '../services/profile.service'; 
+import { Router } from '@angular/router';
 
 @Component({
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
@@ -30,7 +27,7 @@ export class TechnicalProfileComponent implements OnInit {
   imageUrl = 'assets/images/default-profile.jpg';
   isEditing = false;
 
-  constructor(private profileService: ProfileService) {}
+  constructor(private profileService: ProfileService,private router:Router) {}
 
   ngOnInit(): void {
     // Call the API to fetch the user profile when the component initializes
@@ -41,10 +38,11 @@ export class TechnicalProfileComponent implements OnInit {
   getUserProfile(): void {
     this.profileService.getUserProfile().subscribe(
       (data) => {
-        // Assuming the API returns an object with user and portfolio data
+        //  API returns an object with user and portfolio data
         this.user = data.user;
         this.portfolioImages = data.portfolioImages;
-        this.imageUrl = data.imageUrl || this.imageUrl; // If no image URL is provided, keep the default
+        this.imageUrl = data.imageUrl || this.imageUrl; // Set default image if none provided
+        this.user.experience = data.experience || 0; // Set default experience if none provided
       },
       (error) => {
         console.error('Error fetching user profile:', error);
@@ -61,8 +59,11 @@ export class TechnicalProfileComponent implements OnInit {
         (response) => {
           console.log('Image uploaded successfully');
         },
-        (error) => {
-          console.error('Error uploading image:', error);
+        (
+          
+
+        ) => {
+          console.error('Error uploading image:', Error);
         }
       );
     }
@@ -86,7 +87,7 @@ export class TechnicalProfileComponent implements OnInit {
   }
 
   changePassword(): void {
-    alert('This will open password change dialog!');
+    this.router.navigate(['/resetpassword']);
   }
   
 }
