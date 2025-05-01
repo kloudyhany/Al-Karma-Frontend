@@ -8,12 +8,19 @@ import { Service } from '../models/offer';
 })
 export class ServicesService {
 
-  constructor(private http:HttpClient) { }
-   //  جلب جميع الخدمات
-  // هنا نستخدم http.get لجلب جميع الخدمات من API
-  // يمكن أن يكون لديك API خاص بك لجلب الخدمات
-  
-   getAllServices(): Observable<Service[]> {
-    return this.http.get<Service[]>('https://your-api-url/api/services');
+  private baseUrl = 'https://localhost:5001/api/requests'; //apiiiiiiiiiii hereeeeeeeee
+
+  constructor(private http: HttpClient) {}
+
+  createRequest(data: any) {
+    return this.http.post(`${this.baseUrl}`, data);
+  }
+
+  getMyRequests(clientId: string) {
+    return this.http.get<ServicesService[]>(`${this.baseUrl}/by-client/${clientId}`);
+  }
+
+  getAvailableRequests() {
+    return this.http.get<ServicesService[]>(`${this.baseUrl}/open`);
   }
 }

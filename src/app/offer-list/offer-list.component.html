@@ -2,7 +2,7 @@
     <h2>Offers</h2>
   
     <div *ngIf="offers.length === 0" class="alert alert-info">
-      No offers available.
+    لا توجد عروض متاحه
     </div>
   
     <div *ngFor="let offer of offers" class="card my-3 shadow-sm">
@@ -11,7 +11,7 @@
         <div class="ms-3 flex-grow-1">
           <h5>{{ offer.providerName }}</h5>
           <p class="mb-1">{{ offer.message }}</p>
-          <small class="text-muted">Delivery: {{ offer.deliveryTime }} | Price: {{ offer.price | currency }}</small>
+          <small class="text-muted">التوصيل: {{ offer.deliveryTime }} | السعر: {{ offer.price | currency }}</small>
         </div>
         <div class="text-end">
           <span class="badge" [ngClass]="{
@@ -23,8 +23,8 @@
           </span>
   
           <div *ngIf="offer.status === 'Pending'" class="mt-2">
-            <button (click)="acceptOffer(offer.id)" class="btn btn-sm btn-success me-2">Accept</button>
-            <button (click)="rejectOffer(offer.id)" class="btn btn-sm btn-outline-danger">Reject</button>
+            <button *ngIf="offer.isAccepted" class="btn btn-sm btn-success me-2">قبول العرض</button>
+            <button *ngIf="offer.isRejected" class="btn btn-sm btn-outline-danger">رفض العرض</button>
           </div>
         </div>
       </div>

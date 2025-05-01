@@ -16,32 +16,37 @@ import { CommonModule } from '@angular/common';
 })
 export class OfferListComponent implements OnInit {
 
+    requestId: number = 0;
   offers: Offer[] = [];
-  taskId = 6; // Example, you should get this from route param or input
 
   constructor(private offerService: OfferService) {}
 
   ngOnInit(): void {
-    this.loadOffers();
-  }
-
-  loadOffers() {
-    this.offerService.getOffers(this.taskId).subscribe(data => {
+    // جلب العروض المفتوحة بناءً على ID الطلب
+    this.offerService.getOffersByRequest(this.requestId).subscribe((data) => {
       this.offers = data;
     });
   }
 
-  acceptOffer(offerId: number) {
-    this.offerService.acceptOffer(offerId).subscribe(() => {
-      this.loadOffers(); // Refresh the list
-      localStorage.setItem('acceptedOffer', JSON.stringify(this.offers.find(offer => offer.id === offerId)));
-    });
+
+  respondToOffer(offerId: number, status: 'Accepted' | 'Rejected'): void {
+    this.offerService.respondToOffer(offerId, 'Accepted').subscribe(
+      (response) => {
+        alert('تم قبول العرض');
+        this.updateOfferState(offerId, true);
+      },
+      (error) => {
+        alert('حدث خطأ أثناء قبول العرض');
+      }
+    );
   }
 
-  rejectOffer(offerId: number) {
-    this.offerService.rejectOffer(offerId).subscribe(() => {
-      this.loadOffers(); // Refresh the list
-    });
+  private updateOfferState(offerId: number, isAccepted: boolean) {
+    const offer = this.offers.find(o => o.id === offerId);
+    if (offer) {
+      offer.isAccepted = isAccepted;
+      offer.isRejected = !isAccepted;
+    }
   }
 
 }

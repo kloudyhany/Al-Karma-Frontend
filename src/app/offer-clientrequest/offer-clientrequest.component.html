@@ -1,0 +1,11 @@
+<!-- نموذج تقديم العرض -->
+<form *ngIf="selectedRequestId">
+    <label>السعر</label>
+    <input type="number" [(ngModel)]="price" name="price" class="form-control" required />
+  
+    <label>ملاحظات</label>
+    <textarea [(ngModel)]="message" name="message" class="form-control" required></textarea>
+  
+    <button class="btn btn-primary mt-2" (click)="submitOffer()">إرسال العرض</button>
+  </form>
+  

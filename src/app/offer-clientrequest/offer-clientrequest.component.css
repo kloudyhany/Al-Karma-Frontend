@@ -1,0 +1,83 @@
+/* تنسيق النموذج */
+.offer-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* تنسيق الحقول داخل النموذج */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #444;
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  /* تنسيق المدخلات */
+  .form-control {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background-color: #f7f7f7;
+    transition: all 0.3s ease;
+  }
+  
+  /* تأثير التركيز على المدخلات */
+  .form-control:focus {
+    border-color: #28a745;
+    background-color: #fff;
+    outline: none;
+  }
+  
+  /* الزر إرسال العرض */
+  .btn-submit {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .btn-submit i {
+    margin-right: 10px;
+  }
+  
+  .btn-submit:hover {
+    background-color: #218838;
+  }
+  
+  .btn-submit:active {
+    transform: scale(0.98);
+  }
+  
+  /* تنسيق النص في النموذج */
+  textarea.form-control {
+    height: 150px;
+    resize: vertical;
+    background-color: #f7f7f7;
+  }
+  
+  textarea.form-control:focus {
+    border-color: #28a745;
+    background-color: #fff;
+  }
+  

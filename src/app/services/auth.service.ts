@@ -28,5 +28,9 @@ export class AuthService {
    getUserRole(): string | null {
     return localStorage.getItem(this.userRoleKey);
   }
+  getUser() {
+    // Mock implementation, replace with actual logic
+    return { name: 'Technician Name', id: 'Technician ID' };
+  }
   
 }

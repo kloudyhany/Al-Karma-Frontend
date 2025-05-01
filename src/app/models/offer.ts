@@ -6,6 +6,11 @@ export interface Offer {
     deliveryTime: string; 
     message: string;
     status: 'Pending' | 'Accepted' | 'Rejected';
+    requestId: number;
+    technicianId: string;
+    isAccepted: boolean;
+    isRejected: boolean;
+    createdAt: Date;
   }
 export interface Service {
     id: number;
