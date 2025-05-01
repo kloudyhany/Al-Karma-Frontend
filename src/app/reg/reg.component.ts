@@ -2,7 +2,7 @@ import { routes } from '../app.routes';
 import { CommonModule } from '@angular/common';
 import { Component , NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { profileService } from './profileservice';
+import { ProfileService } from './profileservice';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,88 +12,102 @@ import { Router } from '@angular/router';
   styleUrl: './reg.component.css'
 })
 export class RegComponent {
-  constructor(private fb: FormBuilder, private profileService: profileService , private router:Router) {}
-
   profileForm!: FormGroup;
-  selectedFiles: File[] = [];
   fileNames: string[] = [];
+
+  constructor(private fb: FormBuilder , private router : Router) {}
 
   ngOnInit(): void {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],
-      job: ['', Validators.required],
+      serviceType: ['', [Validators.required, Validators.pattern(/^(عميل|فني|ادمن)$/)]],
       password: ['', Validators.required],
-      address: ['', Validators.required],
-      serviceType: ['', Validators.required],
-      service: ['', Validators.required],
-      nationalIdImages: [null],
-      previousworkname: [null],
-      previousworkimgs: [null],
-      phone: ['', [Validators.required, Validators.pattern(/^01\d{9}$/)]],
-      whatsapp: ['', [Validators.required, Validators.pattern(/^01\d{9}$/)]]
+      service: [''],
+      previousworkname: [''],
+      previousworkimgs: [''],
+      nationalIdImages: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{11}$/)]],
+      whatsapp: ['', [Validators.required, Validators.pattern(/^[0-9]{11}$/)]],
+      address: ['']
     });
 
-    this.profileForm.get('serviceType')?.valueChanges.subscribe(value => {
-      const roleDivMap: { [key: string]: { divId: string; controls: string[] } } = {
-        'فني': { divId: 'previouswork', controls: ['previousworkname', 'previousworkimgs'] },
-        'عميل': { divId: 'clientSection', controls: ['clientSection'] },
-        'مزود خدمة': { divId: 'serviceSection', controls: [] },
-        'ادمن': { divId: 'adminSection', controls: [] }
-      };
-
-      Object.entries(roleDivMap).forEach(([role, { divId, controls }]) => {
-        const div = document.getElementById(divId);
-        if (div) {
-          const isVisible = value === role;
-          div.style.display = isVisible ? 'flex' : 'none';
-
-          controls.forEach(controlName => {
-            const control = this.profileForm.get(controlName);
-            if (control) {
-              if (isVisible) {
-                control.addValidators(Validators.required);
-              } else {
-                control.clearValidators();
-              }
-              control.updateValueAndValidity();
-            }
-          });
-        }
-      });
+    // React to serviceType changes
+    this.profileForm.get('serviceType')?.valueChanges.subscribe((serviceType) => {
+      this.updateValidators(serviceType);
     });
+
+    // Initialize once
+    this.updateValidators(this.profileForm.get('serviceType')?.value);
   }
 
-  onFileSelected(event: any, controlName: string): void {
-    const files = event.target.files;
-    if (files && files.length > 0) {
-      this.profileForm.get(controlName)?.setValue(files);
-    } else {
-      this.profileForm.get(controlName)?.setValue(null);
-    }
-    this.profileForm.get(controlName)?.markAsTouched();
-  }
-
-  get FormControls(): any {
+  get FormControls() {
     return this.profileForm.controls;
   }
 
-  onSubmit(): void {
+  updateValidators(serviceType: string): void {
+    const address = this.profileForm.get('address');
+    const service = this.profileForm.get('service');
+    const previousworkname = this.profileForm.get('previousworkname');
+    const previousworkimgs = this.profileForm.get('previousworkimgs');
+
+    // Reset all validators and disable by default
+    [address, service, previousworkname, previousworkimgs].forEach(control => {
+      control?.clearValidators();
+      control?.setValue('');
+      control?.disable();
+    });
+
+    if (serviceType === 'عميل') {
+      address?.enable();
+      address?.setValidators([Validators.required]);
+    }
+
+    if (serviceType === 'فني') {
+      service?.enable();
+      service?.setValidators([Validators.required]);
+
+      previousworkname?.enable();
+      previousworkname?.setValidators([Validators.required]);
+
+      previousworkimgs?.enable();
+      previousworkimgs?.setValidators([Validators.required]);
+    }
+
+    // Update validity
+    [address, service, previousworkname, previousworkimgs].forEach(control => {
+      control?.updateValueAndValidity();
+    });
+  }
+
+  onFileSelected(event: any, controlName: string) {
+    const files: FileList = event.target.files;
+    const control = this.profileForm.get(controlName);
+
+    if (files && files.length > 0) {
+      this.fileNames = Array.from(files).map(f => f.name);
+      control?.setValue(files); // Store file list
+    } else {
+      this.fileNames = [];
+      control?.setValue('');
+    }
+
+    control?.markAsTouched();
+    control?.updateValueAndValidity();
+  }
+
+  onSubmit() {
     if (this.profileForm.invalid) {
       this.profileForm.markAllAsTouched();
-      alert('يرجى تعبئة جميع الحقول المطلوبة.');
+      alert('يرجى تعبئة جميع الحقول المطلوبة');
       return;
     }
 
-    const formValue = this.profileForm.value;
-    this.profileService.submitProfile(formValue).subscribe({
-      next: response => {
-        alert('تم التسجيل بنجاح!');
-        this.router.navigate(['/login']); 
-      },
-      error: error => {
-        alert('حدث خطأ أثناء الإرسال.');
-      }
-    });
-    
+    console.log(this.profileForm.value);
+    alert('تم تسجيل الحساب بنجاح');
+    if (this.profileForm.value.serviceType === 'فني') {
+      this.router.navigate(['/techprofile']);
+    } else if (this.profileForm.value.serviceType === 'عميل') {
+      this.router.navigate(['/clientprofile']);
+    }
   }
 }

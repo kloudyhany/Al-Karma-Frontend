@@ -35,14 +35,14 @@ export class ClientProfileComponent {
     }
   }
   redirectToOfferList(): void {
-    console.log('Redirecting to the offer list...');
-    this.router.navigate(['/requests']); // Redirect to the offer list page
+    console.log('Redirecting to the requests page...');
+    this.router.navigate(['/requests']); 
   }
   pay(): void {
     console.log('Payment button clicked!');
     this.makePayment(); // Call the payment function here
   
-    this.router.navigate(['/transactions']); // Redirect to the transactions page after payment
+    this.router.navigate(['/transactions']); 
     
   }
 

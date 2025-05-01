@@ -1,4 +1,3 @@
-import { Service } from './../models/offer';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule , FormGroup , FormBuilder , Validators } from '@angular/forms';
@@ -25,7 +24,7 @@ export class CreatenewpasswordComponent {
 
   onSubmit() : void {
     if (this.newpassform.valid) {
-    this.router.navigate(['/clientprofile']);
+    this.router.navigate(['/login']);
     alert('تم إنشاء كلمة مرور جديدة بنجاح!');
     }
 

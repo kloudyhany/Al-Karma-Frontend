@@ -16,6 +16,8 @@ import { RegComponent } from './reg/reg.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { create } from 'domain';
 import { CreatenewpasswordComponent } from './createnewpassword/createnewpassword.component';
+import { TechnicalProfileComponent } from './technical-profile/technical-profile.component';
+import { RequestFormComponent } from './request-form/request-form.component';
 
 
 
@@ -40,6 +42,10 @@ export const routes: Routes = [
     component : ResetpasswordComponent,
     title : 'تغيير كلمة المرور',
 
+  },
+  {
+    path : 'requests',
+    component : RequestFormComponent
   },
   {
     path : 'createnewpassword' , 
@@ -91,12 +97,10 @@ export const routes: Routes = [
     component: SupplierProfileComponent,
     title: ' الملف الشخصي',
   },
+  {
+    path: 'techprofile',
+    component : TechnicalProfileComponent
+  },
 
   { path: '**', component: NotfoundComponent, title: '404 Not Found' },
 ];
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-
-})
-export class AppRoutingModule { }

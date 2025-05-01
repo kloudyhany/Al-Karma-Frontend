@@ -50,6 +50,7 @@ export class ResetpasswordComponent {
     //     error: () => alert('فشل في إعادة إرسال الكود.')
     //   });
    // }
+   document.getElementById("resendcodelabel")!.style.display = "block";
   }
   
   onSubmit(): void {

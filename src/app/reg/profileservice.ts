@@ -5,8 +5,8 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class profileService {
-  private apiUrl = 'https://your-api-endpoint.com/register';  // Replace with your actual API endpoint
+export class ProfileService {
+  private apiUrl = 'https://your-api-endpoint.com/register'; // Replace with your actual API endpoint
 
   constructor(private http: HttpClient) {}
 
@@ -14,28 +14,29 @@ export class profileService {
     const formData = new FormData();
 
     formData.append('name', form.name);
-    formData.append('job', form.job);
     formData.append('password', form.password);
     formData.append('serviceType', form.serviceType);
-    formData.append('service', form.serviceType);
-    formData.append('previousworkname', form.previousworkname);
-    formData.append('clientSection', form.clientSection);
     formData.append('phone', form.phone);
     formData.append('whatsapp', form.whatsapp);
+
     if (form.address) {
       formData.append('address', form.address);
     }
 
-    if (form.nationalIdImages instanceof FileList) {
-      Array.from(form.nationalIdImages).forEach((file, index) => {
-        formData.append('nationalIdImages', file as Blob);
-      });
+    if (form.serviceType === 'فني') {
+      formData.append('service', form.service);
+      formData.append('previousworkname', form.previousworkname);
+
+      if (Array.isArray(form.previousworkimgs)) {
+        form.previousworkimgs.forEach((file: File) => {
+          formData.append('previousworkimgs', file);
+        });
+      }
     }
 
-   
-    if (form.previousworkimgs instanceof FileList) {
-      Array.from(form.previousworkimgs).forEach((file, index) => {
-        formData.append('previousworkimgs', file as Blob);
+    if (Array.isArray(form.nationalIdImages)) {
+      form.nationalIdImages.forEach((file: File) => {
+        formData.append('nationalIdImages', file);
       });
     }
 

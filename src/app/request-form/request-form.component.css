@@ -7,7 +7,13 @@
     margin-bottom: 15px;
   }
   
-  .btn {
-    width: 100%;
+  .order {
+    padding: 0.5rem 2rem;
+    border-radius: 50rem;
+    background-color: #ffc107;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+   margin-right: 180px;
   }
-  
