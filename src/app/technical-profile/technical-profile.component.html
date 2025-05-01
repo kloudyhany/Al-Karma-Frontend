@@ -1,34 +1,71 @@
-<div class="profile-wrapper" dir="rtl">
-    <div class="profile-header">
-      <i class="fas fa-user-circle"></i>
-      <span>الملف الشخصي " فني "</span>
+<div class="container py-5" dir="rtl">
+  <div class="profile-card shadow p-4 rounded-4 bg-white mx-auto" style="max-width: 800px;">
+    
+    <!-- الصورة والمعلومات الأساسية -->
+    <div class="text-center mb-4">
+      <div class="position-relative d-inline-block">
+        <img [src]="imageUrl" class="rounded-circle shadow" width="130" height="130" alt="Profile Image">
+        <label class="btn btn-sm btn-outline-secondary position-absolute bottom-0 end-0 rounded-circle" style="transform: translate(25%, 25%);">
+          <i class="bi bi-camera"></i>
+          <input type="file" hidden (change)="onFileSelected($event)">
+        </label>
+      </div>
+      <h4 class="mt-3">{{ user.name }}</h4>
+      <p class="text-muted">{{ user.role }}</p>
+      <div>
+        <span class="badge bg-success me-2">⭐ {{ user.rating }}/5</span>
+        <span class="badge bg-secondary me-2">الخبرة: {{ user.experience }} سنوات</span>
+        <span class="badge bg-info">عدد الطلبات: {{ user.tasksCompleted }}</span>
+      </div>
     </div>
-  
-    <div class="profile-grid">
-      <div class="right-column">
-        <div class="label">التقييمات</div>
-        <div class="label">الاسم</div>
-        <div class="label">المهنة</div>
-        <div class="label">بطاقة شخصية</div>
-        <div class="label">سابقة الاعمال</div>
-        <div class="label">رقم موبايل</div>
-        <div class="label">رقم تواصل (واتساب)</div>
-      </div>
-  
-      <div class="left-column">
-        <div class="stars">
-          <ng-container *ngFor="let s of [].constructor(rating)">
-            <i class="fas fa-star"></i>
-          </ng-container>
+
+    <!-- النموذج -->
+    <form (ngSubmit)="saveChanges()">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">الاسم</label>
+          <input type="text" class="form-control" [(ngModel)]="user.name" name="name" [readonly]="!isEditing">
         </div>
-  
-        <input type="text" placeholder="الاسم الكامل" />
-        <input type="text" placeholder="( نوع الخدمة )" />
-        <input type="file" />
-        <input type="file" placeholder="رفع صور الاعمال" />
-        <input type="text" placeholder="اسم العمل" />
-        <input type="text" placeholder="رقم الهاتف" />
+        <div class="col-md-6">
+          <label class="form-label">رقم الهاتف</label>
+          <input type="text" class="form-control" [(ngModel)]="user.phone" name="phone" [readonly]="!isEditing">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">البريد الإلكتروني</label>
+          <input type="email" class="form-control" [(ngModel)]="user.email" name="email" [readonly]="!isEditing">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">الموقع</label>
+          <input type="text" class="form-control" [(ngModel)]="user.location" name="location" [readonly]="!isEditing">
+        </div>
       </div>
+
+      <!-- الأزرار -->
+      <div class="d-flex justify-content-between mt-4">
+        <button type="button" class="btn btn-outline-warning" (click)="changePassword()">تغيير كلمة المرور</button>
+        <div>
+          <button type="button" class="btn btn-outline-primary me-2" *ngIf="!isEditing" (click)="toggleEdit()">تعديل</button>
+          <button type="submit" class="btn btn-success" *ngIf="isEditing">حفظ</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- معرض الأعمال -->
+    <div class="mt-5">
+      <h5 class="mb-3">معرض الأعمال السابقة</h5>
+      <div class="row g-3">
+        <div class="col-6 col-md-4" *ngFor="let img of portfolioImages">
+          <img [src]="img" class="img-fluid rounded-3 shadow-sm" alt="عمل سابق">
+        </div>
+      </div>
+    </div>
+
+    <!-- رجوع -->
+    <div class="text-center mt-4">
+      <a routerLink="/dashboard" class="btn btn-outline-dark mt-3"> تقديم عرض لخدمه</a>
+      <a routerLink="/home" class="btn btn-outline-secondary mt-3">العودة للصفحة الرئيسية</a>
+      <a routerLink="/logout" class="btn btn-outline-danger mt-3">تسجيل الخروج</a>
+
     </div>
   </div>
-  
+</div>
