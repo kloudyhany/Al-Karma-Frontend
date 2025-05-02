@@ -11,6 +11,11 @@ import { AuthService } from '../services/auth.service'; //
 
 
 
+interface Service {
+  category: string;
+  [key: string]: any;
+}
+
 @Component({
   selector: 'app-services-page',
   imports: [BrowserModule, FormsModule, NgbModalModule, RouterLink],
@@ -49,10 +54,10 @@ export class ServicesPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.userRole = this.authService.getUserRole() ?? ''; // 'Client' or 'Technician'
-    this.serviceService.getAllServices().subscribe(data => {
+    this.serviceService.getAllServices().subscribe((data: { category: string; [key: string]: any }[]) => {
       this.allServices = data;
       this.services = data;
-      this.categories = [...new Set(data.map(s => s.category))];
+      this.categories = [...new Set(data.map((s: Service) => s.category))];
     });
 
     if (this.userRole === 'Technician') {

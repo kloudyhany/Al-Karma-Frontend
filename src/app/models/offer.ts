@@ -51,3 +51,12 @@ export interface Profile {
     imageUrl?: string;
     user: string;
   }
+  export interface Service {
+    id: number;
+    name: string;
+    category: string;
+    price: number;
+    status: string;
+    rating: number;
+    orders: number;
+  }
