@@ -21,8 +21,7 @@
 
     <!-- أزرار العمليات -->
     <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
-      <button type="button" class="btn btn-outline-warning">تغيير كلمة المرور</button>
-      <button *ngIf="isEditing" (click)="toggleEdit()" class="btn btn-outline-danger">إلغاء</button>
+      <a routerLink="/resetpassword" class="btn btn-outline-warning">تغيير كلمة المرور</a>
     </div>
 
     <!-- روابط التنقل -->

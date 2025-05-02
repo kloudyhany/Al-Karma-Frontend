@@ -66,6 +66,7 @@ export class TechnicalProfileComponent implements OnInit {
         error: (err) => console.error('فشل في رفع الصورة:', err),
       });
     }
+    
   }
 
 
