@@ -7,9 +7,7 @@
     "types": [
       "node"
       
-    ],
-    "typeRoots": ["node_modules/@types", "src/custom-typings"]
-    
+    ]
   },
   "files": [
     "src/main.ts",
