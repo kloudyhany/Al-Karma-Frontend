@@ -1,30 +1,34 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 @Component({
   selector: 'app-client-service',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule ],
   templateUrl: './client-service.component.html',
   styleUrl: './client-service.component.css'
 })
 export class ClientServiceComponent {
   messageData = {
-    phoneNumber: '',
     message: ''
   };
 
+  constructor(private router: Router) {}
+
   sendMessage() {
-    const phoneNumber = this.messageData.phoneNumber;
     const message = this.messageData.message;
+    
+    Swal.fire({
+      icon: 'success',
+      title: 'تم الإرسال',
+      text:'تم إرسال الرسالة بنجاح! و سيتم التواصل معك قريبا',
+      confirmButtonText: 'حسناً'
+    });
 
-    // WhatsApp API URL
-    const whatsappAPIUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-
-    // Open WhatsApp in a new window
-    window.open(whatsappAPIUrl, '_blank');
+    this.router.navigate(['/']);
   }
 
 }

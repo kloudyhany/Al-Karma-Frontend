@@ -1,17 +1,14 @@
-<div class="whatsapp-form">
-    <h2>ارسال الشكوي علي الواتساب</h2>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+<div class="container-fluid bg-dark text-white d-flex justify-content-center min-vh-100" dir="rtl">
+  <div class="w-100" style="max-width: 500px;">
+    <div class="d-flex align-items-center justify-content-center mb-4">
+      <span class="badge bg-warning text-dark fs-5 px-3 py-2 rounded-pill">ارسال الشكاوي او المقترحات الخاصة بك</span>
+      <span class="user-circle d-flex align-items-center justify-content-center me-2">
+        <i class="fas fa-sign-in-alt"></i>
+      </span>
+    </div>
     <form (ngSubmit)="sendMessage()" #whatsappForm="ngForm">
-      <div class="form-group">
-        <label for="phoneNumber">رقم التليفون</label>
-        <input
-          type="text"
-          id="phoneNumber"
-          class="form-control"
-          [(ngModel)]="messageData.phoneNumber"
-            name="phoneNumber" pattern="^(010|011|012|015)[0-9]{8}$"
-          required
-        />
-      </div>
       <div class="form-group">
         <label for="message">الرساله</label>
         <textarea
@@ -22,9 +19,10 @@
           required
         ></textarea>
       </div>
-      <div class="btn-confirm" > 
-             <button  style="background-color: rgb(230, 163, 81);border-radius:5px;" type="submit"[disabled]="!whatsappForm.form.valid">ارسال</button>
+      <div class="btn-confirm mt-3"> 
+        <button class="button" type="submit" [disabled]="!whatsappForm.form.valid">ارسال</button>
+      
       </div>
     </form>
   </div>
-  
+</div>

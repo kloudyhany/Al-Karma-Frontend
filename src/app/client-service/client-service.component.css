@@ -1,20 +1,7 @@
-.whatsapp-form {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    font-style: italic;
-    font-size: 16px;
-    font-family: 'Courier New', Courier, monospace;
-    background-color: hsl(0, 0%, 4%);
-    color: hsl(0, 0%, 100%);
+.container-fluid {
+  padding-top: 250px;
+}
 
-    border-radius: 5px;
-    background-color: hsl(0, 0%, 4%);
-
-  }
-
-  
   .form-group {
     margin-bottom: 15px;
     display: flex;
@@ -33,6 +20,11 @@
     font-size: 16px;
     font-family: 'Courier New', Courier, monospace;
 
+  }
+  .button{
+    background-color: rgb(230, 163, 81);
+    border-radius:5px; 
+    margin-right: 225px;
   }
  
     .btn-confirm :hover{
