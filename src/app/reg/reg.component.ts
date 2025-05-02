@@ -3,6 +3,7 @@ import { Component , NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-reg',
   imports: [FormsModule , ReactiveFormsModule, CommonModule],
@@ -81,14 +82,19 @@ export class RegComponent {
     const files: FileList = event.target.files;
     const control = this.profileForm.get(controlName);
 
-    if (files && files.length > 0) {
+    if (files && files.length > 0 && files && files.length <2) {
       this.fileNames = Array.from(files).map(f => f.name);
-      control?.setValue(files); // Store file list
-    } else {
+      control?.setValue(files);
+    } else if (files && files.length > 2) {
+      alert('يرجى اختيار صورتين فقط واحدة للوجه و الاخري للخلف');
       this.fileNames = [];
       control?.setValue('');
     }
-
+    else {
+      this.fileNames = [];
+      control?.setValue('');
+    }
+  
     control?.markAsTouched();
     control?.updateValueAndValidity();
   }
