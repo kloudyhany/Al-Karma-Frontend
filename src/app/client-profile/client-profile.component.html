@@ -44,6 +44,15 @@
       <div class="d-flex justify-content-between mt-4">
         <button type="button" class="btn btn-outline-warning">تغيير كلمة المرور</button>
         <div>
+          <button type="button" class="btn btn-outline-danger me-2" *ngIf="isEditing" (click)="toggleEdit()">إلغاء</button>
+          <div class="text-end mb-3">
+  <button><a routerLink="/client-profile" class="btn btn-outline-secondary me-2">الملف الشخصي</a></button>
+  <button><a routerLink="/client-profile" class="btn btn-outline-secondary me-2">طلب جديد</a></button>
+  <button><a routerLink="/client-profile" class="btn btn-outline-secondary me-2">العروض</a></button>
+  <button><a routerLink="/client-profile" class="btn btn-outline-secondary me-2">الطلبات</a></button>
+  <button><a routerLink="/client-profile" class="btn btn-outline-secondary me-2">تقييمات</a></button>
+  <button><a routerLink="/client-profile" class="btn btn-outline-secondary me-2">تسجيل الخروج</a></button>  
+          </div>
           <button type="button" class="btn btn-outline-primary me-2" *ngIf="!isEditing" (click)="toggleEdit()">تعديل</button>
           <button type="submit" class="btn btn-success" *ngIf="isEditing">حفظ</button>
         </div>
@@ -52,7 +61,6 @@
 
     <!-- روابط -->
     <div class="text-center mt-4">
-      <a routerLink="/req uest" class="btn btn-outline-dark mt-3">طلب خدمة جديد</a>
       <a routerLink="" class="btn btn-outline-secondary mt-3">العودة للصفحة الرئيسية</a>
       <a routerLink="/logout" class="btn btn-outline-danger mt-3">تسجيل الخروج</a>
     </div>

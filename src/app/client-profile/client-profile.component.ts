@@ -4,10 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { ProfileService } from '../services/profile.service';
 import { Profile } from '../models/offer'; 
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-client-profile',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   standalone: true,
   templateUrl:'./client-profile.component.html',
   

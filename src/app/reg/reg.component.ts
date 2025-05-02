@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component , NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { ProfileService } from './profileservice';
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,8 +24,8 @@ export class RegComponent {
       previousworkname: [''],
       previousworkimgs: [''],
       nationalIdImages: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{11}$/)]],
-      whatsapp: ['', [Validators.required, Validators.pattern(/^[0-9]{11}$/)]],
+      phone: ['', [Validators.required, Validators.pattern(/^01[2,5,0,1]\d{8}$/)]],
+      whatsapp: ['', [Validators.required, Validators.pattern(/^01[2,5,0,1]\d{8}$/)]],
       address: ['']
     });
 
@@ -102,7 +101,7 @@ export class RegComponent {
     }
 
     console.log(this.profileForm.value);
-    alert('تم تسجيل الحساب بنجاح');
     this.router.navigate(['/login']);
-  }
+  
+    }
 }

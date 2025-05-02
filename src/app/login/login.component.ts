@@ -24,7 +24,7 @@ export class loginComponent {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      phone: ['', [Validators.required, Validators.pattern(/^01\d{9}$/)]],
+      phone: ['', [Validators.required, Validators.pattern(/^01[0,1,2,5]\d{9}$/)]],
       password: ['', Validators.required],
     });
   }
