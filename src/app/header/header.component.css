@@ -11,7 +11,7 @@
   position: sticky;
   top: 0;
   width: 100%;
-  background-color: #3f51b5;
+  background-color: #0a0a0a;
   z-index: 99;
   direction: ltr;
   text-align: center;
@@ -28,11 +28,11 @@ nav {
 
 .logo a {
   font-weight: bold;
-  color: #fff;
+  color: #ce8517;
 }
 
 .logo a span {
-  color: #b28aee;
+  color: #d49918;
 }
 
 .menu {
@@ -55,7 +55,7 @@ nav {
 
 .menu a:hover {
   opacity: 1;
-  color: #fff;
+  color: #d1b40e;
 }
 
 .menu-icon {
