@@ -15,6 +15,8 @@ import { RegComponent } from './reg/reg.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { CreatenewpasswordComponent } from './createnewpassword/createnewpassword.component';
 import { TechnicalProfileComponent } from './technical-profile/technical-profile.component';
+import { RequestFormComponent } from './request-form/request-form.component';
+import { RequestsPageComponent } from './requests-page/requests-page.component';
 
 
 
@@ -69,11 +71,23 @@ export const routes: Routes = [
     component: TechnicalProfileComponent,
     title: ' الملف الشخصي للفني ',
   },
-  // {
-  //   path: 'adminprofile',
-  //   component: ClientProfileComponent,
-  //   title: ' الملف الشخصي للعميل',
-  // },
+  {
+    path: 'client_requests',
+    component: RequestFormComponent,
+    title: 'طلبات الخدمة',
+  },
+ 
+  {
+    path: 'requests',
+    component: RequestFormComponent,
+    title: 'طلبات الخدمة',
+  },
+  {
+    path: 'myrequests',
+    component: RequestsPageComponent,
+    title: ' طلباتي',
+  },
+
   {
     path: 'clientservice',
     component: ClientServiceComponent,

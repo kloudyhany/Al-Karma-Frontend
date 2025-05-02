@@ -11,6 +11,10 @@ export interface Offer {
     isAccepted: boolean;
     isRejected: boolean;
     createdAt: Date;
+    details: any;
+    serviceId?: number;
+    userId?: number;
+    updatedAt?: Date;
   }
 export interface Service {
     id: number;
@@ -22,13 +26,19 @@ export interface Service {
     offers: Offer[]; 
 }
 export interface Order {
-    id: number;
-    serviceId: number;
-    userId: number;
-    status: string; // 'pending', 'completed', 'canceled'
-    createdAt: Date;
-    updatedAt: Date;
-    offerId: number; 
+  id: number;
+  serviceId: number;
+  userId: number;
+  status: 'Pending' | 'Accepted' | 'Rejected';
+  details: any;
+  createdAt: Date;
+  updatedAt: Date;
+  service?: Service; // Optional, if you want to include service details
+  price?: number;
+  providerName?: string; // Optional, if you want to include provider name
+  title?: string; // Optional, if you want to include service title
+
+  
 }
 export interface User {
     id: number;
@@ -37,9 +47,11 @@ export interface User {
     phone: string;
     role: string; // 'client ' or  'technician'
     imageUrl: string;
+
 }
+
 export interface Profile {
-    id: string;
+    id: number;
     name: string;
     phone: string;
     email: string;
@@ -50,6 +62,9 @@ export interface Profile {
     tasksCompleted?: number;
     imageUrl?: string;
     user: string;
+    requestCount: number;
+    joinedDate: string;
+    
   }
   export interface Service {
     id: number;

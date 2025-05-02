@@ -1,68 +1,42 @@
-<div class="container py-5" dir="rtl" style="background-color: black;">
-  <div class="profile-card shadow p-4 rounded-4 bg-white mx-auto" style="max-width: 1000px;">
+<div class="container py-5" dir="rtl" style="background-color: #f8f9fa;">
+  <div class="profile-card shadow-lg p-4 rounded-4 bg-white mx-auto" style="max-width: 900px;">
     
-    <!-- الصورة والمعلومات الأساسية -->
-    <div class="text-center mb-4" >
+    <!-- صورة ومعلومات المستخدم -->
+    <div class="text-center mb-4">
       <div class="position-relative d-inline-block">
         <img [src]="imageUrl" class="rounded-circle shadow" width="130" height="130" alt="Profile Image">
-        <label class="btn btn-sm btn-outline-secondary position-absolute bottom-0 end-0 rounded-circle" style="transform: translate(25%, 25%);">
+        <label class="btn btn-sm btn-light border position-absolute bottom-0 end-0 rounded-circle" style="transform: translate(25%, 25%);">
           <i class="bi bi-camera"></i>
           <input type="file" hidden (change)="onFileSelected($event)">
         </label>
       </div>
-      <h4 class="mt-3">{{ user.name }}</h4>
-      <p class="text-muted">عميل</p>
-      <div>
-        <span class="badge bg-info me-2">عدد الطلبات: {{ user.requestCount }}</span>
+      <h4 class="mt-3 mb-1">{{ user.name }}</h4>
+      <p class="text-muted mb-2">عميل</p>
+      <div class="d-flex justify-content-center flex-wrap gap-2 mb-2">
+        <span class="badge bg-info">عدد الطلبات: {{ user.requestCount }}</span>
         <span class="badge bg-secondary">تاريخ الانضمام: {{ user.joinedDate | date:'yyyy/MM/dd' }}</span>
+        <span class="badge bg-success">⭐ {{ user.rating }}/5</span>
       </div>
-      <span class="badge bg-success me-2">⭐ {{ user.rating }}/5</span>
     </div>
 
-    <!-- النموذج -->
-    <form (ngSubmit)="saveChanges()">
-      <div class="row g-3">
-        <div class="col-md-6">
-          <label class="form-label">الاسم</label>
-          <input type="text" class="form-control" [(ngModel)]="user.name" name="name" [readonly]="!isEditing">
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">رقم الهاتف</label>
-          <input type="text" class="form-control" [(ngModel)]="user.phone" name="phone" [readonly]="!isEditing">
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">البريد الإلكتروني</label>
-          <input type="email" class="form-control" [(ngModel)]="user.email" name="email" [readonly]="!isEditing">
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">الموقع</label>
-          <input type="text" class="form-control" [(ngModel)]="user.location" name="location" [readonly]="!isEditing">
-        </div>
-      </div>
-
-      <!-- الأزرار -->
-      <div class="d-flex justify-content-between mt-4">
-        <button type="button" class="btn btn-outline-warning">تغيير كلمة المرور</button>
-        <div>
-          <button type="button" class="btn btn-outline-danger me-2" *ngIf="isEditing" (click)="toggleEdit()">إلغاء</button>
-          <div class="text-end mb-3">
-  <button><a routerLink="/client-profile" class="btn btn-outline-secondary me-2">الملف الشخصي</a></button>
-  <button><a routerLink="/client-profile" class="btn btn-outline-secondary me-2">طلب جديد</a></button>
-  <button><a routerLink="/client-profile" class="btn btn-outline-secondary me-2">العروض</a></button>
-  <button><a routerLink="/client-profile" class="btn btn-outline-secondary me-2">الطلبات</a></button>
-  <button><a routerLink="/client-profile" class="btn btn-outline-secondary me-2">تقييمات</a></button>
-  <button><a routerLink="/client-profile" class="btn btn-outline-secondary me-2">تسجيل الخروج</a></button>  
-          </div>
-          <button type="button" class="btn btn-outline-primary me-2" *ngIf="!isEditing" (click)="toggleEdit()">تعديل</button>
-          <button type="submit" class="btn btn-success" *ngIf="isEditing">حفظ</button>
-        </div>
-      </div>
-    </form>
-
-    <!-- روابط -->
-    <div class="text-center mt-4">
-      <a routerLink="" class="btn btn-outline-secondary mt-3">العودة للصفحة الرئيسية</a>
-      <a routerLink="/logout" class="btn btn-outline-danger mt-3">تسجيل الخروج</a>
+    <!-- أزرار العمليات -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+      <button type="button" class="btn btn-outline-warning">تغيير كلمة المرور</button>
+      <button *ngIf="isEditing" (click)="toggleEdit()" class="btn btn-outline-danger">إلغاء</button>
     </div>
+
+    <!-- روابط التنقل -->
+    <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+      <a routerLink="/client_requests" class="btn btn-outline-secondary">طلب جديد</a>
+      <a routerLink="/offers" class="btn btn-outline-secondary">العروض</a>
+      <a routerLink="/myrequests" class="btn btn-outline-secondary">طلباتي</a>
+      <a routerLink="/rating" class="btn btn-outline-secondary">التقييمات</a>
+    </div>
+
+    <!-- عودة للرئيسية -->
+    <div class="text-center mt-3">
+      <a routerLink="" class="btn btn-outline-primary">العودة للصفحة الرئيسية</a>
+    </div>
+
   </div>
 </div>
