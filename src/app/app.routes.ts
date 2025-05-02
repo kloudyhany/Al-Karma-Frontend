@@ -17,6 +17,7 @@ import { CreatenewpasswordComponent } from './createnewpassword/createnewpasswor
 import { TechnicalProfileComponent } from './technical-profile/technical-profile.component';
 import { RequestFormComponent } from './request-form/request-form.component';
 import { RequestsPageComponent } from './requests-page/requests-page.component';
+import { OfferClientrequestComponent } from './offer-clientrequest/offer-clientrequest.component';
 
 
 
@@ -30,7 +31,9 @@ export const routes: Routes = [
     component: loginComponent,
     title: ' تسجيل الدخول',
   },
-  { path: 'transactions', component: TransactionListComponent, title: 'قائمة المعاملات' },
+  { path: 'transactions', 
+    component: TransactionListComponent,
+     title: 'قائمة المعاملات' },
   {
     path: 'registration',
     component: RegComponent,
@@ -93,6 +96,11 @@ export const routes: Routes = [
     component: ClientServiceComponent,
     title: 'خدمة العملاء',
   },
+  {
+    path: 'service_page',
+    component: ServicesPageComponent,
+    title: ' خدماتنا',
+  },
 
   {
     path: 'service-confirmation',
@@ -115,6 +123,12 @@ export const routes: Routes = [
     component: SupplierProfileComponent,
     title: ' الملف الشخصي',
   },
+  {
+    path: 'tchnicaloffer',
+    component: OfferClientrequestComponent,
+    title: '  عرض سعر',
+  },
+
   {
     path: 'techprofile',
     component : TechnicalProfileComponent

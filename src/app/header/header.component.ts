@@ -9,5 +9,4 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './header.component.css'
 }) 
 export class HeaderComponent {
-
 }

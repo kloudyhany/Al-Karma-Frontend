@@ -1,50 +1,44 @@
-
-<nav class="navbar navbar-expand-lg bg-light shadow-sm custom-navbar">
-  <div class="container-fluid"> 
-     
-    <a class="navbar-brand d-flex align-items-center">
-      <img src="/src/app/Assets/images/logo.jpeg" alt="Logo" class="logo-img hover-effect" style="cursor: pointer;" />
-    </a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
-      aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-     <div class="collapse navbar-collapse" id="mainNavbar">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-            <i class="bi bi-house-door-fill me-1"></i> الصفحة الرئيسية
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active">
-            <i class="bi bi-gear-fill me-1"></i> تسجيل الدخول
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/registration" routerLinkActive="active">
-            <i class="bi bi-gear-fill me-1"></i> حساب جديد
-          </a>
-        </li>
-       
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/techprofile" routerLinkActive="active">
-            <i class="bi bi-person-circle me-1"></i> الملف الشخصي
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/clientservice" routerLinkActive="active">
-            <i class="bi bi-headset me-1"></i> خدمة العملاء
-          </a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" routerLink="" routerLinkActive="active">
-            <i class="bi bi-info-circle-fill me-1"></i> عن الموقع
-          </a>
-        </li> -->
-      </ul>
+<header class="header">
+  <nav >
+    <div class="logo">
+      <a [routerLink]="['/ShowTemplates']"><span>X</span>.Auditor</a>
     </div>
-  </div>
-</nav> 
+      <input type="checkbox" id="menu-toggle"  >
+      <label for="menu-toggle" class="menu-icon"  >&#9776;</label>
+    
+
+    <ul class="menu" >
+      <li >
+        <a  routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <i class="bi bi-house-door-fill me-1"></i> الصفحة الرئيسية
+        </a>
+      </li>
+      <li >
+        <a  routerLink="/login" routerLinkActive="active">
+          <i class="bi bi-gear-fill me-1"></i> تسجيل الدخول
+        </a>
+      </li>
+      <li>
+        <a  routerLink="/registration" routerLinkActive="active">
+          <i class="bi bi-gear-fill me-1"></i> حساب جديد
+        </a>
+      </li>
+     
+      <li >
+        <a  routerLink="/techprofile" routerLinkActive="active">
+          <i class="bi bi-person-circle me-1"></i> الملف الشخصي
+        </a>
+      </li>
+      <li >
+        <a  routerLink="/clientservice" routerLinkActive="active">
+          <i class="bi bi-headset me-1"></i> خدمة العملاء
+        </a>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" routerLink="" routerLinkActive="active">
+          <i class="bi bi-info-circle-fill me-1"></i> عن الموقع
+        </a>
+      </li> -->
+    </ul>
+  </nav>
+</header>

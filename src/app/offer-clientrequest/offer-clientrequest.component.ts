@@ -5,12 +5,13 @@ import { OfferService } from '../services/offer.service';
 import { Router } from '@angular/router';
 import { Offer } from '../models/offer';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-offer-clientrequest',
-  imports: [FormsModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './offer-clientrequest.component.html',
   styleUrl: './offer-clientrequest.component.css'
 })

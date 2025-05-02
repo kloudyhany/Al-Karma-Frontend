@@ -2,10 +2,6 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProfileService } from '../services/profile.service';
-import { Profile } from '../models/offer'; 
-import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -62,7 +58,7 @@ export class ClientProfileComponent implements OnInit {
       };
       reader.readAsDataURL(file);
 
-      this.profileService.uploadProfileImage(file).subscribe({
+      this.profileService.uploadProfileImage(this.user.id, file).subscribe({
         next: (res) => {
           console.log('تم رفع الصورة بنجاح');
           this.user.imageUrl = res.imageUrl;

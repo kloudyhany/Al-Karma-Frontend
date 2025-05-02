@@ -11,7 +11,7 @@ export interface Offer {
     isAccepted: boolean;
     isRejected: boolean;
     createdAt: Date;
-    details: any;
+    details?: any;
     serviceId?: number;
     userId?: number;
     updatedAt?: Date;

@@ -1,27 +1,147 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  text-decoration: none;
+  list-style: none;
+}
 
-.navbar .nav-link {
-  transition: background-color 0.3s ease, color 0.3s ease;
-  cursor: pointer;
-  border-radius: 5px;
-  padding: 8px 12px;
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #3f51b5;
+  z-index: 99;
+  direction: ltr;
+  text-align: center;
+}
+.form-select{
+  text-align: center !important;
+}
+nav {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5% 1%;
+}
+
+.logo a {
+  font-weight: bold;
+  color: #fff;
+}
+
+.logo a span {
+  color: #b28aee;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
-.navbar .nav-link:hover {
-  background-color: #f0f0f0; 
-  color: #0d6efd; 
-  text-decoration: none;
+.menu a {
+  display: block;
+  padding: .4% .9%;
+  font-weight: 500;
+  transition: 0.2s all ease-in-out;
+  color: #fff;
 }
 
-.navbar .nav-link i {
-  transition: transform 0.2s ease;
+.menu:hover a {
+  opacity: 0.4;
 }
 
-.navbar .nav-link:hover i {
-  transform: scale(1.1);
+.menu a:hover {
+  opacity: 1;
+  color: #fff;
 }
-.navbar .navbar-brand:hover {
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
+
+.menu-icon {
+  display: none;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+#menu-toggle:checked ~ .menu {
+  transform: scale(1, 1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+    
+@media (min-width:75em) {
+  input,select,textarea,button,.menu,.logo{
+
+     font-size: var(--global-lg-font-size);
+ }  
+ #btn{
+ 
+     width: 1.8rem;
+   }
+   select{
+     width: 10rem;
+     height: 2.5rem;
+   }
+}
+@media (min-width:48em) and (max-width:74.99em){
+input,select,textarea,button,.menu,.logo{
+
+     font-size: var(--global-md-font-size);
+ }  
+ #btn{
+
+     width: 1.5rem;
+   }
+   select{
+     width: 8rem;
+     height: 2.3rem;
+   }
+}
+@media (max-width:47.99rem) {
+  input,select,textarea,button,.menu,.logo{
+
+     font-size: var(--global-sm-font-size);
+ }  
+ #btn{
+
+     width: 1.3rem;
+   }
+   select{
+     width: 6rem;
+     height: 1.7rem;
+
+   }
+   .menu {
+      flex-direction: column;
+      background-color: #3f51b5;
+      align-items: center;
+      padding: .3% 0;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      z-index: 99;
+      transform: scale(1, 0);
+      transform-origin: top;
+      transition: transform 0.3s ease-in-out;
+    }
+    .menu-icon {
+      display: block;
+      color: #fff;
+     cursor: pointer;
+     font-size: var(--global-sm-font-size);
+    }
 }

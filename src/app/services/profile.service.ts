@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProfileService {
-  private baseUrl = ''; // ✅ Replace with actual base URL
+  private baseUrl = ''; // Replace with actual base URL
 
   constructor(private http: HttpClient) {}
 
@@ -38,7 +38,7 @@ export class ProfileService {
   }
 
   // Upload profile image
-  uploadProfileImage(imageFile: File): Observable<any> {
+  uploadProfileImage(userId: number, imageFile: File): Observable<any> {
     const formData = new FormData();
     formData.append('image', imageFile);
     return this.http.post(`${this.baseUrl}/upload-profile-image`, formData);
