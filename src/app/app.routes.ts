@@ -10,13 +10,11 @@ import { ServicesPageComponent } from './services-page/services-page.component';
 import { OfferListComponent } from './offer-list/offer-list.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
-import { NgModule } from '@angular/core';
 import { RatingAllComponent } from './rating-all/rating-all.component';
 import { RegComponent } from './reg/reg.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { CreatenewpasswordComponent } from './createnewpassword/createnewpassword.component';
 import { TechnicalProfileComponent } from './technical-profile/technical-profile.component';
-import { RequestFormComponent } from './request-form/request-form.component';
 
 
 
@@ -24,7 +22,6 @@ export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    title: ' الصفحة الرئيسية',
   },
   {
     path: 'login',
@@ -43,7 +40,6 @@ export const routes: Routes = [
     title : 'تغيير كلمة المرور',
 
   },
-
   {
     path : 'createnewpassword' , 
     component : CreatenewpasswordComponent,
@@ -108,11 +104,6 @@ export const routes: Routes = [
   {
     path: 'techprofile',
     component : TechnicalProfileComponent
-  },
-  {
-    path: 'request',
-    component : RequestFormComponent,
-    title : 'طلب خدمة',
   },
 
   { path: '**', component: NotfoundComponent, title: '404 Not Found' },

@@ -1,4 +1,3 @@
-import { routes } from '../app.routes';
 import { CommonModule } from '@angular/common';
 import { Component , NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, Validators, FormGroup, FormBuilder } from '@angular/forms';
@@ -104,10 +103,6 @@ export class RegComponent {
 
     console.log(this.profileForm.value);
     alert('تم تسجيل الحساب بنجاح');
-    if (this.profileForm.value.serviceType === 'فني') {
-      this.router.navigate(['/techprofile']);
-    } else if (this.profileForm.value.serviceType === 'عميل') {
-      this.router.navigate(['/clientprofile']);
-    }
+    this.router.navigate(['/login']);
   }
 }
