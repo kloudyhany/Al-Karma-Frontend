@@ -1,6 +1,6 @@
 .profile-card {
   max-width: 900px;
-  margin: auto;
+  
   padding: 2rem;
   background-color: #ffffff;
   border-radius: 1.5rem;
@@ -13,6 +13,7 @@
   margin-bottom: 1rem;
   color: #333;
 }
+
 
 .profile-card p {
   color: #777;
