@@ -46,9 +46,39 @@ export class ServicesService {
     ];
     return of(mockServices);
   }
+  name: string = '';
+  age: number = 0;
+  file: File | null = null;
+  // Handle file selection
+  handleFileChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.file = input.files[0];
+    }
+  }
+
+  // Submit form data
+  uploadData(): void {
+    const formData = new FormData();
+    formData.append('name', this.name);
+    formData.append('age', this.age.toString());
+    if (this.file) {
+      formData.append('file', this.file, this.file.name);
+    }
+
+    this.http
+      .post('https://localhost:7245/api/Request', formData)
+      .subscribe({
+        next: (response) => console.log('Success!', response),
+        error: (error) => console.error('Error:', error),
+      });
+  }
 }
+
 function of(mockServices: Service[]): Observable<Service[]> {
   return observableOf(mockServices);
+
+
 }
 
 
