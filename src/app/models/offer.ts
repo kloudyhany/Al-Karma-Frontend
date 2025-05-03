@@ -41,8 +41,8 @@ export interface User {
     name: string;
     email: string;
     phone: string;
-    role: string; // 'client ' or  'technician'
-    imageUrl: string;
+    role: string; 
+    // 'client ' or  'technician'
 
 }
 
@@ -54,13 +54,9 @@ export interface Profile {
     location: string;
     role: string;
     rating?: number;
-    experience?: number;
-    tasksCompleted?: number;
     imageUrl?: string;
     user: string;
-    requestCount: number;
-    joinedDate: string;
-    
+ 
   }
   export interface Service {
     id: number;
