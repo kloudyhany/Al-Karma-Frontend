@@ -32,11 +32,7 @@ export interface Order {
   status: 'Pending' | 'Accepted' | 'Rejected';
   details: any;
   createdAt: Date;
-  updatedAt: Date;
-  service?: Service; // Optional, if you want to include service details
-  price?: number;
-  providerName?: string; // Optional, if you want to include provider name
-  title?: string; // Optional, if you want to include service title
+  price: number;
 
   
 }

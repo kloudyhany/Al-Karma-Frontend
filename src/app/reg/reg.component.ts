@@ -114,11 +114,16 @@ export class RegComponent {
       alert('يرجى تعبئة جميع الحقول المطلوبة');
       return;
     }
-
-    console.log(this.profileForm.value);
-    this.router.navigate(['/login']);
-  
+    
     // Store the form data in localStorage
-    localStorage.setItem('userData', JSON.stringify(this.profileForm.value));
+    const formData = this.profileForm.value;
+    for (const key in formData) {
+      if (formData.hasOwnProperty(key)) {
+        localStorage.setItem(key, JSON.stringify(formData[key]));
+      }
+    }
+
+    console.log(formData);
+    this.router.navigate(['/login']);
   }
 }
