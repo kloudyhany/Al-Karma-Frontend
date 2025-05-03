@@ -27,8 +27,8 @@ export class loginComponent {
     const parsedData = savedRegistrationData ? JSON.parse(savedRegistrationData) : null;
 
     this.loginForm = this.fb.group({
-      email: [parsedData?.email || '', [Validators.required, Validators.email]],
-      password: [parsedData?.password || '', Validators.required],
+      email: ['', [Validators.required,  Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
+      password: ['', Validators.required],
     });
   }
 

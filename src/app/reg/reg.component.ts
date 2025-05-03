@@ -19,7 +19,7 @@ export class RegComponent {
   ngOnInit(): void {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required,  Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
       serviceType: ['', [Validators.required, Validators.pattern(/^(عميل|فني|ادمن)$/)]],
       password: ['', Validators.required],
       service: [''],
@@ -77,6 +77,14 @@ export class RegComponent {
     [address, service, previousworkname, previousworkimgs].forEach(control => {
       control?.updateValueAndValidity();
     });
+  }
+
+  onimagesSelected(event: any, controlName: string) {
+    const files: FileList = event.target.files;
+    const control = this.profileForm.get(controlName);
+  
+    control?.markAsTouched();
+    control?.updateValueAndValidity();
   }
 
   onFileSelected(event: any, controlName: string) {
