@@ -23,9 +23,17 @@ export class loginComponent {
   ) { }
 
   ngOnInit(): void {
+    const savedRegistrationData = localStorage.getItem('userData');
+    const parsedData = savedRegistrationData ? JSON.parse(savedRegistrationData) : null;
+
     this.loginForm = this.fb.group({
+<<<<<<< HEAD
       email: ['', [Validators.required,  Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
       password: ['', Validators.required],
+=======
+      email: [parsedData?.email || '', [Validators.required, Validators.email]],
+      password: [parsedData?.password || '', Validators.required],
+>>>>>>> b6e3780d89602b73e261a374d685e6cda8cf3bee
     });
   }
 

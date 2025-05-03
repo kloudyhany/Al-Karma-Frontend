@@ -8,8 +8,11 @@ import { Offer } from '../models/offer';
   providedIn: 'root'
 })
 export class OfferService {
- 
-  private baseUrl = 'https://localhost:7245/api/offers';
+  /**
+   * Base URL for the offers API.
+   * @private
+   */
+  private baseUrl = 'https://localhost:7245/api/Offer'; 
 
   constructor(private http: HttpClient) { }
 

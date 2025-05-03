@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProfileService {
-  private baseUrl = ''; // Replace with actual base URL
+  private baseUrl = ''; 
 
   constructor(private http: HttpClient) {}
 

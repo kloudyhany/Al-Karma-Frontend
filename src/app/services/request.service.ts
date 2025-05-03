@@ -9,32 +9,40 @@ import { Observable } from 'rxjs';
 })
 export class RequestService {
 
-  private apiUrl = 'https://your-api.com/api/requests';  // عنوان الـ API الخاص بك
+  private apiUrl = 'https://localhost:7245/api/Request'; 
 
   constructor(private http: HttpClient) { }
 
-  // ✅ الحصول على جميع الطلبات
+  //  الحصول على جميع الطلبات
   getMyRequests(): Observable<Offer[]> {
     return this.http.get<Offer[]>(`${this.apiUrl}/my`);
   }
 
-  // ✅ الحصول على طلب معين
+  //  الحصول على طلب معين
   getRequestById(id: number): Observable<Offer> {
     return this.http.get<Offer>(`${this.apiUrl}/${id}`);
   }
 
-  // ✅ إضافة طلب جديد
+  //  إضافة طلب جديد
   createRequest(request: Offer): Observable<Offer> {
     return this.http.post<Offer>(`${this.apiUrl}/create`, request);
   }
 
-  // ✅ تحديث الطلب
+  //  تحديث الطلب
   updateRequest(id: number, request: Offer): Observable<Offer> {
     return this.http.put<Offer>(`${this.apiUrl}/update/${id}`, request);
   }
 
-  // ✅ حذف الطلب
+
+  //  حذف الطلب
   deleteRequest(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
+  }
+  //  قبول الطلب (تحديث حالة الطلب إلى مكتمل أو مرفوض)
+  updateRequestStatus(id: number, status: 'completed' | 'rejected'): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/status/${id}`, { status });
+  }
+  acceptRequest(id: number, status: string): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/accept/${id}`, { status });
   }
 }
