@@ -6,12 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class loginservice {
-  private apiUrl = 'https://jsonplaceholder.typicode.com/posts';  // Fake API endpoint for testing
+  private apiUrl = 'https://localhost:7245/Auth';  
 
   constructor(private http: HttpClient) {}
 
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post(this.apiUrl, credentials); 
+
      
   }
 }

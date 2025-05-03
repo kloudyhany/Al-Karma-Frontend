@@ -24,10 +24,23 @@
     </div>
     <div class="row mb-3">
       <div class="col-md-3 mb-2">
-        <input type="text" class="form-control rounded-pill" value="الايميل الخاص بك" readonly />
+        <input type="text" class="form-control rounded-pill" value="الايميل" readonly />
       </div>
       <div class="col-md-6 mb-2">
-        <input type="email" formControlName="email" class="form-control rounded-pill" placeholder="مثل name@gmail.com " />
+        <div class="input-group">
+          <input type="email" formControlName="email" class="form-control rounded-pill" placeholder="ادخل الايميل" />
+        </div>
+      </div>
+      <div *ngIf="profileForm.get('email')?.touched && profileForm.get('email')?.invalid">
+        <small class="text-danger" *ngIf="profileForm.get('email')?.errors?.['required']">
+          Email is required.
+        </small>
+        <small class="text-danger" *ngIf="profileForm.get('email')?.errors?.['email']">
+          Invalid email format.
+        </small>
+        <small class="text-danger" *ngIf="profileForm.get('email')?.errors?.['pattern']">
+          Please enter a valid email address.
+        </small>
       </div>
       <div class="form-text text-danger">
         @if (FormControls['email'].invalid && FormControls['email'].touched) {
@@ -42,18 +55,17 @@
         <input type="text" class="form-control rounded-pill" value="الدور الخاص بك" readonly />
       </div>
       <div class="col-md-6 mb-2">
-        <select id="serviceType" formControlName="serviceType" class="form-control" required pattern="^(عميل|فني|ادمن)$"
+        <select id="serviceType" formControlName="serviceType" class="form-control" required pattern="^(عميل|فني|)$"
           aria-placeholder="اختر فني او عميل او ادمن ">
           <option value="عميل">عميل</option>
           <option value="فني">فني</option>
-          <option value="ادمن">ادمن</option>
         </select>
       </div>
       @if (FormControls['serviceType'].invalid &&
       (FormControls['serviceType'].dirty ||
       FormControls['serviceType'].touched)) {
       <div class="form-text text-danger">
-        <span style="font-size: large">اختر فني او عميل او ادمن </span>
+        <span style="font-size: large">اختر فني او عميل </span>
       </div>
       }
     </div>
