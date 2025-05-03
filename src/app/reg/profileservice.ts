@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProfileService {
-  private apiUrl = 'https://your-api-endpoint.com/register'; // Replace with your actual API endpoint
+  private apiUrl = 'https://localhost:7245/Auth/register'; // apiiiiiiiiiiiiiiiii
 
   constructor(private http: HttpClient) {}
 
