@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ProfileService } from '../services/profile.service'; 
 import { RouterLink } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { log } from 'node:console';
 
 
 @Component({
@@ -25,7 +26,11 @@ export class TechnicalProfileComponent implements OnInit {
 
   loadProfile(): void {
     this.profileService.getUserProfile().subscribe({
+      
       next: (data) => {
+        console.log("aaaaaaaaaaaaaaaa");
+        console.log(data);
+        
         this.user = data;
         this.imageUrl = data.imageUrl || 'assets/default-user.png';
       },

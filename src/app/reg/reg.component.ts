@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component , NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { SharedDataService } from '../shared-data-service.service';
 
 @Component({
   selector: 'app-reg',
@@ -14,7 +14,7 @@ export class RegComponent {
   profileForm!: FormGroup;
   fileNames: string[] = [];
 
-  constructor(private fb: FormBuilder , private router : Router) {}
+  constructor(private fb: FormBuilder , private router : Router, private sharedDataService : SharedDataService) {}
 
   ngOnInit(): void {
     this.profileForm = this.fb.group({
@@ -116,6 +116,7 @@ export class RegComponent {
     }
 
     console.log(this.profileForm.value);
+    this.sharedDataService.setRegistrationData(this.profileForm);
     this.router.navigate(['/login']);
   
     // Store the form data in localStorage

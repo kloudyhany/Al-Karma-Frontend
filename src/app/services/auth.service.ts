@@ -7,13 +7,13 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = 'https://yourapiurl.com/api/auth';  // Replace with your API URL
+  private apiUrl = 'https://localhost:7245/Auth';  // Replace with your API URL
   private authTokenKey = 'auth_token';
   private userRoleKey = 'user_role';
 
   constructor(private http:HttpClient) { }
   login(username: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, { username, password });
+    return this.http.post<any>(`${this.apiUrl}`, { username, password });
   }
   // Store authentication token
   setAuthToken(token: string): void {
