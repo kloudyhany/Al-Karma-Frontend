@@ -19,6 +19,7 @@ export class RegComponent {
   ngOnInit(): void {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       serviceType: ['', [Validators.required, Validators.pattern(/^(عميل|فني|ادمن)$/)]],
       password: ['', Validators.required],
       service: [''],

@@ -10,12 +10,14 @@
     </div>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label class="form-label">رقم الهاتف</label>
-        <input type="text" formControlName="phone" class="form-control rounded-pill" placeholder="رقم الهاتف">
-        <div class="form-text text-danger" *ngIf="FormControls['phone'].touched && FormControls['phone'].invalid">
-          <span *ngIf="FormControls['phone'].errors?.['required']">الرقم مطلوب</span>
-          <span *ngIf="FormControls['phone'].errors?.['pattern']">الرقم غير صحيح</span>
+      <div class=" mb-3">
+        <label class="form-label">الايميل الخاص بك</label>
+          <input type="email" formControlName="email" class="form-control rounded-pill" placeholder="مثل name@gmail.com " />
+        <div class="form-text text-danger">
+          @if (FormControls['email'].invalid && FormControls['email'].touched) { @if
+          (FormControls['email'].hasError('required')) {
+          <span style="font-size: large">يجب كتابة الايميل</span>
+          } }
         </div>
       </div>
 
