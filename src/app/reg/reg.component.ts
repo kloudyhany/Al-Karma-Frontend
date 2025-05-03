@@ -83,7 +83,7 @@ export class RegComponent {
     const files: FileList = event.target.files;
     const control = this.profileForm.get(controlName);
 
-    if (files && files.length > 0 && files && files.length <3) {
+    if (files && files.length > 1 && files && files.length <3) {
       this.fileNames = Array.from(files).map(f => f.name);
       control?.setValue(files);
     } else if (files && files.length > 2) {
