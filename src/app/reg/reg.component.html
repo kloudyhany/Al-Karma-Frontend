@@ -43,9 +43,9 @@
         </small>
       </div>
       <div class="form-text text-danger">
-        @if (FormControls['email'].invalid && FormControls['email'].touched) { @if
-        (FormControls['email'].hasError('required')) {
-        <span style="font-size: large">يجب كتابة الايميل</span>
+        @if (FormControls['email'].invalid && FormControls['email'].touched) {
+           @if (FormControls['email'].hasError('required') && FormControls['email'].hasError('pattern')) {
+        <span style="font-size: large">يجب كتابة الايميل بطريقة صحيحة</span>
         } }
       </div>
     </div>
