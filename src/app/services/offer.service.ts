@@ -16,7 +16,7 @@ export class OfferService {
    * Base URL for the offers API.
    * @private
    */
-  private baseUrl = 'https://localhost:5001/api/offers';
+  private baseUrl = 'https://localhost:7245/api/Offer'; // Adjust the base URL as necessary
 
   /**
    * Constructor for the OfferService.

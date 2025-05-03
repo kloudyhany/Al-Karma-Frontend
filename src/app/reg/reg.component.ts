@@ -110,5 +110,7 @@ export class RegComponent {
     console.log(this.profileForm.value);
     this.router.navigate(['/login']);
   
-    }
+    // Store the form data in localStorage
+    localStorage.setItem('userData', JSON.stringify(this.profileForm.value));
+  }
 }
