@@ -104,15 +104,35 @@ export class loginComponent {
             console.log('Unknown role:', userData);
             alert('دور المستخدم غير معروف.'); // Unknown role
             break;
+        localStorage.setItem('userData', JSON.stringify(userData));
+        this.loginForm.reset();
+        console.log(userData);
+        console.log('before');
+
+        switch (userData.serviceType) {
+          case 'عميل':
+            this.router.navigate(['/clientprofile']);
+            break;
+          case 'فني':
+            this.router.navigate(['/techprofile']);
+            break;
+        
+          default:
+            console.log('Unknown role:', userData);
+            alert('دور المستخدم غير معروف.'); // Unknown role
+            break;
         }
+        console.log('after');
         console.log('after');
       },
       error: (error) => {
         alert('فشل تسجيل الدخول. تأكد من البيانات.');
         console.error(error);
+        console.error(error);
       },
     });
 >>>>>>> 8f9dd2f44616d4b5042d8bbe47e44b437e15817d
   }
+  
   
 }
