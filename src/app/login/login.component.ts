@@ -42,23 +42,35 @@ export class loginComponent {
       alert('يرجى تعبئة جميع الحقول.');
       return;
     }
-
+  
     this.loginService.login(this.loginForm.value).subscribe({
       next: (userData) => {
         alert('تم تسجيل الدخول بنجاح!');
-        if (userData.role === 'admin') {
-          this.router.navigate(['/admin']);
-        } 
-        else if  (userData.role === 'client') {
-          this.router.navigate(['/clientprofile']);
+        localStorage.setItem('userData', JSON.stringify(userData));
+        this.loginForm.reset();
+        console.log(userData);
+        console.log('before');
+
+        switch (userData.serviceType) {
+          case 'عميل':
+            this.router.navigate(['/clientprofile']);
+            break;
+          case 'فني':
+            this.router.navigate(['/techprofile']);
+            break;
+        
+          default:
+            console.log('Unknown role:', userData);
+            alert('دور المستخدم غير معروف.'); // Unknown role
+            break;
         }
-        else if (userData.role === 'technician') {
-        this.router.navigate(['/technicianprofile']);
-        }
+        console.log('after');
       },
       error: (error) => {
         alert('فشل تسجيل الدخول. تأكد من البيانات.');
+        console.error(error);
       },
     });
   }
+  
 }

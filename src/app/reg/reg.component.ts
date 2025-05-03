@@ -18,16 +18,23 @@ export class RegComponent {
 
   ngOnInit(): void {
     this.profileForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required,  Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
-      serviceType: ['', [Validators.required, Validators.pattern(/^(عميل|فني|ادمن)$/)]],
-      password: ['', Validators.required],
+      name: ['', [Validators.required, Validators.pattern(/^[\u0600-\u06FFa-zA-Z\s]+$/)]], 
+ email: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+        ]
+      ],
+            serviceType: ['', [Validators.required, Validators.pattern(/^(عميل|فني)$/)]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],  
       service: [''],
       previousworkname: [''],
       previousworkimgs: [''],
       nationalIdImages: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern(/^01[2,5,0,1]\d{8}$/)]],
-      whatsapp: ['', [Validators.required, Validators.pattern(/^01[2,5,0,1]\d{8}$/)]],
+      phone: ['', [Validators.required, Validators.pattern(/^01[2,5,0,1]\d{8}$/)]], 
+      whatsapp: ['', [Validators.required, Validators.pattern(/^01[2,5,0,1]\d{8}$/)]], 
       address: ['']
     });
 
