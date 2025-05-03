@@ -44,15 +44,15 @@ export class loginComponent {
     }
 
     this.loginService.login(this.loginForm.value).subscribe({
-      next: (response) => {
+      next: (userData) => {
         alert('تم تسجيل الدخول بنجاح!');
-        if (response.role === 'admin') {
+        if (userData.role === 'admin') {
           this.router.navigate(['/admin']);
         } 
-        else if  (response.role === 'client') {
+        else if  (userData.role === 'client') {
           this.router.navigate(['/clientprofile']);
         }
-        else if (response.role === 'technician') {
+        else if (userData.role === 'technician') {
         this.router.navigate(['/technicianprofile']);
         }
       },
