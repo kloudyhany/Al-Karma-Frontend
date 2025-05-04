@@ -12,9 +12,8 @@ export interface Offer {
     isRejected: boolean;
     createdAt: Date;
     details?: any;
-    serviceId?: number;
+    serviceType?: number;
     userId?: number;
-    updatedAt?: Date;
   }
 export interface Service {
     id: number;
@@ -27,7 +26,7 @@ export interface Service {
 }
 export interface Order {
   id: number;
-  serviceId: number;
+  serviceType: number;
   userId: number;
   status: 'Pending' | 'Accepted' | 'Rejected';
   details: any;
@@ -42,7 +41,6 @@ export interface User {
     email: string;
     phone: string;
     role: string; 
-    // 'client ' or  'technician'
 
 }
 

@@ -14,49 +14,59 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class loginComponent {
-  loginForm!: FormGroup;
+ 
+  
+loginForm!: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private loginService: loginservice,
-    private router: Router
-  ) { }
+constructor(
+  private fb: FormBuilder,
+  private loginService: loginservice,
+  private router: Router
+) { }
 
-  ngOnInit(): void {
-    const savedRegistrationData = localStorage.getItem('userData');
-    const parsedData = savedRegistrationData ? JSON.parse(savedRegistrationData) : null;
+ngOnInit(): void {
+  this.loginForm = this.fb.group({
+    email: [
+      '', 
+      [
+        Validators.required, 
+        Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')
+      ]
+    ],
+    password: ['', Validators.required],
+  });
+}
 
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required,  Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
-      password: ['', Validators.required],
-    });
+get FormControls() {
+  return this.loginForm.controls;
+}
+
+
+onSubmit(): void {
+  if (this.loginForm.invalid) {
+    this.loginForm.markAllAsTouched();
+    alert('يرجى تعبئة جميع الحقول.');
+    return;
   }
 
-  get FormControls() {
-    return this.loginForm.controls;
-  }
+  this.loginService.login(this.loginForm.value).subscribe({
+    next: (userData) => {
+      alert('تم تسجيل الدخول بنجاح!');
 
-  onSubmit(): void {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
-      alert('يرجى تعبئة جميع الحقول.');
-      return;
-    }
+      localStorage.setItem('userData', JSON.stringify(userData));
 
-    this.loginService.login(this.loginForm.value).subscribe({
-      next: (userData) => {
-        alert('تم تسجيل الدخول بنجاح!');
-        
-         if  (userData.role === 'عميل') {
-          this.router.navigate(['/clientprofile']);
-        }
-        else if (userData.role === 'فني') {
+      // Navigate based on user role
+      if (userData.role === 'عميل') {
+        this.router.navigate(['/clientprofile']);
+      } else if (userData.role === 'فني') {
         this.router.navigate(['/techprofile']);
-        }
-      },
-      error: (error) => {
-        alert('فشل تسجيل الدخول. تأكد من البيانات.');
-      },
-    });
-  }
+      } else {
+        this.router.navigate(['']);
+      }
+    },
+    error: (error) => {
+      alert('فشل تسجيل الدخول. تأكد من البيانات.');
+    },
+  });
+}
 }
