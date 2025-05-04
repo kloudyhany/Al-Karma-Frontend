@@ -12,9 +12,8 @@ export interface Offer {
     isRejected: boolean;
     createdAt: Date;
     details?: any;
-    serviceId?: number;
+    serviceType?: number;
     userId?: number;
-    updatedAt?: Date;
   }
 export interface Service {
     id: number;
@@ -27,16 +26,12 @@ export interface Service {
 }
 export interface Order {
   id: number;
-  serviceId: number;
+  serviceType: number;
   userId: number;
   status: 'Pending' | 'Accepted' | 'Rejected';
   details: any;
   createdAt: Date;
-  updatedAt: Date;
-  service?: Service; // Optional, if you want to include service details
-  price?: number;
-  providerName?: string; // Optional, if you want to include provider name
-  title?: string; // Optional, if you want to include service title
+  price: number;
 
   
 }
@@ -45,8 +40,7 @@ export interface User {
     name: string;
     email: string;
     phone: string;
-    role: string; // 'client ' or  'technician'
-    imageUrl: string;
+    role: string; 
 
 }
 
@@ -58,13 +52,9 @@ export interface Profile {
     location: string;
     role: string;
     rating?: number;
-    experience?: number;
-    tasksCompleted?: number;
     imageUrl?: string;
     user: string;
-    requestCount: number;
-    joinedDate: string;
-    
+ 
   }
   export interface Service {
     id: number;

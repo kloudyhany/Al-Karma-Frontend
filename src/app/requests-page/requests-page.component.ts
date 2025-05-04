@@ -8,7 +8,7 @@ import { CommonModule, NgClass } from '@angular/common';
 @Component({
   selector: 'app-requests-page',
   imports: [RouterLink,CommonModule,NgClass],
-  templateUrl: './requests-page.component.html',
+  templateUrl:'./requests-page.component.html',
   styleUrl: './requests-page.component.css'
 })
 export class RequestsPageComponent implements OnInit {
@@ -27,12 +27,12 @@ export class RequestsPageComponent implements OnInit {
       next: (data: Offer[]) => {
         this.requests = data.map(offer => ({
           id: offer.id,
-          serviceId: offer.serviceId ?? 0,
+          serviceType: offer.serviceType ?? 0,
           userId: offer.userId ?? 0,
           status: offer.status,
           details: offer.details,
           createdAt: offer.createdAt ? new Date(offer.createdAt) : new Date(),
-          updatedAt: offer.updatedAt ? new Date(offer.updatedAt) : new Date()
+          price: offer.price ?? 0,
         }));
         this.filterRequests();
       },
