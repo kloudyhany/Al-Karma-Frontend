@@ -98,9 +98,7 @@ export class loginComponent {
         this.router.navigate(['/clientprofile']);
       } else if (userRole === 'فني') {
         this.router.navigate(['/techprofile']);
-      } else if (userRole === 'ادمن') {
-        this.router.navigate(['/admin-profile']);
-      } else {
+      }  else {
         alert('دور غير معروف');
       }
     } else {
