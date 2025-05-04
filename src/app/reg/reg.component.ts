@@ -3,6 +3,7 @@ import { Component, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { notmatching } from './confirmpass';
+import { ProfileService } from './profileservice';
 
 @Component({
   selector: 'app-reg',
@@ -14,7 +15,7 @@ export class RegComponent {
   profileForm!: FormGroup;
   fileNames: string[] = [];
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router, private profileService : ProfileService) { }
 
   ngOnInit(): void {
     this.profileForm = this.fb.group({
@@ -133,10 +134,20 @@ export class RegComponent {
 
     const formData = this.profileForm.value;
 
+    this.profileService.submitProfile(formData).subscribe({
+      next: (res) => {
+        console.log(res);
+        const token = res.token;
+        const user = res.userName;
+        const role = res.role;
     // حفظ البيانات في localStorage
     localStorage.setItem('userData', JSON.stringify(formData));
 
     console.log('تم الحفظ في LocalStorage:', formData);
     this.router.navigate(['/login']);
+      }
+    });
+    }
   }
-}
+
+

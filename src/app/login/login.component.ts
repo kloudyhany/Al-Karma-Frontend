@@ -58,8 +58,8 @@ export class loginComponent {
 
     this.loginService.login(credentials).subscribe({
       next: (res) => {
-        const token = res.token;
-        const user = res.user;
+        const token = res.value.token;
+        const user = res.value.userName;
 
         if (token && user) {
           localStorage.setItem('token', token);
