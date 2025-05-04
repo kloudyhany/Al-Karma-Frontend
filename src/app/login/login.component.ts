@@ -17,27 +17,14 @@ import { Router } from '@angular/router';
  * Represents the login component responsible for handling user authentication.
  */
 export class loginComponent {
-  /**
-   * The reactive form group for the login form.
-   */
   loginForm!: FormGroup;
 
-  /**
-   * Initializes the login component with necessary dependencies.
-   * 
-   * @param fb - The `FormBuilder` service for creating reactive forms.
-   * @param loginService - The service responsible for handling login-related operations.
-   * @param router - The Angular `Router` service for navigation.
-   */
   constructor(
     private fb: FormBuilder,
     private loginService: loginservice,
     private router: Router
   ) {}
 
-  /**
-   * Lifecycle hook that initializes the login form with validation rules.
-   */
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: [
@@ -51,27 +38,10 @@ export class loginComponent {
     });
   }
 
-  /**
-   * Getter for accessing the form controls of the login form.
-   * 
-   * @returns The controls of the login form.
-   */
   get FormControls() {
     return this.loginForm.controls;
   }
 
-  /**
-   * Handles the form submission for user login.
-   * 
-   * - Validates the form and ensures all fields are filled.
-   * - Reads user data from `localStorage` and compares it with the entered credentials.
-   * - Sets a cookie with the user data upon successful login.
-   * - Navigates to the appropriate profile page based on the user's role.
-   * 
-   * @remarks
-   * - Displays an alert if the form is invalid or if the credentials do not match.
-   * - Supports roles: "عميل" (Client), "فني" (Technician), and "ادمن" (Admin).
-   */
   onSubmit(): void {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
@@ -79,30 +49,38 @@ export class loginComponent {
       return;
     }
 
-    const storedData = localStorage.getItem('userData');
-    if (!storedData) {
-      alert('لا توجد بيانات مسجلة!');
-      return;
-    }
+    const credentials = this.loginForm.value;
 
-    const formData = JSON.parse(storedData);
-    const { email, password } = this.loginForm.value;
+    this.loginService.login(credentials).subscribe({
+      next: (res) => {
+        const token = res.token;
+        const user = res.user;
 
-    if (email === formData.email && password === formData.password) {
-      alert('تم تسجيل الدخول بنجاح!');
-      document.cookie = `formData=${encodeURIComponent(JSON.stringify(formData))}; path=/;`;
+        if (token && user) {
+          localStorage.setItem('token', token);
+          localStorage.setItem('user', JSON.stringify(user));
 
-      const userRole = formData.serviceType;
+          alert('تم تسجيل الدخول بنجاح!');
 
-      if (userRole === 'عميل') {
-        this.router.navigate(['/clientprofile']);
-      } else if (userRole === 'فني') {
-        this.router.navigate(['/techprofile']);
-      }  else {
-        alert('دور غير معروف');
-      }
-    } else {
-      alert('البريد الإلكتروني أو كلمة المرور غير صحيحة!');
-    }
+          const role = user.serviceType;
+
+          if (role === 'عميل') {
+            this.router.navigate(['/clientprofile']);
+          } else if (role === 'فني') {
+            this.router.navigate(['/techprofile']);
+          } else if (role === 'ادمن') {
+            this.router.navigate(['/admin']);
+          } else {
+            alert('دور غير معروف!');
+          }
+        } else {
+          alert('الاستجابة غير صحيحة من الخادم.');
+        }
+      },
+      error: (err) => {
+        alert('فشل تسجيل الدخول: تأكد من البريد وكلمة المرور.');
+        console.error(err);
+      },
+    });
   }
 }
