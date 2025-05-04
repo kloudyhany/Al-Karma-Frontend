@@ -15,58 +15,71 @@ import { Router } from '@angular/router';
 })
 export class loginComponent {
  
-  
-loginForm!: FormGroup;
+  loginForm!: FormGroup;
 
-constructor(
-  private fb: FormBuilder,
-  private loginService: loginservice,
-  private router: Router
-) { }
+  constructor(
+    private fb: FormBuilder,
+    private loginService: loginservice,
+    private router: Router
+  ) {}
 
-ngOnInit(): void {
-  this.loginForm = this.fb.group({
-    email: [
-      '', 
-      [
-        Validators.required, 
-        Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')
-      ]
-    ],
-    password: ['', Validators.required],
-  });
-}
-
-get FormControls() {
-  return this.loginForm.controls;
-}
-
-
-onSubmit(): void {
-  if (this.loginForm.invalid) {
-    this.loginForm.markAllAsTouched();
-    alert('يرجى تعبئة جميع الحقول.');
-    return;
+  ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'),
+        ],
+      ],
+      password: ['', Validators.required],
+    });
   }
 
-  this.loginService.login(this.loginForm.value).subscribe({
-    next: (userData) => {
+  get FormControls() {
+    return this.loginForm.controls;
+  }
+
+  onSubmit(): void {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      alert('يرجى تعبئة جميع الحقول.');
+      return;
+    }
+
+    // قراءة بيانات المستخدم من localStorage
+    const storedData = localStorage.getItem('userData');
+    
+    if (!storedData) {
+      alert('لا توجد بيانات مسجلة!');
+      return;
+    }
+
+    const formData = JSON.parse(storedData);
+    
+    // مقارنة البيانات المدخلة مع البيانات المخزنة
+    const { email, password } = this.loginForm.value;
+
+    if (email === formData.email && password === formData.password) {
       alert('تم تسجيل الدخول بنجاح!');
+      
+      // تخزين البيانات في الـ cookie إذا أردت
+      document.cookie = `formData=${encodeURIComponent(JSON.stringify(formData))}; path=/;`;
 
-      localStorage.setItem('userData', JSON.stringify(userData));
+      const userRole = formData.serviceType; // أو استخدم role إذا كنت تحفظه في البيانات
 
-      // Navigate based on user role
-      if (userData.role === 'عميل') {
+      // تحديد الدور
+      if (userRole === 'عميل') {
         this.router.navigate(['/clientprofile']);
-      } else if (userData.role === 'فني') {
+      } else if (userRole === 'فني') {
         this.router.navigate(['/techprofile']);
+      } else if (userRole === 'ادمن') {
+        this.router.navigate(['/admin-profile']);
       } else {
-        this.router.navigate(['']);
+        alert('دور غير معروف');
       }
-    },
-    error: (error) => {
-      alert('فشل تسجيل الدخول. تأكد من البيانات.');
-    },
-  });
-}
+    } else {
+      alert('البريد الإلكتروني أو كلمة المرور غير صحيحة!');
+    }
+  }
 }

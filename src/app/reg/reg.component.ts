@@ -14,12 +14,12 @@ export class RegComponent {
   profileForm!: FormGroup;
   fileNames: string[] = [];
 
-  constructor(private fb: FormBuilder , private router : Router) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required,  Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
       serviceType: ['', [Validators.required, Validators.pattern(/^(عميل|فني|ادمن)$/)]],
       password: ['', Validators.required],
       service: [''],
@@ -82,7 +82,6 @@ export class RegComponent {
   onimagesSelected(event: any, controlName: string) {
     const files: FileList = event.target.files;
     const control = this.profileForm.get(controlName);
-  
     control?.markAsTouched();
     control?.updateValueAndValidity();
   }
@@ -91,19 +90,18 @@ export class RegComponent {
     const files: FileList = event.target.files;
     const control = this.profileForm.get(controlName);
 
-    if (files && files.length > 1 && files && files.length <3) {
+    if (files && files.length > 1 && files.length < 3) {
       this.fileNames = Array.from(files).map(f => f.name);
       control?.setValue(files);
     } else if (files && files.length > 2) {
-      alert('يرجى اختيار صورتين فقط واحدة للوجه و الاخري للخلف');
+      alert('يرجى اختيار صورتين فقط واحدة للوجه والأخرى للخلف');
+      this.fileNames = [];
+      control?.setValue('');
+    } else {
       this.fileNames = [];
       control?.setValue('');
     }
-    else {
-      this.fileNames = [];
-      control?.setValue('');
-    }
-  
+
     control?.markAsTouched();
     control?.updateValueAndValidity();
   }
@@ -114,16 +112,13 @@ export class RegComponent {
       alert('يرجى تعبئة جميع الحقول المطلوبة');
       return;
     }
-    
-    // Store the form data in localStorage
-    const formData = this.profileForm.value;
-    for (const key in formData) {
-      if (formData.hasOwnProperty(key)) {
-        localStorage.setItem(key, JSON.stringify(formData[key]));
-      }
-    }
 
-    console.log(formData);
+    const formData = this.profileForm.value;
+
+    // حفظ البيانات في localStorage
+    localStorage.setItem('userData', JSON.stringify(formData));
+
+    console.log('تم الحفظ في LocalStorage:', formData);
     this.router.navigate(['/login']);
   }
 }
