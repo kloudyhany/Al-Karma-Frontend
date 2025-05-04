@@ -27,13 +27,19 @@
         <input type="text" class="form-control rounded-pill" value="الايميل الخاص بك" readonly />
       </div>
       <div class="col-md-6 mb-2">
-        <input type="email" formControlName="email" class="form-control rounded-pill" placeholder="مثل name@gmail.com " />
+        <input type="email" formControlName="email" class="form-control rounded-pill"
+          placeholder="مثل name@gmail.com " />
       </div>
       <div class="form-text text-danger">
-        @if (FormControls['email'].invalid && FormControls['email'].touched) { @if
-        (FormControls['email'].hasError('required')) {
+        @if (FormControls['email'].invalid && FormControls['email'].touched) {
+        @if (FormControls['email'].hasError('required')) {
         <span style="font-size: large">يجب كتابة الايميل</span>
-        } }
+        }
+        @if (FormControls['email'].hasError('pattern')) {
+        <span style="font-size: large">الايميل غير صحيح</span>
+        }
+        }
+
       </div>
     </div>
 
@@ -42,36 +48,82 @@
         <input type="text" class="form-control rounded-pill" value="الدور الخاص بك" readonly />
       </div>
       <div class="col-md-6 mb-2">
-        <select id="serviceType" formControlName="serviceType" class="form-control" required pattern="^(عميل|فني|ادمن)$"
-          aria-placeholder="اختر فني او عميل او ادمن ">
+        <select id="serviceType" formControlName="serviceType" class="form-control" required pattern="^(عميل|فني)$"
+          aria-placeholder="اختر فني او عميل ">
           <option value="عميل">عميل</option>
           <option value="فني">فني</option>
-          <option value="ادمن">ادمن</option>
         </select>
       </div>
-      @if (FormControls['serviceType'].invalid &&
-      (FormControls['serviceType'].dirty ||
-      FormControls['serviceType'].touched)) {
       <div class="form-text text-danger">
-        <span style="font-size: large">اختر فني او عميل او ادمن </span>
+        @if (FormControls['serviceType'].invalid && FormControls['serviceType'].touched) {
+        @if (FormControls['serviceType'].hasError('required')) {
+        <span style="font-size: large">اختر فني او عميل</span>
+        } }
       </div>
-      }
+     
     </div>
+
     <div class="row mb-3">
       <div class="col-md-3 mb-2">
         <input type="text" class="form-control rounded-pill" value="كلمة السر" readonly />
       </div>
+
       <div class="col-md-6 mb-2">
-        <input type="password" formControlName="password" class="form-control rounded-pill" />
+        <div class="d-flex align-items-center">
+          <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
+            class="form-control rounded-pill" />
+          <button type="button"
+            class="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center ms-2"
+            style="width: 40px; height: 40px" (click)="togglePassword()">
+            <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </button>
+        </div>
       </div>
-      <div class="form-text text-danger">
-        @if (FormControls["password"].invalid &&
-        FormControls["password"].touched) { @if
-        (FormControls["password"].hasError("required")) {
-        <span style="font-size: large">يجب كتابة كلمة السر</span>
-        } }
+
+      <div class="form-text text-danger"
+        *ngIf="profileForm.get('password')?.touched && profileForm.get('password')?.invalid">
+        <span *ngIf="profileForm.get('password')?.hasError('required')" style="font-size: large">
+          يجب كتابة كلمة السر
+        </span>
+        <span *ngIf="profileForm.get('password')?.hasError('pattern')" style="font-size: large">
+          يجب ألا تقل كلمة السر عن 8 أحرف باللغة الإنجليزية وتحتوي على حروف كبيرة وصغيرة وأرقام ورموز
+        </span>
       </div>
     </div>
+
+
+
+
+    <div class="row mb-3">
+      <div class="col-md-3 mb-2">
+        <input type="text" class="form-control rounded-pill" value="تأكيد كلمة السر" readonly />
+      </div>
+
+      <div class="col-md-6 mb-2">
+        <div class="d-flex align-items-center">
+          <input [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmPassword"
+            class="form-control rounded-pill" />
+          <button type="button"
+            class="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center ms-2"
+            style="width: 40px; height: 40px" (click)="toggleConfirmPassword()">
+            <i class="fa" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-text text-danger"
+        *ngIf="profileForm.get('confirmPassword')?.touched && profileForm.get('confirmPassword')?.invalid">
+        <span *ngIf="profileForm.get('confirmPassword')?.hasError('required')" style="font-size: large">
+          يجب كتابة كلمة السر
+        </span>
+        <span *ngIf="profileForm.get('confirmPassword')?.hasError('notMatching')" style="font-size: large">
+          كلمة السر غير متطابقة
+        </span>
+      </div>
+    </div>
+
+
+
     <div *ngIf="profileForm.get('serviceType')?.value === 'فني'">
       <div class="row mb-3" id="previouswork">
         <div class="col-md-3 mb-2">
