@@ -15,13 +15,13 @@ export class ProfileService {
 
     formData.append('name', form.name);
     formData.append('password', form.password);
+    formData.append('email', form.email);
+    formData.append('confirmPassword', form.confirmPassword);
     formData.append('serviceType', form.serviceType);
     formData.append('phone', form.phone);
     formData.append('whatsapp', form.whatsapp);
+   
 
-    if (form.address) {
-      formData.append('address', form.address);
-    }
 
     if (form.serviceType === 'فني') {
       formData.append('service', form.service);
@@ -32,6 +32,9 @@ export class ProfileService {
           formData.append('previousworkimgs', file);
         });
       }
+    }
+    if (form.serviceType === 'عميل') {
+      formData.append('address', form.address);
     }
 
     if (Array.isArray(form.nationalIdImages)) {

@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component , NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SharedDataService } from '../shared-data-service.service';
+import { notmatching } from './confirmpass';
 
 @Component({
   selector: 'app-reg',
-  imports: [FormsModule , ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './reg.component.html',
   styleUrl: './reg.component.css'
 })
@@ -14,14 +14,15 @@ export class RegComponent {
   profileForm!: FormGroup;
   fileNames: string[] = [];
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
-      serviceType: ['', [Validators.required, Validators.pattern(/^(عميل|فني|ادمن)$/)]],
-      password: ['', Validators.required],
+      serviceType: ['', [Validators.required, Validators.pattern(/^(فني|عميل)$/)]],
+      password: ['', [Validators.required,Validators.pattern(/^(?=(.*[a-z]))(?=(.*[A-Z]))(?=(.*\d))(?=(.*[@$!%*?&]))[A-Za-z\d@$!%*?&]{8,20}$/)]],
+      confirmPassword: ['', [Validators.required, Validators.pattern(/^(?=(.*[a-z]))(?=(.*[A-Z]))(?=(.*\d))(?=(.*[@$!%*?&]))[A-Za-z\d@$!%*?&]{8,20}$/)]],
       service: [''],
       previousworkname: [''],
       previousworkimgs: [''],
@@ -29,7 +30,10 @@ export class RegComponent {
       phone: ['', [Validators.required, Validators.pattern(/^01[2,5,0,1]\d{8}$/)]], 
       whatsapp: ['', [Validators.required, Validators.pattern(/^01[2,5,0,1]\d{8}$/)]], 
       address: ['']
-    });
+    },
+      { validators: notmatching('password', 'confirmPassword') }
+    );
+
 
     // React to serviceType changes
     this.profileForm.get('serviceType')?.valueChanges.subscribe((serviceType) => {
@@ -43,6 +47,16 @@ export class RegComponent {
   get FormControls() {
     return this.profileForm.controls;
   }
+  // password toggle
+  showPassword = false;
+  showConfirmPassword = false;
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
+  toggleConfirmPassword() {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
+
 
   updateValidators(serviceType: string): void {
     const address = this.profileForm.get('address');
@@ -90,9 +104,13 @@ export class RegComponent {
     const files: FileList = event.target.files;
     const control = this.profileForm.get(controlName);
 
-    if (files && files.length > 1 && files.length < 3) {
+    if (files && files.length ===2) {
       this.fileNames = Array.from(files).map(f => f.name);
       control?.setValue(files);
+    } else if (files && files.length === 1) {
+      this.fileNames = [];
+      control?.setValue('');
+      alert('يرجى اختيار صورتين واحدة للوجه والأخرى للخلف');
     } else if (files && files.length > 2) {
       alert('يرجى اختيار صورتين فقط واحدة للوجه والأخرى للخلف');
       this.fileNames = [];
