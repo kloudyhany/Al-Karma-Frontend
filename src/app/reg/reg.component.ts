@@ -133,7 +133,6 @@ export class RegComponent {
     }
 
     const formData = this.profileForm.value;
-
     this.profileService.submitProfile(formData).subscribe({
       next: (res) => {
         console.log(res);
@@ -141,7 +140,8 @@ export class RegComponent {
         const user = res.userName;
         const role = res.role;
     // حفظ البيانات في localStorage
-    localStorage.setItem('userData', JSON.stringify(formData));
+    localStorage.setItem('FrontData', JSON.stringify(formData));
+    localStorage.setItem('BackData', JSON.stringify(res));
 
     console.log('تم الحفظ في LocalStorage:', formData);
     this.router.navigate(['/login']);

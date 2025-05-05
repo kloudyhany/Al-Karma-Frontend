@@ -48,44 +48,66 @@ export class loginComponent {
 
   onSubmit(): void {
     if (this.loginForm.invalid) {
-      
       this.loginForm.markAllAsTouched();
       alert('يرجى تعبئة جميع الحقول.');
       return;
     }
-
+  
     const credentials = this.loginForm.value;
-
+    
     this.loginService.login(credentials).subscribe({
       next: (res) => {
-        const token = res.value.token;
-        const user = res.value.userName;
+        try {
+          // Try to parse if response is string
+          const response = typeof res === 'string' ? JSON.parse(res) : res;
+          
+          const token = response.value?.token;
+          const user = response.value?.userName;
+          //const refreshToken = response.value?.refreshToken;
+          
+          if (token && user) {
+            localStorage.setItem('BackData', JSON.stringify(res));
+            // localStorage.setItem('FrontData', JSON.stringify(FormData));
+  
+            alert('تم تسجيل الدخول بنجاح!');
+  
+            // Note: Fixed accessing role - was trying to access user.value.role
+            // but user is already the userName from response
+            // You might need to adjust this based on actual response structure
 
-        if (token && user) {
-          localStorage.setItem('token', token);
-          localStorage.setItem('user', JSON.stringify(user));
 
-          alert('تم تسجيل الدخول بنجاح!');
-
-          const role = user.serviceType;
-
-          if (role === 'عميل') {
-            this.router.navigate(['/clientprofile']);
-          } else if (role === 'فني') {
-            this.router.navigate(['/techprofile']);
-          } else if (role === 'ادمن') {
-            this.router.navigate(['/admin']);
+            const role = response.value?.role; 
+  
+            if (role === 'User') {
+              this.router.navigate(['/clientprofile']);
+            } else if (role === 'Technician') {
+              this.router.navigate(['/techprofile']);
+            } 
+            // else if (role === 'ادمن') {
+            //   this.router.navigate(['/admin']);
+            // } 
+            else {
+              alert('دور غير معروف!');
+            }
           } else {
-            alert('دور غير معروف!');
+            alert('الاستجابة غير صحيحة من الخادم.');
           }
-        } else {
-          alert('الاستجابة غير صحيحة من الخادم.');
+        } catch (e) {
+          console.error('Parsing error:', e);
+          alert('خطأ في معالجة استجابة الخادم');
         }
       },
       error: (err) => {
-        alert('فشل تسجيل الدخول: تأكد من البريد وكلمة المرور.');
-        console.error(err);
-      },
+        console.error('Full error:', err);
+        if (err.error instanceof Error) {
+          alert(`Network error: ${err.error.message}`);
+        } else {
+          // Handle cases where error might be string
+          const errorMsg = typeof err.error === 'string' ? err.error : 
+                           err.message || 'حدث خطأ غير معروف';
+          alert(`Server error: ${err.status} - ${errorMsg}`);
+        }
+      }
     });
   }
   
