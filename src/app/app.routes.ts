@@ -18,6 +18,7 @@ import { TechnicalProfileComponent } from './technical-profile/technical-profile
 import { RequestFormComponent } from './request-form/request-form.component';
 import { RequestsPageComponent } from './requests-page/requests-page.component';
 import { OfferClientrequestComponent } from './offer-clientrequest/offer-clientrequest.component';
+import { RightsideprofileComponent } from './rightsideprofile/rightsideprofile.component';
 
 
 
@@ -89,6 +90,11 @@ export const routes: Routes = [
     path: 'myrequests',
     component: RequestsPageComponent,
     title: ' طلباتي',
+  },
+  {
+    path : 'rightside' , 
+    component : RightsideprofileComponent
+
   },
 
   {

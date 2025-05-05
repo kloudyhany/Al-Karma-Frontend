@@ -1,0 +1,55 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+<div class="container-fluid bg-dark text-white d-flex" dir="rtl"
+  style="min-height: 100%; padding-top: 30px; justify-content: center; align-items: center;">
+  <div class="d-flex flex-column align-items-center w-100" style="max-width: 800px;">
+    <span class="badge bg-warning text-dark mb-4 fs-5 px-3 py-2 rounded-pill align-items-center text-center" style="height: 50px; width: 500px;">الملف الشخصي</span>
+    <div class="profile-card" >
+      <ul class="list-group shadow-lg p-4 rounded-4 bg-white mx-auto" style="max-width: 900px;">
+        <li class="list-group-item text-center">
+          <div class="position-relative d-inline-block">
+            <img [src]="imageUrl" class="rounded-circle shadow" width="130" height="130" alt="Profile Image">
+            <label class="btn btn-sm btn-light border position-absolute bottom-0 end-0 rounded-circle"
+              style="transform: translate(25%, 25%);">
+              <i class="bi bi-camera"></i>
+              <input type="file" hidden (change)="saveProfilePicture()" accept="image/*">
+            </label>
+          </div>
+        </li>
+        <li class="list-group-item text-center" >
+          <div class="d-flex flex-column align-items-center gap-2">
+            <div class="badge bg-primary">الاسم: {{ user.name }}</div>
+            <div class="badge bg-warning">المهنة: {{ user.servicetype }}</div>
+          </div>
+        </li>
+        <li class="list-group-item text-center">
+          <div class="d-flex flex-column align-items-center gap-2">
+            <div class="badge bg-secondary">رقم الهاتف: {{ user.phoneNumber }}</div>
+            <div class="badge bg-success">البريد الإلكتروني: {{ user.email }}</div>
+            <div class="badge bg-info">عدد الخدمات: {{ user.serviceCount }}</div>
+          </div>
+        </li>
+        <li class="list-group-item text-center" style="min-height: 100px;">
+          <div class="d-flex flex-column align-items-center gap-3">
+            <div class="badge bg-info fs-6 px-3 py-2">سابقة الأعمال: {{ user.perviouswork }}</div>
+            <div class="d-flex flex-wrap justify-content-center gap-3 mt-3">
+              <ng-container *ngIf="user.previousWorkPhotos && user.previousWorkPhotos.length > 0; else noPhotos">
+          <div *ngFor="let photo of user.previousWorkPhotos" class="photo-container">
+            <img [src]="photo.url" class="rounded shadow-sm border" width="120" height="120" alt="Previous Work Photo" style="object-fit: cover;">
+          </div>
+              </ng-container>
+              <ng-template #noPhotos>
+                <label class="btn btn-outline-primary mt-2" style="margin: 15px; width: 200px; height: 50px; margin-right: 200px;
+                text-align: center; ">
+                  <i class="bi bi-upload"></i> رفع صور جديدة
+                  <input type="file" hidden (change)="onPhotosSelected($event)" multiple>
+                </label>
+              </ng-template>
+            </div>
+        
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
