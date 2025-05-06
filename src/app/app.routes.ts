@@ -10,7 +10,6 @@ import { ServicesPageComponent } from './services-page/services-page.component';
 import { OfferListComponent } from './offer-list/offer-list.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
-import { RatingAllComponent } from './rating-all/rating-all.component';
 import { RegComponent } from './reg/reg.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { CreatenewpasswordComponent } from './createnewpassword/createnewpassword.component';
@@ -119,11 +118,7 @@ export const routes: Routes = [
     component: ServiceConfirmationComponent,
     title: 'عرض سعر',
   },
-  {
-    path: 'rating',
-    component: RatingAllComponent,
-    title: 'تقييمات',
-  },
+ 
   {
     path: 'client_service',
     component: ClientServiceComponent,
