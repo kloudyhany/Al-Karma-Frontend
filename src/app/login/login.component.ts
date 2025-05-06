@@ -67,7 +67,7 @@ export class loginComponent {
           
           if (token && user) {
             localStorage.setItem('BackData', JSON.stringify(res));
-            // localStorage.setItem('FrontData', JSON.stringify(FormData));
+            //localStorage.setItem('LoginData', JSON.stringify());
   
             alert('تم تسجيل الدخول بنجاح!');
   
@@ -77,6 +77,8 @@ export class loginComponent {
 
 
             const role = response.value?.role; 
+
+            //const IsServiceProvider = response.value?.serviceProvider;
   
             if (role === 'User') {
               this.router.navigate(['/clientprofile']);
@@ -104,7 +106,7 @@ export class loginComponent {
         } else {
           // Handle cases where error might be string
           const errorMsg = typeof err.error === 'string' ? err.error : 
-                           err.message || 'حدث خطأ غير معروف';
+                    err.message || 'حدث خطأ غير معروف';
           alert(`Server error: ${err.status} - ${errorMsg}`);
         }
       }
