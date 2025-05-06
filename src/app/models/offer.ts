@@ -65,3 +65,9 @@ export interface Profile {
     rating: number;
     orders: number;
   }
+  export interface RatingRequest {
+    role: string; 
+    ratings: { [key: string]: number }; 
+    comment?: string; 
+  }
+  
