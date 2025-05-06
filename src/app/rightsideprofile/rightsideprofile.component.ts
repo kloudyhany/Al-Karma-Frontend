@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentLoaderService } from '../technical-profile/ComponentLoaderService';
 import { TechPersonalInformationComponent } from '../tech-personal-information/tech-personal-information.component';
 import { RequestFormComponent } from '../request-form/request-form.component';
-import { RatingAllComponent } from '../rating-all/rating-all.component';
+import { RatingClientComponent } from '../rating-client/rating-client.component';
 import { ServiceConfirmationComponent } from '../service-confirmation/service-confirmation.component';
 import { OfferClientrequestComponent } from '../offer-clientrequest/offer-clientrequest.component';
 import { ServicesPageComponent } from '../services-page/services-page.component';
@@ -15,7 +15,7 @@ import { ServicesPageComponent } from '../services-page/services-page.component'
 export class RightsideprofileComponent {
   TechPersonalInformationComponent = TechPersonalInformationComponent;
   RequestFormComponent = RequestFormComponent;
-  RatingAllComponent = RatingAllComponent;
+  RatingclientComponent = RatingClientComponent;
   ServiceConfirmationComponent = ServiceConfirmationComponent;
   OfferClientrequestComponent = OfferClientrequestComponent;
   ServicesPageComponent = ServicesPageComponent;

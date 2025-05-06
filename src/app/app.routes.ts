@@ -19,6 +19,7 @@ import { RequestFormComponent } from './request-form/request-form.component';
 import { RequestsPageComponent } from './requests-page/requests-page.component';
 import { OfferClientrequestComponent } from './offer-clientrequest/offer-clientrequest.component';
 import { RightsideprofileComponent } from './rightsideprofile/rightsideprofile.component';
+import { RatingClientComponent } from './rating-client/rating-client.component';
 
 
 
@@ -74,6 +75,11 @@ export const routes: Routes = [
 
     component: TechnicalProfileComponent,
     title: ' الملف الشخصي للفني ',
+  },
+  {
+    path: 'ratingclient',
+    component: RatingClientComponent,
+    title: '   تقييم  العميل',
   },
   {
     path: 'client_requests',
