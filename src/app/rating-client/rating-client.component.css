@@ -1,0 +1,55 @@
+.ratings-wrapper {
+    background: #0f1c24;
+    padding: 2rem;
+    border-radius: 20px;
+    color: white;
+    max-width: 900px;
+    margin: auto;
+    direction: rtl;
+  }
+  
+  .section-title {
+    background: #ea6c1b;
+    border-radius: 20px;
+    padding: 0.7rem 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 2rem auto 1rem;
+    width: fit-content;
+    font-weight: bold;
+  }
+  
+  .star-rating {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #ccc;
+  }
+  
+  .star-rating .bi-star-fill.selected {
+    color: #ffc107;
+  }
+  
+  textarea.form-control {
+    resize: none;
+    border-radius: 12px;
+    padding: 1rem;
+  }
+  
+  .submit-btn {
+    background: #ea6c1b;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .submit-btn:hover {
+    background: #cf5c18;
+  }
+  

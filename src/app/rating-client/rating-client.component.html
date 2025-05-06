@@ -1,26 +1,32 @@
-<div class="container mt-5">
-    <h3 class="mb-4 text-center">Rate Your Experience</h3>
-  
-    <div class="text-center mb-3">
+<div class="ratings-wrapper" dir="rtl">
+  <div class="section-title">{{ ratingCategory.title }}</div>
+
+  <!-- تكرار المعايير (المقاييس) التي سيتم تقييمها -->
+  <div *ngFor="let criterion of ratingCategory.criteria" class="mb-4">
+    <label class="form-label d-block mb-2 fw-bold">{{ criterion.label }}</label>
+    <div class="star-rating">
+      <!-- تكرار النجوم للتقييم (من 1 إلى 5) -->
       <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
-        <i class="bi" 
-           [ngClass]="star <= selectedStars ? 'bi-star-fill text-warning' : 'bi-star text-secondary'"
-           (click)="setRating(star)"
-           style="font-size: 2rem; cursor: pointer;"></i>
+        <i class="bi"
+           [ngClass]="{
+             'bi-star-fill selected': star <= (ratings[criterion.key] || 0),
+             'bi-star': star > (ratings[criterion.key] || 0)
+           }"
+           (click)="setCriterionRating(criterion.key, star)">
+        </i>
       </ng-container>
     </div>
-  
-    <form [formGroup]="form" (ngSubmit)="submitRating()">
-      <div class="mb-3">
-        <textarea 
-          formControlName="comment" 
-          class="form-control" 
-          rows="4" 
-          placeholder="Write a comment about your experience..."></textarea>
-      </div>
-      <button class="btn btn-primary w-100" type="submit" [disabled]="form.invalid">
-        Submit Rating
-      </button>
-    </form>
   </div>
-  
+
+  <!-- نموذج التقييم -->
+  <form [formGroup]="form" (ngSubmit)="submitRating()">
+    <div class="mb-3">
+      <label class="form-label fw-bold">أضف تعليقك (اختياري)</label>
+      <textarea formControlName="comment" rows="4" class="form-control" placeholder="اكتب تعليقك هنا..."></textarea>
+    </div>
+
+    <button class="submit-btn" type="submit" [disabled]="form.invalid">
+      إرسال التقييم
+    </button>
+  </form>
+</div>

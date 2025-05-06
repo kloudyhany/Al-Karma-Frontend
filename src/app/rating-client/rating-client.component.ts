@@ -1,49 +1,95 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { inject } from '@angular/core';
-import { NgClass } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { RatingService } from '../services/rating.service'; 
+import{  } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+
 
 @Component({
-  imports: [ReactiveFormsModule, NgClass, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,  FormsModule],
   standalone: true,
   selector: 'app-rating-client', 
 
   templateUrl: './rating-client.component.html',
   styleUrl: './rating-client.component.css'
 })
-export class RatingClientComponent {
+export class RatingClientComponent implements OnInit {
+  form: FormGroup;
+  ratings: Record<string, number> = {};
+  role: 'client' | 'technician' = 'client'; // سيتم تحديده لاحقًا
 
-  private fb = inject(FormBuilder);
-  private http = inject(HttpClient);
+  ratingCategory: any = {}; // سيُملأ بعد تحديد الدور
 
-  form: FormGroup = this.fb.group({
-    stars: [0, Validators.required],
-    comment: ['', [Validators.required, Validators.maxLength(300)]],
-  });
+  constructor(
+    private fb: FormBuilder,
+    private ratingService: RatingService,
+    private router: Router,
+    private authService: AuthService // Inject AuthService
+  ) {
+    this.form = this.fb.group({
+      comment: ['']
+    });
+  }
 
-  selectedStars = 0;
+  ngOnInit(): void {
+    const path = this.router.url;
 
-  setRating(stars: number) {
-    this.selectedStars = stars;
-    this.form.patchValue({ stars });
+    if (path.includes('techprofile')) {
+      this.role = 'technician';
+    } else {
+      this.role = 'client';
+    }
+    // الحصول على الدور من الخدمة
+    this.role = this.authService.getCurrentUserRole(); // 'client' or 'technician'
+
+    this.ratingCategory = {
+      title: this.role === 'client' ? 'تقييمات العميل' : 'تقييمات الفني',
+      key: this.role,
+      criteria: this.role === 'client' ? [
+        { key: 'commitment', label: 'الالتزام بتفاصيل طلب الخدمة' },
+        { key: 'payment', label: 'الالتزام بدفع تكلفة الخدمة' },
+        { key: 'behavior', label: 'سلوك و تعاون العميل' },
+      ] : [
+        { key: 'commitment', label: 'الالتزام بتفاصيل طلب الخدمة' },
+        { key: 'punctuality', label: 'الالتزام بالمواعيد المحددة' },
+        { key: 'quality', label: 'جودة تنفيذ الخدمة' },
+        { key: 'appearance', label: 'المظهر والنظافة' },
+        { key: 'behavior', label: 'سلوك و تعاون الفني' }
+      ]
+    };
+  }
+
+  setCriterionRating(key: string, stars: number) {
+    this.ratings[key] = stars;
   }
 
   submitRating() {
     if (this.form.invalid) return;
 
-    const ratingData = this.form.value;
-    this.http.post('/api/reviewclient', ratingData).subscribe({
-      next: () => alert('شكرا علي التقييم!'),
-      complete: () => {
-        this.form.reset();
-        this.selectedStars = 0;
-      },
-      error: () => alert('حصل خطا ما يرجى المحاولة لاحقا!'),
+    const ratingPayload = {
+      technicianId: 1,
+      clientId: 1,
+      stars: Object.values(this.ratings).reduce((a, b) => a + b, 0),
+      comment: this.form.value.comment
+    };
 
+    const request$ = this.role === 'client'
+      ? this.ratingService.rateTechnician(ratingPayload)
+      : this.ratingService.rateClient(ratingPayload);
+
+    request$.subscribe({
+      next: () => {
+      this.router.navigate([''], { state: { ratings: this.ratings } });
+        alert('تم إرسال التقييم بنجاح');
+        this.router.navigate(['']); 
+      },
+      error: () => alert('حدث خطأ أثناء الإرسال')
     });
   }
 }
+

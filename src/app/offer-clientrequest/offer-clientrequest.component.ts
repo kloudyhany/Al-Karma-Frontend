@@ -32,7 +32,7 @@ export class OfferClientrequestComponent implements OnInit {
   ngOnInit(): void {
     const user = this.authService.getUser();
     this.technicianName = user.name;
-    this.technicianId = user.id;
+    this.technicianId = user.id.toString();
 
     // جلب الطلبات المفتوحة
     // هنا يمكن استدعاء خدمة لعرض الطلبات المفتوحة
