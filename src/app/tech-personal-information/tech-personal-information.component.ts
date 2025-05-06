@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-tech-personal-information',
   imports: [CommonModule],
+  providers: [CookieService],
   templateUrl: './tech-personal-information.component.html',
   styleUrls: ['./tech-personal-information.component.css']
 })
@@ -12,7 +13,7 @@ export class TechPersonalInformationComponent implements OnInit {
   user: any = {};
   imageUrl: string = 'assets/default-user.png';
 
-  constructor(private cookieService: CookieService) {}
+  constructor(@Inject(CookieService) private cookieService: CookieService) {}
 
   ngOnInit(): void {
     this.loadUserFromCookie();
@@ -55,9 +56,28 @@ export class TechPersonalInformationComponent implements OnInit {
     const userData = this.cookieService.get('user');
     if (userData) {
       this.user = JSON.parse(userData);
-      this.imageUrl = this.user.imageUrl || 'assets/default-user.png';
+  
+      // Now access the nested properties under this.user.value
+      const userInfo = this.user.value;
+  
+      if (userInfo) {
+        console.log('ID:', userInfo.id);
+        console.log('Email:', userInfo.email);
+        console.log('Phone Number:', userInfo.phoneNumber);
+        console.log('Username:', userInfo.userName);
+        console.log('Role:', userInfo.role);
+        console.log('Token:', userInfo.token);
+        console.log('Expires In:', userInfo.expiresIn);
+        console.log('Refresh Token:', userInfo.refreshToken);
+        console.log('Refresh Token Expiration:', userInfo.refreshTokenExpiration);
+  
+        this.imageUrl = userInfo.imageUrl || 'assets/default-user.png'; // If you later add an imageUrl field
+      } else {
+        console.error('Invalid user structure in cookie.');
+      }
     } else {
       console.error('No user data found in cookies.');
     }
   }
+  
 }

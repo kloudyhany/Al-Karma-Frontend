@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 interface ProfileForm {
   name: string;
@@ -14,7 +15,7 @@ interface ProfileForm {
   nationalIdImages?: FileList;
   previousworkimgs?: FileList;
   previousworkname?: string;
-  service : string;
+  service: string;
 }
 
 @Injectable({
@@ -26,72 +27,65 @@ export class ProfileService {
   constructor(private http: HttpClient) {}
 
   submitProfile(form: ProfileForm): Observable<any> {
-    const formData = this.prepareFormData(form);
-    return this.http.post(this.apiUrl, formData);
+    return from(this.preparePayload(form)).pipe(
+      switchMap(payload => this.http.post(this.apiUrl, payload))
+    );
   }
 
-  private prepareFormData(form: ProfileForm): FormData {
-    const formData = new FormData();
+  private async preparePayload(form: ProfileForm): Promise<any> {
+    const payload: any = {
+      name: form.name,
+      email: form.email,
+      password: form.password,
+      confirmPassword: form.confirmPassword,
+      phoneNumber: form.phone,
+      whatsappNumber: form.whatsapp,
+      address: form.address,
+      userName: form.name,
+      role: form.serviceType === 'فني' ? '1' : '0'
+    };
 
-    // Append basic user info
-    this.appendBasicInfo(formData, form);
-    
-    // Append role-specific data
-    this.appendRoleSpecificData(formData, form);
-    
-    // Append national ID images if they exist
-    this.appendNationalIdImages(formData, form.nationalIdImages);
+    // Process national ID images
+    if (form.nationalIdImages) {
+      const files = await this.getValidFiles(form.nationalIdImages);
+      if (files[0]) payload.SSNFront_FilePath = await this.fileToBase64(files[0]);
+      if (files[1]) payload.SSNBack_FilePath = await this.fileToBase64(files[1]);
+    }
 
-    return formData;
-  }
-
-  private appendBasicInfo(formData: FormData, form: ProfileForm): void {
-    formData.append('name', form.name);
-    formData.append('email', form.email);
-    formData.append('password', form.password);
-    formData.append('confirmPassword', form.confirmPassword);
-    formData.append('phoneNumber', form.phone);
-    formData.append('whatsappNumber', form.whatsapp);
-    formData.append('address', form.address);
-    formData.append('userName', form.name);
-  }
-
-  private appendRoleSpecificData(formData: FormData, form: ProfileForm): void {
+    // Process technician-specific data
     if (form.serviceType === 'فني') {
-      formData.append('role', '1');
-      formData.append('serviceType', form.service);
+      payload.serviceType = form.service;
+      if (form.previousworkname) payload.previousworkname = form.previousworkname;
       
-      if (form.previousworkname) {
-        formData.append('previousworkname', form.previousworkname);
+      if (form.previousworkimgs) {
+        const workImages = await this.getValidFiles(form.previousworkimgs);
+        payload.attachments = await Promise.all(
+          workImages.map(file => this.fileToBase64(file))
+        );
       }
-
-      if (form.previousworkimgs?.length) {
-        if (form.previousworkimgs.length > 0) {
-          formData.append('SSNFront_FilePath', form.previousworkimgs[0]); // Changed field name to match C#
-        }
-        if (form.previousworkimgs.length > 1) {
-          formData.append('SSNBack_FilePath', form.previousworkimgs[1]); // Changed field name to match C#
-        }
-        if (form.previousworkimgs.length > 2) {
-          formData.append('SSNBack_FilePath', form.previousworkimgs[2]); // Changed field name to match C#
-        }
-        if (form.previousworkimgs.length > 3) {
-          formData.append('SSNBack_FilePath', form.previousworkimgs[3]); // Changed field name to match C#
-        }
-      }
-    } else if (form.serviceType === 'عميل') {
-      formData.append('role', '0');
     }
+
+    return payload;
   }
 
-  private appendNationalIdImages(formData: FormData, nationalIdImages?: FileList): void {
-    if (nationalIdImages?.length) {
-      if (nationalIdImages.length > 0) {
-        formData.append('SSNFront_FilePath', nationalIdImages[0]); // Changed field name to match C#
-      }
-      if (nationalIdImages.length > 1) {
-        formData.append('SSNBack_FilePath', nationalIdImages[1]); // Changed field name to match C#
+  private getValidFiles(fileList: FileList): File[] {
+    const files: File[] = [];
+    // Proper FileList iteration
+    for (let i = 0; i < fileList.length; i++) {
+      const file = fileList[i];
+      if (file instanceof File) {
+        files.push(file);
       }
     }
+    return files;
+  }
+
+  private fileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = error => reject(error);
+      reader.readAsDataURL(file);
+    });
   }
 }
