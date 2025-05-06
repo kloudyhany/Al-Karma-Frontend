@@ -3,9 +3,9 @@ import { ComponentLoaderService } from '../technical-profile/ComponentLoaderServ
 import { ClientinfoComponent } from '../clientinfo/clientinfo.component';
 import { OfferClientrequestComponent } from '../offer-clientrequest/offer-clientrequest.component';
 import { RequestFormComponent } from '../request-form/request-form.component';
-import { RatingAllComponent } from '../rating-all/rating-all.component';
 import { ServiceConfirmationComponent } from '../service-confirmation/service-confirmation.component';
 import { OfferListComponent } from '../offer-list/offer-list.component';
+import { RatingClientComponent } from '../rating-client/rating-client.component';
 
 
 @Component({
@@ -28,7 +28,7 @@ constructor(private loaderService: ComponentLoaderService) {}
   ClientinfoComponent = ClientinfoComponent;
   OfferClientrequestComponent = OfferClientrequestComponent;
   RequestFormComponent = RequestFormComponent;
-  RatingAllComponent = RatingAllComponent;
+  RatingclientComponent = RatingClientComponent;
   ServiceConfirmationComponent = ServiceConfirmationComponent;
   OfferListComponent = OfferListComponent;
   
