@@ -152,7 +152,7 @@ export class RatingClientComponent implements OnInit {
         comment: this.form.value.comment
       
       };
-      localStorage.setItem('rating', JSON.stringify(payload));
+      document.cookie = `rating=${encodeURIComponent(JSON.stringify(payload))}; path=/;`;
       if (payload.role==='عميل')
       this.router.navigate(["clientprofile"]);
     else
