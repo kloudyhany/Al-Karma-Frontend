@@ -25,8 +25,8 @@ export class RegComponent {
       password: ['', [Validators.required,Validators.pattern(/^(?=(.*[a-z]))(?=(.*[A-Z]))(?=(.*\d))(?=(.*[@$!%*?&]))[A-Za-z\d@$!%*?&]{8,20}$/)]],
       confirmPassword: ['', [Validators.required, Validators.pattern(/^(?=(.*[a-z]))(?=(.*[A-Z]))(?=(.*\d))(?=(.*[@$!%*?&]))[A-Za-z\d@$!%*?&]{8,20}$/)]],
       service: [''],
-      previousworkname: [''],
-      previousworkimgs: [''],
+      // previousworkname: [''],
+      // previousworkimgs: [''],
       nationalIdImages: ['', Validators.required],
       phone: ['', [Validators.required, Validators.pattern(/^01[2,5,0,1]\d{8}$/)]], 
       whatsapp: ['', [Validators.required, Validators.pattern(/^01[2,5,0,1]\d{8}$/)]], 
@@ -62,11 +62,11 @@ export class RegComponent {
   updateValidators(serviceType: string): void {
     const address = this.profileForm.get('address');
     const service = this.profileForm.get('service');
-    const previousworkname = this.profileForm.get('previousworkname');
-    const previousworkimgs = this.profileForm.get('previousworkimgs');
+    // const previousworkname = this.profileForm.get('previousworkname');
+    // const previousworkimgs = this.profileForm.get('previousworkimgs');
 
     // Reset all validators and disable by default
-    [address, service, previousworkname, previousworkimgs].forEach(control => {
+    [address, service].forEach(control => {
       control?.clearValidators();
       control?.setValue('');
       control?.disable();
@@ -81,15 +81,15 @@ export class RegComponent {
       service?.enable();
       service?.setValidators([Validators.required]);
 
-      previousworkname?.enable();
-      previousworkname?.setValidators([Validators.required]);
+      // previousworkname?.enable();
+      // previousworkname?.setValidators([Validators.required]);
 
-      previousworkimgs?.enable();
-      previousworkimgs?.setValidators([Validators.required]);
+      // previousworkimgs?.enable();
+      // previousworkimgs?.setValidators([Validators.required]);
     }
 
     // Update validity
-    [address, service, previousworkname, previousworkimgs].forEach(control => {
+    [address, service].forEach(control => {
       control?.updateValueAndValidity();
     });
   }

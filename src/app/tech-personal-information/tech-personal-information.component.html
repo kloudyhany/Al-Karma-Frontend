@@ -12,7 +12,7 @@
             <label class="btn btn-sm btn-light border position-absolute bottom-0 end-0 rounded-circle"
               style="transform: translate(25%, 25%);">
               <i class="bi bi-camera"></i>
-              <input type="file" hidden (change)="saveProfilePicture()" accept="image/*">
+              <input type="file" hidden (change)="onPhotosSelected($event)" accept="image/*">
             </label>
           </div>
         </li>
@@ -26,10 +26,11 @@
           <div class="d-flex flex-column align-items-center gap-2">
             <div class="badge bg-secondary">رقم الهاتف: {{ user.phoneNumber }}</div>
             <div class="badge bg-success">البريد الإلكتروني: {{ user.email }}</div>
-            <div class="badge bg-info">عدد الخدمات: {{ user.serviceCount }}</div>
+            <div class="badge bg-info">عدد الخدمات المنجزة : {{ user.serviceCount }}</div>
+            <div class="badge bg-info">عدد الخدمات الملغية{{ user.serviceCount }}</div>
           </div>
         </li>
-        <li class="list-group-item text-center" style="min-height: 100px;">
+        <!-- <li class="list-group-item text-center" style="min-height: 100px;">
           <div class="d-flex flex-column align-items-center gap-3">
             <div class="badge bg-info fs-6 px-3 py-2">سابقة الأعمال: {{ user.perviouswork }}</div>
             <div class="d-flex flex-wrap justify-content-center gap-3 mt-3">
@@ -48,7 +49,7 @@
             </div>
         
           </div>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
