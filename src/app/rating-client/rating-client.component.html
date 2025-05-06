@@ -1,11 +1,9 @@
 <div class="ratings-wrapper" dir="rtl">
   <div class="section-title">{{ ratingCategory.title }}</div>
 
-  <!-- تكرار المعايير (المقاييس) التي سيتم تقييمها -->
   <div *ngFor="let criterion of ratingCategory.criteria" class="mb-4">
     <label class="form-label d-block mb-2 fw-bold">{{ criterion.label }}</label>
     <div class="star-rating">
-      <!-- تكرار النجوم للتقييم (من 1 إلى 5) -->
       <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
         <i class="bi"
            [ngClass]="{
@@ -18,15 +16,12 @@
     </div>
   </div>
 
-  <!-- نموذج التقييم -->
   <form [formGroup]="form" (ngSubmit)="submitRating()">
     <div class="mb-3">
       <label class="form-label fw-bold">أضف تعليقك (اختياري)</label>
       <textarea formControlName="comment" rows="4" class="form-control" placeholder="اكتب تعليقك هنا..."></textarea>
     </div>
 
-    <button class="submit-btn" type="submit" [disabled]="form.invalid">
-      إرسال التقييم
-    </button>
+    <button class="submit-btn" type="submit" [disabled]="form.invalid">إرسال التقييم</button>
   </form>
 </div>

@@ -18,11 +18,17 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, { username, password });
   }
 
+ 
+
   // Set authentication token
   setAuthToken(token: string): void {
     localStorage.setItem(this.authTokenKey, token);
   }
 
+  getUser() {
+    // Mock implementation, replace with actual logic
+    return { name: 'Technician Name', id: 123 };
+  }
   // Get authentication token
   getAuthToken(): string | null {
     return localStorage.getItem(this.authTokenKey);
@@ -34,27 +40,18 @@ export class AuthService {
     localStorage.removeItem(this.userRoleKey);
   }
 
-  // Set user role
-  setUserRole(role: 'client' | 'technician'): void {
-    localStorage.setItem(this.userRoleKey, role);
+  getUserRole(): 'فني' | 'عميل' | 'مزود خدمة' | 'ادمن' {
+    const role = localStorage.getItem('userRole');
+    return (role as any) || 'عميل'; // القيمة الافتراضية "عميل"
   }
 
-  // Get user role
-  getUserRole(): 'client' | 'technician' | null {
-    const role = localStorage.getItem(this.userRoleKey);
-    if (role === 'client' || role === 'technician') {
-      return role;
-    }
-    return null;
+  // حفظ الدور بعد تسجيل الدخول (اختياري)
+  setUserRole(role: 'فني' | 'عميل' | 'مزود خدمة' | 'ادمن'): void {
+    localStorage.setItem('userRole', role);
   }
 
-  // Safe fallback getter
-  getCurrentUserRole(): 'client' | 'technician' {
-    return this.getUserRole() || 'client'; // default to 'client' if not set
-  }
-
-  // Dummy method - replace with real user info logic if needed
-  getUser() {
-    return { name: 'John Doe', id: 1 }; // You may call /me endpoint here
+  // حذف الدور عند تسجيل الخروج
+  clearUserRole(): void {
+    localStorage.removeItem('userRole');
   }
 }

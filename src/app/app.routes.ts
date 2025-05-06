@@ -7,7 +7,6 @@ import { SupplierProfileComponent } from './supplier-profile/supplier-profile.co
 import { ClientServiceComponent } from './client-service/client-service.component';
 import { loginComponent } from './login/login.component';
 import { ServicesPageComponent } from './services-page/services-page.component';
-import { OfferListComponent } from './offer-list/offer-list.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
 import { RegComponent } from './reg/reg.component';
@@ -58,7 +57,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'transactions/:id',
+    path: 'transactions/id',
     component: TransactionDetailComponent,
     title: 'تفاصيل المعاملة',
   },
@@ -116,15 +115,14 @@ export const routes: Routes = [
   {
     path: 'service-confirmation',
     component: ServiceConfirmationComponent,
-    title: 'عرض سعر',
+    title: ' تاكيد الخدمة',
   },
  
-  {
-    path: 'client_service',
-    component: ClientServiceComponent,
-    title: ' خدمه العملاء',
-  },
-  { path: 'offers', component: OfferListComponent, title: ' الطلبات' },
+  // {
+  //   path: 'client_service',
+  //   component: ClientServiceComponent,
+  //   title: ' خدمه العملاء',
+  // },
   {
     path: 'profile',
     component: SupplierProfileComponent,
