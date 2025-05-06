@@ -4,14 +4,14 @@ import { ClientinfoComponent } from '../clientinfo/clientinfo.component';
 import { OfferClientrequestComponent } from '../offer-clientrequest/offer-clientrequest.component';
 import { RequestFormComponent } from '../request-form/request-form.component';
 import { ServiceConfirmationComponent } from '../service-confirmation/service-confirmation.component';
-import { OfferListComponent } from '../offer-list/offer-list.component';
 import { RatingClientComponent } from '../rating-client/rating-client.component';
 
 
 @Component({
   selector: 'app-client-rightside',
   imports: [],
-  templateUrl: './client-rightside.component.html',
+  templateUrl: 
+  './client-rightside.component.html',
   styleUrl: './client-rightside.component.css',
   template: `
    <button (click)="open(ClientinfoComponent)">Load Component ClientinfoComponent</button>
@@ -30,7 +30,6 @@ constructor(private loaderService: ComponentLoaderService) {}
   RequestFormComponent = RequestFormComponent;
   RatingclientComponent = RatingClientComponent;
   ServiceConfirmationComponent = ServiceConfirmationComponent;
-  OfferListComponent = OfferListComponent;
   
 
   open(component: any) {
