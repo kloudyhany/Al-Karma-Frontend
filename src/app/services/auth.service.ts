@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = 'https://localhost:7245/Auth';  // Replace with your actual API URL
+  private apiUrl = 'https://localhost:7245/Auth';  // URL of your API
   private authTokenKey = 'auth_token';
   private userRoleKey = 'user_role';
 
@@ -17,28 +17,29 @@ export class AuthService {
   login(username: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, { username, password });
   }
-
- 
-
-  // Set authentication token
-  setAuthToken(token: string): void {
-    localStorage.setItem(this.authTokenKey, token);
+  updatePassword(username: string, oldPassword: string, newPassword: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/updatePassword`, { username, oldPassword, newPassword });
   }
-
-  getUser() {
-    // Mock implementation, replace with actual logic
-    return { name: 'Technician Name', id: 123 };
+  // Register request
+  register(username: string, password: string, email: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/register`, { username, password, email });
   }
-  // Get authentication token
-  getAuthToken(): string | null {
-    return localStorage.getItem(this.authTokenKey);
+  GetRefreshToken(username: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/GetRefreshToken`, { username, password });
+  }
+  // Verify token request
+  RevokeRefreshToken(username: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/RevokeRefreshToken`, { username, password });
+  }
+  GenerateRefreshToken(username: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/GenerateRefreshToken`, { username, password });
   }
 
   // Remove authentication data
-  logout(): void {
-    localStorage.removeItem(this.authTokenKey);
-    localStorage.removeItem(this.userRoleKey);
-  }
+  // logout(): void {
+  //   localStorage.removeItem(this.authTokenKey);
+  //   localStorage.removeItem(this.userRoleKey);
+  // }
 
   getUserRole(): 'فني' | 'عميل' | 'مزود خدمة' | 'ادمن' {
     const role = localStorage.getItem('userRole');
@@ -51,7 +52,7 @@ export class AuthService {
   }
 
   // حذف الدور عند تسجيل الخروج
-  clearUserRole(): void {
-    localStorage.removeItem('userRole');
-  }
+  // clearUserRole(): void {
+  //   localStorage.removeItem('userRole');
+  // }
 }

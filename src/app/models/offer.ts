@@ -15,6 +15,32 @@ export interface Offer {
     serviceType?: number;
     userId?: number;
   }
+  export interface FinantialTransaction
+  {
+    id: number;
+    TransactionDate: string;
+    Amount: number;
+    offerId?: number;
+    transactionType: PaymentMethod;
+    offer?:Offer
+
+  }
+    export enum PaymentMethod{
+       Cash,
+       VodafoneCash,
+       InstaPay
+   }
+  
+
+  export interface OfferResponse {
+    TimeToFinish: string;  // ISO string
+    StartTime: string;
+    Price: number;         // enum int value (e.g. pricing tier or range)
+    OfferStatus: number;   // 0 = pending, etc.
+    Notes: string;
+    OfferDescription: string;  // base64 string
+    RequestID: number;
+  }
 export interface Service {
     id: number;
     name: string;

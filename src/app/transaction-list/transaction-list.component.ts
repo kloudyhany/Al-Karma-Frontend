@@ -26,7 +26,7 @@ export class TransactionListComponent implements OnInit {
   }
 
   loadTransactions(): void {
-    this.transactionService.getTransactions().subscribe(
+    this.transactionService.GetAllFinancialTransactions().subscribe(
       (data) => {
         this.transactions = data;
       },
@@ -36,9 +36,9 @@ export class TransactionListComponent implements OnInit {
     );
   }
   deleteTransaction(id: string): void {
-    this.transactionService.deleteTransaction(id).subscribe(
+    this.transactionService.deleteFinancialTransaction(id).subscribe(
       () => {
-        this.loadTransactions(); // Reload transactions after deletion
+        this.loadTransactions(); 
       },
       (error) => {
         console.error('Error deleting transaction:', error);
@@ -58,7 +58,6 @@ export class TransactionListComponent implements OnInit {
     }
   }
   getTransactionStatus(transaction: Transaction): string {
-    // Assuming the status is determined by the payment method and amount
     if (transaction.amount > 0) {
       return 'Success';
     } else if (transaction.amount < 0) {
@@ -68,12 +67,10 @@ export class TransactionListComponent implements OnInit {
     }
   }
   getTransactionDate(transaction: Transaction): string {
-    // Assuming the date is in ISO format and needs to be formatted
     const date = new Date(transaction.date);
-    return date.toLocaleDateString(); // Format as needed
+    return date.toLocaleDateString(); 
   }
   getTransactionType(transaction: Transaction): string {
-    // Assuming the type is determined by the payment method
     switch (transaction.paymentMethod) {
       case 'Cash':
         return 'Cash Transaction';
@@ -86,17 +83,14 @@ export class TransactionListComponent implements OnInit {
     }
   }
   getTransactionOffer(transaction: Transaction): string {
-    //  offer is determined by the transaction ID or some other logic
     const offer: Offer = { id: 1, title: 'Special Offer' }; 
     return offer.title; 
   }
-  getTransactionId(transaction: Transaction): string {
-    //  ID is a unique identifier for the transaction
-    return transaction.id;
+  getTransactionById(transaction: Transaction): string {
+    return transaction.id.toString(); 
   }
 
   viewTransaction(transaction: Transaction): void { 
-    // Logic to view transaction details
     alert(`Transaction Details:
     ID: ${transaction.id}
     Amount: ${transaction.amount}
