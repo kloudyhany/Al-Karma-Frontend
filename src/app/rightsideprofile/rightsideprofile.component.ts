@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ComponentLoaderService } from '../technical-profile/ComponentLoaderService';
 import { TechPersonalInformationComponent } from '../tech-personal-information/tech-personal-information.component';
@@ -13,7 +13,22 @@ import { ServicesPageComponent } from '../services-page/services-page.component'
   templateUrl: './rightsideprofile.component.html',
   styleUrls: ['./rightsideprofile.component.css']
 })
-export class RightsideprofileComponent {
+export class RightsideprofileComponent implements OnInit {
+    ngOnInit(): void {
+    this.sideBar();
+    }
+  
+    sideBar(){
+      const burger = document.querySelector('.hamburger-box') as HTMLElement;
+      const menu = document.querySelector('.js-nav')?.parentElement?.querySelector('.menu') as HTMLElement;
+      
+      if (burger && menu) {
+        burger.addEventListener('click', (e: MouseEvent) => {
+          burger.classList.toggle('active');
+          menu.classList.toggle('active');
+        });
+      }
+    }
   TechPersonalInformationComponent = TechPersonalInformationComponent;
   RequestFormComponent = RequestFormComponent;
   RatingclientComponent = RatingClientComponent;

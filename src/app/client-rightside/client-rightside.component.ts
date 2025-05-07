@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ComponentLoaderService } from '../technical-profile/ComponentLoaderService';
 import { ClientinfoComponent } from '../clientinfo/clientinfo.component';
 import { OfferClientrequestComponent } from '../offer-clientrequest/offer-clientrequest.component';
@@ -27,8 +27,23 @@ import{Router}from '@angular/router';
   `
 
 })
-export class ClientRightsideComponent {
+export class ClientRightsideComponent implements OnInit {
 constructor(private loaderService: ComponentLoaderService,private Router:Router) {}
+  ngOnInit(): void {
+  this.sideBar();
+  }
+
+  sideBar(){
+    const burger = document.querySelector('.hamburger-box') as HTMLElement;
+    const menu = document.querySelector('.js-nav')?.parentElement?.querySelector('.menu') as HTMLElement;
+    
+    if (burger && menu) {
+      burger.addEventListener('click', (e: MouseEvent) => {
+        burger.classList.toggle('active');
+        menu.classList.toggle('active');
+      });
+    }
+  }
   ClientinfoComponent = ClientinfoComponent;
   OfferClientrequestComponent = OfferClientrequestComponent;
   RequestFormComponent = RequestFormComponent;

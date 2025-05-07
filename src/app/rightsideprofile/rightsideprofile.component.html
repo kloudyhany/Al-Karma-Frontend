@@ -1,15 +1,52 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="container-fluid bg-dark text-white d-flex align-items-center justify-content-center min-vh-100" dir="rtl">
-    <div class="w-100" style="max-width: 500px;">
-       
-        <div class="side-menu">
-            <div class="main-btn">
-                <span>👤</span>
-                <span>الملف الشخصي للفني</span>
-              </div>
-            <button class="rounded-box" (click)="open(TechPersonalInformationComponent)">البيانات الشخصية</button>
-            <button class="rounded-box" (click)="open(RatingclientComponent)">التقييمات</button>
-            <button class="rounded-box" (click)="open(OfferClientrequestComponent)">خدمات مطلوبة</button>
-            <button class="rounded-box">تسجيل الخروج</button>
-          </div>
+  <div class="w-100" style="max-width: 500px;">
+     
+      <div class="side-menu">
+        
+<div class="super-container">
+    <div class="slide-container">
+      <div class="stripe toggle-nav js-nav" (click)="sideBar()">
+        <div class="hamburger-box" >
+          <div class="bun top"></div>
+          <div class="meat"></div>
+          <div class="bun bottom"></div>
+        </div>
+      </div>
+      <div class="nav-wrap">
+        <nav class="menu" style="padding: 1rem;">
+          <ul>
+              <li> 👤 الملف الشخصي للفني</li>
+              <li class="rounded-box" (click)="open(TechPersonalInformationComponent)">البيانات الشخصية</li>
+              <li class="rounded-box" (click)="open(RatingclientComponent)">التقييمات</li>
+              <li class="rounded-box" (click)="open(OfferClientrequestComponent)">خدمات مطلوبة</li>
+              <li class="rounded-box">تسجيل الخروج</li>
+          </ul>
+        </nav>
+      </div>
     </div>
+  </div>
+
+      </div>
+</div> 
 </div>
