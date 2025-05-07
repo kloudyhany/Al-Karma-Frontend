@@ -18,6 +18,7 @@ import { RequestsPageComponent } from './requests-page/requests-page.component';
 import { OfferClientrequestComponent } from './offer-clientrequest/offer-clientrequest.component';
 import { RightsideprofileComponent } from './rightsideprofile/rightsideprofile.component';
 import { RatingClientComponent } from './rating-client/rating-client.component';
+import { OffersListComponent } from './offers-list/offers-list.component';
 
 
 
@@ -132,6 +133,11 @@ export const routes: Routes = [
     path: 'tchnicaloffer',
     component: OfferClientrequestComponent,
     title: '  عرض سعر',
+  },
+  {
+    path: 'offers',
+    component: OffersListComponent,
+    title: '   قائمة العروض',
   },
 
   {

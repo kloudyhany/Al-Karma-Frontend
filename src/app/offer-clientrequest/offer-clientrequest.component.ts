@@ -30,9 +30,9 @@ export class OfferClientrequestComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const user = this.authService.getUser();
-    this.technicianName = user.name;
-    this.technicianId = user.id.toString();
+    // const user = this.authService.getUser();
+    // this.technicianName = user.name;
+    // this.technicianId = user.id.toString();
 
     // جلب الطلبات المفتوحة
     // هنا يمكن استدعاء خدمة لعرض الطلبات المفتوحة
@@ -67,6 +67,14 @@ export class OfferClientrequestComponent implements OnInit {
     } else {
       alert('الرجاء إدخال جميع البيانات');
     }
+  }
+  getStatusLabel(status: string): string {
+    const statusLabels: { [key: string]: string } = {
+      active: 'نشط',
+      expired: 'منتهي',
+      pending: 'قيد الانتظار'
+    };
+    return statusLabels[status] || 'غير معروف';
   }
 
   resetForm() {

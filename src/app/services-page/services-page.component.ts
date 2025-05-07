@@ -3,9 +3,7 @@ import { OnInit } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RouterLink } from '@angular/router';
-import { OrderdServiceService} from '../services/orderd-service.service'; 
 import { ServicesService } from '../services/services.service'; 
 import { AuthService } from '../services/auth.service'; // 
 
@@ -19,7 +17,7 @@ interface Service {
 @Component({
   selector: 'app-services-page',
   imports: [BrowserModule, FormsModule, NgbModalModule, RouterLink],
-  providers: [OrderdServiceService, ServicesService],
+  providers: [ServicesService],
   standalone: true,
   templateUrl: './services-page.component.html',
   styleUrl: './services-page.component.css'
@@ -48,7 +46,6 @@ export class ServicesPageComponent implements OnInit {
 
   constructor(
     private serviceService: ServicesService,
-    private orderService: OrderdServiceService,
     private authService: AuthService
   ) {}
 
@@ -61,7 +58,6 @@ export class ServicesPageComponent implements OnInit {
     });
 
     if (this.userRole === 'Technician') {
-      this.loadMyOrders();
     }
   }
 
@@ -76,9 +72,9 @@ export class ServicesPageComponent implements OnInit {
     alert(`طلبت خدمة: ${service.name}`);
   }
 
-  loadMyOrders() {
-    this.orderService.getmyOrders().subscribe(data => {
-      this.myOrders = data;
-    });
-  }
+  // loadMyOrders() {
+  //   this.getall.getmyOrders().subscribe(data => {
+  //     this.myOrders = data;
+  //   });
+  // }
 }

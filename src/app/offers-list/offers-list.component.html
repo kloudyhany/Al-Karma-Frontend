@@ -1,0 +1,22 @@
+<div class="container py-4" dir="rtl">
+    <h2 class="mb-4">العروض</h2>
+  
+    <div *ngIf="loading">جاري التحميل...</div>
+  
+    <div *ngIf="!loading && offers.length === 0">
+      لا توجد عروض متاحة
+    </div>
+  
+    <div *ngFor="let offer of offers" class="card mb-3 p-3 shadow-sm rounded">
+      <div><strong>السعر:</strong> {{ offer.Price }} ج.م</div>
+      <div><strong>حالة العرض:</strong> {{ getStatusLabel(offer.OfferStatus) }}</div>
+      <div><strong>بداية الوقت:</strong> {{ offer.StartTime | date: 'short' }}</div>
+      <div><strong>نهاية الوقت:</strong> {{ offer.TimeToFinish | date: 'short' }}</div>
+      <div><strong>ملاحظات:</strong> {{ offer.Notes }}</div>
+      <!-- <div *ngIf="offer.OfferDescription">
+        <strong>الوصف:</strong>
+        <button class="btn btn-link p-0" (click)="downloadDescription(offer.OfferDescription)">تحميل</button>
+      </div> -->
+    </div>
+  </div>
+  

@@ -30,6 +30,7 @@ constructor(private loaderService: ComponentLoaderService) {}
   RequestFormComponent = RequestFormComponent;
   RatingclientComponent = RatingClientComponent;
   ServiceConfirmationComponent = ServiceConfirmationComponent;
+  OfferListComponent = OfferClientrequestComponent; 
   
 
   open(component: any) {
