@@ -13,6 +13,9 @@
       <div><strong>بداية الوقت:</strong> {{ offer.StartTime | date: 'short' }}</div>
       <div><strong>نهاية الوقت:</strong> {{ offer.TimeToFinish | date: 'short' }}</div>
       <div><strong>ملاحظات:</strong> {{ offer.Notes }}</div>
+      <div>
+        <button class="btn btn-primary" (click)="goBackToProfile()">رجوع</button>
+      </div>
       <!-- <div *ngIf="offer.OfferDescription">
         <strong>الوصف:</strong>
         <button class="btn btn-link p-0" (click)="downloadDescription(offer.OfferDescription)">تحميل</button>

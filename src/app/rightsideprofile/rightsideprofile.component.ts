@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ComponentLoaderService } from '../technical-profile/ComponentLoaderService';
 import { TechPersonalInformationComponent } from '../tech-personal-information/tech-personal-information.component';
 import { RequestFormComponent } from '../request-form/request-form.component';
@@ -19,11 +20,16 @@ export class RightsideprofileComponent {
   ServiceConfirmationComponent = ServiceConfirmationComponent;
   OfferClientrequestComponent = OfferClientrequestComponent;
   ServicesPageComponent = ServicesPageComponent;
-
-  constructor(private loaderService: ComponentLoaderService) {}
+  constructor(private loaderService: ComponentLoaderService, private router: Router) {}
 
   open(component: any) {
     console.log('Opening:', component.name);
     this.loaderService.loadComponent(component);
+  }
+
+  logout() {
+    console.log('Logging out...');
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }

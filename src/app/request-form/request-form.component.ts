@@ -3,57 +3,58 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsModule } from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
-import { RequestService } from '../services/request.service'; 
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router'; 
+import { ReqsignalrService } from '../reqsignalr.service';
 
 @Component({
   selector: 'app-request-form',
-  imports: [FormsModule, CommonModule,RouterLink],
+  imports: [FormsModule, CommonModule],
   standalone: true,
   templateUrl: './request-form.component.html',
   styleUrl: './request-form.component.css'
 })
 export class RequestFormComponent implements OnInit {
-  // Form group for the request form
-  allRequests: any[] = [];
-  filteredRequests: any[] = [];
-  selectedStatus: string = 'الكل';
-  loading = true;
+  constructor(private http: HttpClient, private fb: FormBuilder, private reqsignalrService: ReqsignalrService) {
 
-  constructor(private requestService: RequestService) {}
+  }
+  private router = inject(Router);
+  request = {
+    serviceType: '',
+    description: '',
+    location: '',
+    serviceTime: ''
+  };
 
-  ngOnInit() {
-    this.loadRequests();
+  ngOnInit(): void {
+    this.reqsignalrService.connectionstart(); 
   }
 
-  loadRequests() {
-    this.loading = true;
-    this.requestService.getClientRequests().subscribe({
-      next: (data) => {
-        this.allRequests = data;
-        this.applyFilter();
-        this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
-      }
+  // onFileSelected(event: any) {
+    
+  // }
+
+  onSubmit() {
+    const formData = new FormData();
+    formData.append('serviceType', this.request.serviceType);
+    formData.append('description', this.request.description);
+    formData.append('location', this.request.location);
+    formData.append('serviceTime', this.request.serviceTime);
+    const clientId = 'someClientIdValue'; 
+    localStorage.setItem('clientId', clientId);
+    if (clientId) {
+      formData.append('clientId', clientId);
+    }
+
+    this.http.post('/api/requests', formData).subscribe(response => {
+      console.log('Request saved successfully:', response);
+    }, error => {
+      console.error('Error saving request:', error);
     });
-  }
+    this.router.navigate(['/myrequests']); 
+    console.log(this.request);
+    localStorage.setItem('requestData', JSON.stringify(this.request));
+    this.reqsignalrService.sendMessage(); 
 
-  applyFilter() {
-    if (this.selectedStatus === 'الكل') {
-      this.filteredRequests = this.allRequests;
-    } else {
-      this.filteredRequests = this.allRequests.filter(r => r.status === this.selectedStatus);
-    }
-  }
-
-  deleteRequest(id: number) {
-    if (confirm('هل أنت متأكد من حذف هذا الطلب؟')) {
-      this.requestService.deleteRequest(id).subscribe(() => {
-        this.allRequests = this.allRequests.filter(r => r.id !== id);
-        this.applyFilter();
-      });
-    }
+    this.reqsignalrService.onreceiveOffer(); 
   }
 }

@@ -22,8 +22,7 @@ export class OffersListComponent implements OnInit {
   }
 
   loadOffers() {
-    if (this.offers.length > 0) {
-
+    
     
     const savedRequest = localStorage.getItem('savedRequest');
     if (savedRequest) {
@@ -43,13 +42,6 @@ export class OffersListComponent implements OnInit {
       }
     });
   }
-  else{alert("لا توجد طلبات بعد");
-
-    window.history.back();
-
-  } 
-
-    }
   getStatusLabel(status: string): string {
     const statusLabels: { [key: string]: string } = {
       active: 'نشط',
@@ -58,8 +50,8 @@ export class OffersListComponent implements OnInit {
     };
     return statusLabels[status] || 'غير معروف';
   }
-  BackToProfile() {
-    window.history.back(); // Go back to the previous page  
+  goBackToProfile() {
+    window.history.back(); 
   }
 
 }

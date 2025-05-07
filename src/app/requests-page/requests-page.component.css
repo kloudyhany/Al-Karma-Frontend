@@ -1,0 +1,79 @@
+/* Request Tabs */
+.nav-pills .nav-link {
+    border-radius: 2rem;
+    padding: 0.6rem 1.5rem;
+    font-weight: 500;
+    background-color: #f8f9fa;
+    color: #df8b0e;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .nav-pills .nav-link.active {
+    background-color: #202bc4;
+    color: rgb(8, 199, 224);
+    font-weight: 600;
+  }
+  .mb-4 text-center {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+
+  }
+  
+  .card {
+    border: none;
+    background-color: #ffffff;
+    border-radius: 1.5rem;
+    transition: box-shadow 0.3s ease;
+  }
+.card {
+    color: white;
+}
+  .card:hover {
+    box-shadow: 0 6px 20px rgba(134, 26, 26, 0.08)
+    , 0 6px 20px rgba(134, 26, 26, 0.08);
+
+    }
+  
+  /* Request Badge */
+  .badge {
+    font-size: 0.9rem;
+    border-radius: 1rem;
+  }
+  
+  .badge.in-progress {
+    background-color: #ffc107;
+    color: #1a65af;
+  }
+  
+  .badge.completed {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  
+  .badge.cancelled {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  /* Buttons */
+  .btn-outline-primary {
+    border-radius: 1.2rem;
+    padding: 0.3rem 1rem;
+  }
+  
+  .btn-danger {
+    border-radius: 1.2rem;
+    padding: 0.3rem 1rem;
+  }
+  
+  /* RTL support */
+  [dir='rtl'] .card {
+    text-align: right;
+  }
+  

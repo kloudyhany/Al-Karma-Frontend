@@ -19,6 +19,7 @@ import { OfferClientrequestComponent } from './offer-clientrequest/offer-clientr
 import { RightsideprofileComponent } from './rightsideprofile/rightsideprofile.component';
 import { RatingClientComponent } from './rating-client/rating-client.component';
 import { OffersListComponent } from './offers-list/offers-list.component';
+import { RequestDetailsComponent } from './client/pages/request-details/request-details.component';
 
 
 
@@ -80,16 +81,17 @@ export const routes: Routes = [
     component: RatingClientComponent,
     title: '   تقييم  العميل',
   },
-  {
-    path: 'client_requests',
-    component: RequestFormComponent,
-    title: 'طلبات الخدمة',
-  },
+ 
  
   {
     path: 'requests',
     component: RequestFormComponent,
     title: 'طلبات الخدمة',
+  },
+  {
+    path: 'RequestDetails',
+    component: RequestDetailsComponent,
+    title: ' تفاصيل الطلب',
   },
   {
     path: 'myrequests',

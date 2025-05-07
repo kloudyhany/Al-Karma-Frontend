@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Offer, Order } from '../models/offer';
 import { RequestService } from '../services/request.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule, NgClass } from '@angular/common';
+import { Request } from '../models/offer'; 
+
+
+
+
 
 
 @Component({
@@ -12,69 +16,87 @@ import { CommonModule, NgClass } from '@angular/common';
   styleUrl: './requests-page.component.css'
 })
 export class RequestsPageComponent implements OnInit {
-  requests: Order[] = [];
-  filteredRequests: Order[] = [];
-  selectedTab: string = 'all';
+  selectedTab: 'all' | 'inProgress' | 'completed' | 'cancelled' = 'all';
+  allRequests: Request[] = [];
+  filteredRequests: Request[] = [];
 
-  constructor(private requestService: RequestService) {}
+  constructor(
+    private router: Router,
+    private requestsService: RequestService
+  ) {}
 
   ngOnInit(): void {
     this.loadRequests();
   }
 
+  // Fetch requests from the API
   loadRequests(): void {
-    this.requestService.getAvailableRequests().subscribe({
-      next: (data: Offer[]) => {
-        this.requests = data.map(offer => ({
-          id: offer.id,
-          serviceType: offer.serviceType ?? 0,
-          userId: offer.userId ?? 0,
-          status: offer.status,
-          details: offer.details,
-          createdAt: offer.createdAt ? new Date(offer.createdAt) : new Date(),
-          price: offer.price ?? 0,
-        }));
+    this.requestsService.getAvailableRequests().subscribe(
+      (data: Request[]) => {
+        this.allRequests = data;
         this.filterRequests();
       },
-      error: (error) => {
-        console.error('فشل في تحميل الطلبات:', error);
+      (error) => {
+        console.error('Error fetching requests:', error);
+        // Handle error (e.g., show a notification or fallback)
       }
-    });
+    );
   }
-  
 
-  setTab(tab: string): void {
+  // Set the selected tab and filter the requests accordingly
+  setTab(tab: 'all' | 'inProgress' | 'completed' | 'cancelled'): void {
     this.selectedTab = tab;
     this.filterRequests();
   }
 
+  // Filter requests based on the selected tab
   filterRequests(): void {
     if (this.selectedTab === 'all') {
-      this.filteredRequests = this.requests;
+      this.filteredRequests = this.allRequests;
     } else {
-      this.filteredRequests = this.requests.filter(
-        req => req.status === this.selectedTab
+      this.filteredRequests = this.allRequests.filter(
+        req => {
+          const statusMap: { [key: string]: string } = {
+            inProgress: 'Pending',
+            completed: 'Accepted',
+            cancelled: 'Rejected'
+          };
+          return statusMap[this.selectedTab] === req.status;
+        }
       );
     }
   }
 
+  // Get the label for each request status
   getStatusLabel(status: string): string {
     switch (status) {
-      case 'inProgress': return 'قيد التنفيذ';
-      case 'completed': return 'مكتملة';
-      case 'cancelled': return 'ملغاة';
-      default: return 'غير معروف';
+      case 'inProgress':
+        return 'قيد التنفيذ';
+      case 'completed':
+        return 'مكتملة';
+      case 'cancelled':
+        return 'ملغية';
+      default:
+        return 'غير معروف';
     }
   }
 
+  // Get the CSS class for each status to style the badges
   getStatusClass(status: string): string {
     switch (status) {
-      case 'inProgress': return 'bg-warning text-dark';
-      case 'completed': return 'bg-success';
-      case 'cancelled': return 'bg-danger';
-      default: return 'bg-secondary';
+      case 'inProgress':
+        return 'badge in-progress';
+      case 'completed':
+        return 'badge completed';
+      case 'cancelled':
+        return 'badge cancelled';
+      default:
+        return 'badge bg-secondary text-white';
     }
   }
+  redirectToRequestPage(): void {
+    this.router.navigate(['/myrequests']);
+  
   }
-
+}
 

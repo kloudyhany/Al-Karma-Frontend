@@ -1,4 +1,4 @@
-.container {
+/* .container {
     max-width: 600px;
     margin: 20px auto;
   }
@@ -16,4 +16,95 @@
     cursor: pointer;
     margin-top: 10px;
    margin-right: 180px;
+  } */
+   /* Garo-like styling for طلباتي page */
+:host {
+  direction: rtl;
+  font-family: 'Cairo', sans-serif;
+}
+
+.container {
+  max-width: 900px;
+}
+
+h3 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #333;
+}
+
+label {
+  font-weight: 500;
+}
+
+.form-select {
+  border-radius: 0.75rem;
+  border: 1px solid #ced4da;
+  padding: 0.5rem 1rem;
+}
+
+.card {
+  border: none;
+  border-radius: 1rem;
+  transition: transform 0.2s;
+  background-color: #fff;
+}
+
+.card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.card-body {
+  padding: 1.25rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  color: #004085;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  font-size: 0.95rem;
+}
+
+.btn-outline-primary,
+.btn-outline-danger {
+  border-radius: 0.5rem;
+  min-width: 80px;
+}
+
+img.rounded {
+  object-fit: cover;
+  border-radius: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+img.rounded:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+/* Status color tweaks */
+.text-success {
+  color: #28a745 !important;
+}
+.text-warning {
+  color: #ffc107 !important;
+}
+.text-danger {
+  color: #dc3545 !important;
+}
+
+/* Responsive spacing tweaks */
+@media (max-width: 576px) {
+  .card-title {
+    font-size: 1.1rem;
   }
+
+  .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.85rem;
+  }
+}

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Offer } from '../models/offer';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -12,17 +13,17 @@ export class RequestService {
   private apiUrl = 'https://localhost:7245/api/Request'; 
   // private baseUrl = 'https://localhost:7245/api'; // Add base URL for other endpoints
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private router:Router) { }
 
   // //  الحصول على جميع الطلبات
   // getMyRequests(): Observable<Offer[]> {
   //   return this.http.get<Offer[]>(`${this.apiUrl}/my`);
   // }
 
-  // //  الحصول على طلب معين
-  // getRequestById(id: number): Observable<Offer> {
-  //   return this.http.get<Offer>(`${this.apiUrl}/${id}`);
-  // }
+  getRequestById(id: number): Observable<Offer> {
+    return this.http.get<Offer>(`${this.apiUrl}/${id}`);
+  }
+  
 
   // //  إضافة طلب جديد
   // createRequest(request: Offer): Observable<Offer> {
@@ -81,5 +82,10 @@ export class RequestService {
   // Ratings
   addRating(ratingData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/ratings`, ratingData);
+  }
+  logout() {
+    console.log('تسجيل الخروج...');
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }

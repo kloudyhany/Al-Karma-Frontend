@@ -1,1 +1,42 @@
-<p>request-details works!</p>
+<div class="container my-4" *ngIf="!loading && request">
+    <h3>تفاصيل الطلب رقم {{ request.id }}</h3>
+  
+    <div class="card mt-3 shadow-sm">
+      <div class="card-body">
+        <p><strong>نوع الخدمة:</strong> {{ request.serviceType }}</p>
+        <p><strong>الوصف:</strong> {{ request.description }}</p>
+        <p><strong>الموقع:</strong> {{ request.location }}</p>
+        <p><strong>تاريخ التنفيذ:</strong> {{ request.preferredDate | date:'medium' }}</p>
+        <p>
+          <strong>الحالة:</strong>
+          <span [ngClass]="{
+            'text-success': request.status === 'مقبول',
+            'text-warning': request.status === 'قيد المراجعة',
+            'text-danger': request.status === 'مرفوض'
+          }">
+            {{ request.status }}
+          </span>
+        </p>
+  
+        <div *ngIf="request.images?.length">
+          <strong>الصور المرفقة:</strong>
+          <div class="d-flex gap-2 flex-wrap my-2">
+            <img *ngFor="let img of request.images"
+                 [src]="img"
+                 width="120"
+                 height="120"
+                 class="rounded border"
+                 alt="صورة">
+          </div>
+        </div>
+  
+        <a routerLink="/my-requests" class="btn btn-outline-secondary mt-3">رجوع إلى طلباتي</a>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="loading" class="text-center my-5">
+    <div class="spinner-border" role="status"></div>
+    <p>جاري تحميل تفاصيل الطلب...</p>
+  </div>
+  

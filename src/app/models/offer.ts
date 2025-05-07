@@ -50,7 +50,7 @@ export interface Service {
     imageUrl: string;
     offers: Offer[]; 
 }
-export interface Order {
+export interface Request {
   id: number;
   serviceType: number;
   userId: number;
