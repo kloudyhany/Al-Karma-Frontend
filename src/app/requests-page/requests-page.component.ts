@@ -23,7 +23,7 @@ export class RequestsPageComponent implements OnInit {
   }
 
   loadRequests(): void {
-    this.requestService.getMyRequests().subscribe({
+    this.requestService.getAvailableRequests().subscribe({
       next: (data: Offer[]) => {
         this.requests = data.map(offer => ({
           id: offer.id,

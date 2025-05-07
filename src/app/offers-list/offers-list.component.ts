@@ -22,6 +22,14 @@ export class OffersListComponent implements OnInit {
   }
 
   loadOffers() {
+    if (this.offers.length > 0) {
+
+    
+    const savedRequest = localStorage.getItem('savedRequest');
+    if (savedRequest) {
+      const request = JSON.parse(savedRequest);
+      console.log('Loaded request:', request);
+    }
     this.loading = true;
     const technicianId = 'someTechnicianId'; 
     this.offersService.getMyOffers(technicianId).subscribe({
@@ -35,6 +43,13 @@ export class OffersListComponent implements OnInit {
       }
     });
   }
+  else{alert("لا توجد طلبات بعد");
+
+    window.history.back();
+
+  } 
+
+    }
   getStatusLabel(status: string): string {
     const statusLabels: { [key: string]: string } = {
       active: 'نشط',
@@ -42,6 +57,9 @@ export class OffersListComponent implements OnInit {
       pending: 'قيد الانتظار'
     };
     return statusLabels[status] || 'غير معروف';
+  }
+  BackToProfile() {
+    window.history.back(); // Go back to the previous page  
   }
 
 }

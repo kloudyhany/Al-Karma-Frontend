@@ -1,4 +1,4 @@
-
+<!-- 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
 <div class="container-fluid bg-dark text-white d-flex align-items-center justify-content-center vh-100" dir="rtl">
@@ -54,4 +54,60 @@
       <button type="submit" class="btn btn-link text-warning" class="order">إرسال الطلب</button>
     </form>
   </div>
-</div>
+</div> -->
+<div class="container my-4">
+  <h3 class="mb-3">طلباتي</h3>
+
+  <!-- فلترة -->
+  <div class="mb-3">
+    <label class="me-2">تصفية حسب الحالة:</label>
+    <select class="form-select w-auto d-inline-block"
+            [(ngModel)]="selectedStatus"
+            (change)="applyFilter()">
+      <option value="الكل">الكل</option>
+      <option value="قيد المراجعة">قيد المراجعة</option>
+      <option value="مقبول">مقبول</option>
+      <option value="مرفوض">مرفوض</option>
+    </select>
+  </div>
+
+  <div *ngIf="loading">جاري التحميل...</div>
+
+  <div *ngIf="!loading && filteredRequests.length === 0" class="alert alert-info">
+    لا توجد طلبات.
+  </div>
+
+  <div class="row" >
+    <div class="col-md-6 mb-4" *ngFor="let request of filteredRequests">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ request.serviceType }}</h5>
+          <p class="card-text text-muted">{{ request.description }}</p>
+          <p><strong>الموقع:</strong> {{ request.location }}</p>
+          <p><strong>التاريخ:</strong> {{ request.preferredDate | date:'medium' }}</p>
+          <p>
+            <strong>الحالة:</strong>
+            <span [ngClass]="{
+              'text-success': request.status === 'مقبول',
+              'text-warning': request.status === 'قيد المراجعة',
+              'text-danger': request.status === 'مرفوض'
+            }">
+              {{ request.status }}
+            </span>
+          </p>
+          </div>
+
+          <!-- أزرار الإجراءات -->
+          <div class="mt-3 d-flex justify-content-between">
+            <button class="btn btn-outline-primary btn-sm" [routerLink]="['/my-requests', request.id]">
+              التفاصيل
+            </button>
+            <button class="btn btn-outline-danger btn-sm" (click)="deleteRequest(request.id)">
+              حذف
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
