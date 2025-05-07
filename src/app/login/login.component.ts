@@ -47,6 +47,7 @@ export class loginComponent {
   }
 
   onSubmit(): void {
+    
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       alert('يرجى تعبئة جميع الحقول.');
@@ -63,11 +64,9 @@ export class loginComponent {
           
           const token = response.value?.token;
           const user = response.value?.userName;
-          //const refreshToken = response.value?.refreshToken;
           
           if (token && user) {
             localStorage.setItem('BackData', JSON.stringify(res));
-            //localStorage.setItem('LoginData', JSON.stringify());
   
             alert('تم تسجيل الدخول بنجاح!');
   

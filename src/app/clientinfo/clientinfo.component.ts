@@ -55,7 +55,7 @@ export class ClientinfoComponent {
   }
 
   loadUserFromLocalStorage(): void {
-    const userData = localStorage.getItem('user');
+    const userData = localStorage.getItem('BackData');
     if (userData) {
       this.user = JSON.parse(userData);
       this.imageUrl = this.user.imageUrl || 'assets/default-user.png';
