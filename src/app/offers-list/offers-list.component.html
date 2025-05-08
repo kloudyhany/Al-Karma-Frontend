@@ -13,6 +13,7 @@
       <div><strong>بداية الوقت:</strong> {{ offer.StartTime | date: 'short' }}</div>
       <div><strong>نهاية الوقت:</strong> {{ offer.TimeToFinish | date: 'short' }}</div>
       <div><strong>ملاحظات:</strong> {{ offer.Notes }}</div>
+      <button class="btn btn-danger" (click)="canceloffer(offer)">الغاء العرض</button>
       <div>
         <button class="btn btn-primary" (click)="goBackToProfile()">رجوع</button>
       </div>

@@ -9,43 +9,90 @@
       </span>
     </div>
 
-    <form (ngSubmit)="onSubmit()" #requestForm="ngForm">
-  
-      <div class="form-group">
+    <form #requestForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+
+      <!-- Service Type -->
+      <div class="form-group mb-3">
         <label for="serviceType">نوع الخدمة</label>
-        <select id="serviceType" class="form-control mt-2" [(ngModel)]="request.serviceType" name="serviceType" required placeholder="اختر نوع الخدمة">
-            <option value="" disabled selected>اختر نوع الخدمة</option>
-            <option value="سباكه">سباكة</option>
-            <option value="كهرباء">كهرباء</option>
-            <option value="نجارة">نجارة</option>
-            <option value="تكييف">تكييف</option>
-            <option value="تنظيف">تنظيف</option>
-            <option value="دهان">دهان</option>
-            <option value="عماله عاديه">عماله عاديه</option>
-            <option value="مباني">مباني</option>
-            <option value="العزل">العزل</option>
-            <option value="جيبسون بورد">جيبسن بورد</option>
-            <option value="الومينتال">الومينتال</option>
-            <option value="حداده كريتال">حداده كريتال</option>
+        <select
+          id="serviceType"
+          class="form-control mt-2"
+          [(ngModel)]="request.serviceType"
+          name="serviceType"
+          required
+          #serviceType="ngModel">
+          <option value="" disabled selected>اختر نوع الخدمة</option>
+          <option value="سباكه">سباكة</option>
+          <option value="كهرباء">كهرباء</option>
+          <option value="نجارة">نجارة</option>
+          <option value="تكييف">تكييف</option>
+          <option value="تنظيف">تنظيف</option>
+          <option value="دهان">دهان</option>
+          <option value="عماله عاديه">عماله عاديه</option>
+          <option value="مباني">مباني</option>
+          <option value="العزل">العزل</option>
+          <option value="جيبسون بورد">جيبسن بورد</option>
+          <option value="الومينتال">الومينتال</option>
+          <option value="حداده كريتال">حداده كريتال</option>
         </select>
+        <div class="text-danger mt-1" *ngIf="serviceType.invalid && serviceType.touched">
+          <i class="fas fa-exclamation-circle"></i> اختيار نوع الخدمة مطلوب.
+        </div>
       </div>
-  
-      <div class="form-group">
+
+      <!-- Description -->
+      <div class="form-group mb-3">
         <label for="description">وصف المشكلة</label>
-        <textarea id="description" class="form-control mt-2" [(ngModel)]="request.description" name="description" required required placeholder="اوصف العطل او الشغل اللي هتعمله"></textarea>
+        <textarea
+          id="description"
+          class="form-control mt-2"
+          [(ngModel)]="request.description"
+          name="description"
+          required
+          minlength="10"
+          #description="ngModel"
+          placeholder="اوصف العطل او الشغل اللي هتعمله"></textarea>
+        <div class="text-danger mt-1" *ngIf="description.invalid && description.touched">
+          <i class="fas fa-exclamation-circle"></i>
+          الوصف مطلوب ويجب أن لا يقل عن 10 أحرف.
+        </div>
       </div>
-  
-      <div class="form-group">
+
+      <!-- Location -->
+      <div class="form-group mb-3">
         <label for="location">العنوان</label>
-        <input type="text" id="location" class="form-control mt-2" [(ngModel)]="request.location" name="location" required />
+        <input
+          type="text"
+          id="location"
+          class="form-control mt-2"
+          [(ngModel)]="request.location"
+          name="location"
+          required
+          #location="ngModel" />
+        <div class="text-danger mt-1" *ngIf="location.invalid && location.touched">
+          <i class="fas fa-exclamation-circle"></i> العنوان مطلوب.
+        </div>
       </div>
-  
-      <div class="form-group">
+
+      <!-- Service Time -->
+      <div class="form-group mb-4">
         <label for="serviceTime">وقت الخدمة المطلوب</label>
-        <input type="datetime-local" id="serviceTime" class="form-control mt-2" [(ngModel)]="request.serviceTime" name="serviceTime" required />
+        <input
+          type="datetime-local"
+          id="serviceTime"
+          class="form-control mt-2"
+          [(ngModel)]="request.serviceTime"
+          name="serviceTime"
+          required
+          #serviceTime="ngModel" />
+        <div class="text-danger mt-1" *ngIf="serviceTime.invalid && serviceTime.touched">
+          <i class="fas fa-exclamation-circle"></i> وقت الخدمة مطلوب.
+        </div>
       </div>
-  
-      <button type="submit" class="btn btn-link text-warning order">إرسال الطلب</button>
+
+      <button type="submit" class="btn btn-warning w-100" [disabled]="requestForm.invalid">
+        <i class="fas fa-paper-plane"></i> إرسال الطلب
+      </button>
     </form>
   </div>
 </div>

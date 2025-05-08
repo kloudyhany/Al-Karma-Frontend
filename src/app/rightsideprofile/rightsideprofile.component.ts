@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ComponentLoaderService } from '../technical-profile/ComponentLoaderService';
 import { TechPersonalInformationComponent } from '../tech-personal-information/tech-personal-information.component';
@@ -13,10 +13,12 @@ import { ServicesPageComponent } from '../services-page/services-page.component'
   templateUrl: './rightsideprofile.component.html',
   styleUrls: ['./rightsideprofile.component.css']
 })
-export class RightsideprofileComponent implements OnInit {
+export class RightsideprofileComponent implements OnInit ,AfterViewInit{
     ngOnInit(): void {
     this.sideBar();
     }
+    ngAfterViewInit(): void {
+this.open(TechPersonalInformationComponent);    }
   
     sideBar(){
       const burger = document.querySelector('.hamburger-box') as HTMLElement;
@@ -44,7 +46,7 @@ export class RightsideprofileComponent implements OnInit {
 
   logout() {
     console.log('Logging out...');
-    localStorage.removeItem('token');
+    localStorage.removeItem('BackData');
     this.router.navigate(['/login']);
   }
 }

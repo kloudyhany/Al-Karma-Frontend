@@ -1,7 +1,8 @@
+import { Offer } from './../models/transaction';
 import { Component, OnInit } from '@angular/core';
 import { OfferService } from '../services/offer.service';
 import { CommonModule } from '@angular/common';
-
+import { OffersignalrService } from '../offersignalr.service';
 
 
 @Component({
@@ -15,10 +16,48 @@ export class OffersListComponent implements OnInit {
   offers: any[] = [];
   loading = false;
 
-  constructor(private offersService: OfferService) {}
+  constructor(private offersService: OfferService , private offersignalr : OffersignalrService) {}
 
   ngOnInit(): void {
     this.loadOffers();
+    this.acceptOffer(1); // Pass a valid offerId as an argument
+    this.completeOffer(1); 
+
+  }
+  completeOffer(offerId: number) {
+    this.offersignalr.onOfferCompleted(offerId).subscribe({
+      next: (response) => {
+        console.log('Offer completed successfully:', response);
+        this.offersignalr.receivereview() ;
+  
+      },
+      error: (err) => {
+        console.error('Error completing offer:', err);
+      }
+    });
+  }
+  acceptOffer(offerId: number) {
+    this.offersignalr.onOfferAccepted(offerId).subscribe({
+      next: (response) => {
+        console.log('Offer accepted successfully:', response);
+        alert('تم قبول العرض بنجاح!');
+        
+      },
+      error: (err) => {
+        console.error('Error accepting offer:', err);
+      }
+    });
+  }
+  canceloffer(offerid : number) {
+   this.offersService.onOfferCanceled(offerid).subscribe({
+      next: (response) => {
+        console.log('Offer cancelled successfully:', response);
+        this.loadOffers(); // Reload offers after cancellation
+      },
+      error: (err) => {
+        console.error('Error cancelling offer:', err);
+      }
+    });
   }
 
   loadOffers() {

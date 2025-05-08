@@ -7,13 +7,15 @@ import { Request } from '../models/offer';
 
 
 
+import { Request } from '../models/offer';
+import { ReqsignalrService } from '../reqsignalr.service';
 
 
 
 @Component({
   selector: 'app-requests-page',
-  imports: [RouterLink,CommonModule,NgClass],
-  templateUrl:'./requests-page.component.html',
+  imports: [RouterLink, CommonModule, NgClass],
+  templateUrl: './requests-page.component.html',
   styleUrl: './requests-page.component.css'
 })
 export class RequestsPageComponent implements OnInit {
@@ -23,11 +25,28 @@ export class RequestsPageComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private requestsService: RequestService
-  ) {}
+    private requestsService: RequestService ,
+    private reqsignalrService: ReqsignalrService
+
+  ) { }
 
   ngOnInit(): void {
     this.loadRequests();
+
+    const role = localStorage.getItem('role');
+    if (role === 'فني') {
+      this.requestsService.getClientRequests().subscribe(
+        (response) => {
+            const userServiceType = localStorage.getItem('serviceType') || '';
+            const matchedRequests = response.filter((req: any) => req.serviceType === userServiceType);
+            document.getElementById('offerbutton')!.style.display = 'block';
+            console.log('Matched requests:', matchedRequests);
+        });
+      }
+  }
+
+  provideoffer(request: Request): void {
+    this.router.navigate(['/requests']);
   }
 
   // Fetch requests from the API
@@ -98,6 +117,9 @@ export class RequestsPageComponent implements OnInit {
   redirectToRequestPage(): void {
     this.router.navigate(['/myrequests']);
 
+  }
+  GoToRequest(): void {
+    this.router.navigate(['/requests']);
   }
 }
 

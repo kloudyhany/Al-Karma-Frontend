@@ -68,7 +68,7 @@ export class loginComponent {
           if (token && user) {
             localStorage.setItem('BackData', JSON.stringify(res));
   
-            alert('تم تسجيل الدخول بنجاح!');
+        
   
             // Note: Fixed accessing role - was trying to access user.value.role
             // but user is already the userName from response
