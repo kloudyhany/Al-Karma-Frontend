@@ -11,7 +11,7 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class HeaderComponent {
   isLoggedIn = false;
-  showNavItem = false; // Property to control nav item visibility
+  showNavItem = false;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
@@ -20,12 +20,12 @@ export class HeaderComponent {
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      const userCookie = this.getCookie('user');
-      this.isLoggedIn = !!userCookie;
-      this.showNavItem = !!userCookie; // Show nav item if cookie exists
+      const userData = this.getFromLocalStorage('user');
+      this.isLoggedIn = !!userData;
+      this.showNavItem = !!userData;
 
-      if (userCookie) {
-        const user = JSON.parse(userCookie);
+      if (userData) {
+        const user = JSON.parse(userData);
         if (user.serviceType === 'فني') {
           this.router.navigate(['/techprofile']);
         } else if (user.serviceType === 'عميل') {
@@ -35,10 +35,7 @@ export class HeaderComponent {
     }
   }
 
-  getCookie(name: string): string | null {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop()!.split(';').shift() || null;
-    return null;
+  getFromLocalStorage(key: string): string | null {
+    return localStorage.getItem(key);
   }
 }
