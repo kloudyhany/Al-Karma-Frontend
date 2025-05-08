@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule , FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import { OffersignalrService } from '../offersignalr.service';
+import { Router } from '@angular/router';
+import { OfferService } from '../services/offer.service';
 
 @Component({
   selector: 'app-service-confirmation',
@@ -11,7 +13,8 @@ import { OffersignalrService } from '../offersignalr.service';
 })
 export class ServiceConfirmationComponent {
   
-  constructor(private fb:FormBuilder , private offersignalrService: OffersignalrService) { 
+  constructor(private fb:FormBuilder , private offersignalrService: OffersignalrService , private router: Router , private offerService: OfferService) {
+    this.offersignalrService = offersignalrService; 
   }
 
   serviceform !: FormGroup ;
@@ -37,7 +40,18 @@ export class ServiceConfirmationComponent {
     }
     else {
       this.offersignalrService.sendMessage();
-      
-    }
-  }
+      this.offerService.submitOffer(this.serviceform.value).subscribe({
+        next: (response) => {
+          console.log('Offer submitted successfully:', response);
+          alert('تم تقديم العرض بنجاح!');
+          this.router.navigate(['/offers']);
+        }
+        , error: (error) => {
+          console.error('Error submitting offer:', error);
+          alert('فشل تقديم العرض. يرجى المحاولة مرة أخرى.');
+        }
+
+      });
+   
+  }}
 }

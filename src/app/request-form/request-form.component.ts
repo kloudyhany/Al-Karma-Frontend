@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router'; 
 import { ReqsignalrService } from '../reqsignalr.service';
+import { RequestService } from '../services/request.service';
 
 @Component({
   selector: 'app-request-form',
@@ -14,9 +15,10 @@ import { ReqsignalrService } from '../reqsignalr.service';
   styleUrl: './request-form.component.css'
 })
 export class RequestFormComponent implements OnInit {
-  constructor(private http: HttpClient, private fb: FormBuilder, private reqsignalrService: ReqsignalrService) {
+  constructor(private http: HttpClient, private fb: FormBuilder, private reqsignalrService: ReqsignalrService ,
+     private requestservice : RequestService) { } 
 
-  }
+  
   private router = inject(Router);
   request = {
     serviceType: '',
@@ -26,8 +28,10 @@ export class RequestFormComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.reqsignalrService.connectionstart(); 
-  }
+    this.reqsignalrService.connectionstart();
+
+    }
+  
 
   // onFileSelected(event: any) {
     

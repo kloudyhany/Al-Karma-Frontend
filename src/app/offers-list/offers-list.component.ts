@@ -1,7 +1,8 @@
+import { Offer } from './../models/transaction';
 import { Component, OnInit } from '@angular/core';
 import { OfferService } from '../services/offer.service';
 import { CommonModule } from '@angular/common';
-
+import { OffersignalrService } from '../offersignalr.service';
 
 
 @Component({
@@ -15,10 +16,34 @@ export class OffersListComponent implements OnInit {
   offers: any[] = [];
   loading = false;
 
-  constructor(private offersService: OfferService) {}
+  constructor(private offersService: OfferService , private offersignalr : OffersignalrService) {}
 
   ngOnInit(): void {
     this.loadOffers();
+    this.acceptOffer();
+
+  }
+  acceptOffer(offerId: number) {
+    this.offersignalr.OnOfferAccepted(offerId).subscribe({
+      next: (response) => {
+        console.log('Offer accepted successfully:', response);
+        this.offersignalr.receivereview() ;
+      },
+      error: (err) => {
+        console.error('Error accepting offer:', err);
+      }
+    });
+  }
+  canceloffer(offerid : number) {
+   this.offersService.OnOfferCanceled(offerid).subscribe({
+      next: (response) => {
+        console.log('Offer cancelled successfully:', response);
+        this.loadOffers(); // Reload offers after cancellation
+      },
+      error: (err) => {
+        console.error('Error cancelling offer:', err);
+      }
+    });
   }
 
   loadOffers() {

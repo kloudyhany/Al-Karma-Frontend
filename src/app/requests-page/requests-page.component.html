@@ -31,8 +31,11 @@
               </span>
               <br />
               <a [routerLink]="['/request-details', req.id]" class="btn btn-sm btn-outline-primary mt-2">عرض التفاصيل</a>
+              <button class="btn btn-sm btn-outline-danger mt-2" id="offerbutton" style="display: none;" (click)="provideoffer(req)">
+                تقديم عرض</button>
                 <button class="btn btn-success" (click)="redirectToRequestPage()">الذهاب إلى صفحة الطلب</button>
             </div>
+            
           </div>
         </div>
       </div>
