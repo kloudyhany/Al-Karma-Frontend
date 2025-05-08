@@ -1,8 +1,9 @@
+import { Service } from './../models/offer';
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../services/request.service';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule, NgClass } from '@angular/common';
-import { Request } from '../models/offer'; 
+import { Request } from '../models/offer';
 
 
 
@@ -96,7 +97,7 @@ export class RequestsPageComponent implements OnInit {
   }
   redirectToRequestPage(): void {
     this.router.navigate(['/myrequests']);
-  
+
   }
 }
 

@@ -1,8 +1,10 @@
+import { Service, Request } from './../models/offer';
 import { Injectable } from '@angular/core';
 import { Offer } from '../models/offer';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, retry } from 'rxjs';
 import { Router } from '@angular/router';
+import signalR from '@microsoft/signalr';
 
 
 @Injectable({
@@ -10,82 +12,114 @@ import { Router } from '@angular/router';
 })
 export class RequestService {
 
-  private apiUrl = 'https://localhost:7245/api/Request'; 
-  // private baseUrl = 'https://localhost:7245/api'; // Add base URL for other endpoints
+  private apiUrl = 'https://localhost:7245/api/request'; 
+  private hubApiUrl = 'https://localhost:7245/hubs/request'; 
 
+  private connection = new signalR.HubConnectionBuilder()
+        .withUrl(`${this.hubApiUrl}`, {
+            accessTokenFactory: () => {
+              const backData = localStorage.getItem("BackData");
+              return backData ? JSON.parse(backData).value.token : '';
+            },
+            transport: signalR.HttpTransportType.WebSockets,
+            withCredentials: false,
+          })
+          .configureLogging(signalR.LogLevel.Information)
+          .withAutomaticReconnect()
+          .build();
+  
+  
   constructor(private http: HttpClient,private router:Router) { }
 
-  // //  الحصول على جميع الطلبات
-  // getMyRequests(): Observable<Offer[]> {
-  //   return this.http.get<Offer[]>(`${this.apiUrl}/my`);
-  // }
 
-  getRequestById(id: number): Observable<Offer> {
-    return this.http.get<Offer>(`${this.apiUrl}/${id}`);
+  connectionStart(): void {   
+  this.connection
+    .start()
+    .then(() => {
+      console.log("✅ Connected to SignalR hub");
+    })
+    .catch((err) => {
+      console.error("❌ Connection failed:", err);
+    });
   }
-  
 
-  // //  إضافة طلب جديد
-  // createRequest(request: Offer): Observable<Offer> {
-  //   return this.http.post<Offer>(`${this.apiUrl}/create`, request);
-  // }
+  SendRequest(request: any): Observable<any>{
+      return new Observable((observer) => {
+        this.connection.invoke("CreateRequest", request).then((msg) => {
+          observer.next(msg);
+          observer.complete();
+        });
+      });
+    }
+    
+  onRceiveNotification(): Observable<any> {
+    return new Observable(observer => {
+      this.connection.on("ReceiveNotification", (message) => {
+      observer.next(message);
+      });
+    });
+  }
 
-  // //  تحديث الطلب
-  // updateRequest(id: number, request: Offer): Observable<Offer> {
-  //   return this.http.put<Offer>(`${this.apiUrl}/update/${id}`, request);
-  // }
+  onReceiveRequest(): Observable<any> {
+    return new Observable(observer => {
+      this.connection.on("ReceiveRequest", (message) => {
+        observer.next(message);
+      });
+    });
+  }
 
+  getRequestById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
+  getServiceTypeRequests(serviceType: number): Observable<any[]> {
+    return this.http.get<any>(`${this.apiUrl}/serviceType/${serviceType}`)
+  }
 
   //  حذف الطلب
   deleteRequest(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
-  // //  قبول الطلب (تحديث حالة الطلب إلى مكتمل أو مرفوض)
-  // updateRequestStatus(id: number, status: 'completed' | 'rejected'): Observable<void> {
-  //   return this.http.put<void>(`${this.apiUrl}/status/${id}`, { status });
-  // }
-  // acceptRequest(id: number, status: string): Observable<void> {
-  //   return this.http.put<void>(`${this.apiUrl}/accept/${id}`, { status });
-  // }
-  
-  // Client Requests
+
+  // Client Requests not Recommended to use, 
+  //ANCHOR -  use SendRequest instead
   createRequest(requestData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/requests`, requestData);
+    return this.http.post(`${this.apiUrl}`, requestData);
   }
 
-  getClientRequests(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/client/requests`);
+  getClientRequests(id : number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/userId/${id}`);
   }
 
-  // Provider Offers
-  createOffer(offerData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/offers`, offerData);
-  }
+  // // Provider Offers
+  // createOffer(offerData: any): Observable<any> {
+  //   return this.http.post(`${this.apiUrl}/offers`, offerData);
+  // }
 
-  getAvailableRequests(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/provider/requests`);
-  }
+  // getAvailableRequests(): Observable<any[]> {
+  //   return this.http.get<any[]>(`${this.apiUrl}/provider/requests`);
+  // }
 
-  getProviderOffers(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/provider/offers`);
-  }
+  // getProviderOffers(): Observable<any[]> {
+  //   return this.http.get<any[]>(`${this.apiUrl}/provider/offers`);
+  // }
 
   // Offer Management
-  acceptOffer(offerId: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/offers/${offerId}/accept`, {});
-  }
+  // acceptOffer(offerId: string): Observable<any> {
+  //   return this.http.put(`${this.apiUrl}/offers/${offerId}/accept`, {});
+  // }
 
-  rejectOffer(offerId: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/offers/${offerId}/reject`, {});
-  }
+  // rejectOffer(offerId: string): Observable<any> {
+  //   return this.http.put(`${this.apiUrl}/offers/${offerId}/reject`, {});
+  // }
 
   // Ratings
-  addRating(ratingData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/ratings`, ratingData);
-  }
-  logout() {
-    console.log('تسجيل الخروج...');
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
-  }
+  // addRating(ratingData: any): Observable<any> {
+  //   return this.http.post(`${this.apiUrl}/ratings`, ratingData);
+  // }
+  // logout() {
+  //   console.log('تسجيل الخروج...');
+  //   localStorage.removeItem('token');
+  //   this.router.navigate(['/login']);
+  // }
 }
