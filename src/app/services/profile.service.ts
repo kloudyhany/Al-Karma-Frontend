@@ -8,15 +8,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProfileService {
-  private baseUrl = ''; 
+  private baseUrl = 'https://localhost:7245/api/user';
 
   constructor(private http: HttpClient) {}
 
   // Get profile data
-  getUserProfile(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/profile`);
+  getUserData(userId : number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${userId}`);
   }
-
+  /**--------------------------------------------**/
   // Update profile
   updateUserProfile(userData: any): Observable<any> {
     return this.http.put(`${this.baseUrl}/update-profile`, userData);
@@ -28,7 +28,7 @@ export class ProfileService {
     formData.append('image', file);
     return this.http.post(`${this.baseUrl}/upload-profile-image`, formData);
   }
-  
+
 
 
 
@@ -52,6 +52,6 @@ export class ProfileService {
     });
   }
   }
-  
+
 
 

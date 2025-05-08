@@ -8,11 +8,19 @@ import { RatingRequest } from '../models/offer';
 })
 export class RatingService {
 
-  private baseUrl = ''; // غيّرها حسب عنوان API الفعلي
+  private baseUrl = 'https://localhost:7245/hubs/review'; // غيّرها حسب عنوان API الفعلي
 
   constructor(private http: HttpClient) {}
 
-  submitRating(payload: RatingRequest): Observable<any> {
-    return this.http.post(this.baseUrl, payload);
-  }
-  }
+  //signalR
+
+  // reveiwClient(clientReview: any): Observable<any>{
+  //   return
+  // }
+
+
+
+  // submitRating(payload: RatingRequest): Observable<any> {
+  //   return this.http.post(this.baseUrl, payload);
+  // }
+}
