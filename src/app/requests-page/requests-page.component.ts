@@ -113,5 +113,8 @@ export class RequestsPageComponent implements OnInit {
     this.router.navigate(['/myrequests']);
 
   }
+  GoToRequest(): void {
+    this.router.navigate(['/requests']);
+  }
 }
 
