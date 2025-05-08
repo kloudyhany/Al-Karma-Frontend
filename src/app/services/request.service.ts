@@ -12,8 +12,8 @@ import signalR from '@microsoft/signalr';
 })
 export class RequestService {
 
-  private apiUrl = 'https://localhost:7245/api/request'; 
-  private hubApiUrl = 'https://localhost:7245/hubs/request'; 
+  private apiUrl = 'https://localhost:7245/api/request';
+  private hubApiUrl = 'https://localhost:7245/hubs/request';
 
   private connection = new signalR.HubConnectionBuilder()
         .withUrl(`${this.hubApiUrl}`, {
@@ -27,12 +27,12 @@ export class RequestService {
           .configureLogging(signalR.LogLevel.Information)
           .withAutomaticReconnect()
           .build();
-  
-  
+
+
   constructor(private http: HttpClient,private router:Router) { }
 
 
-  connectionStart(): void {   
+  connectionStart(): void {
   this.connection
     .start()
     .then(() => {
@@ -51,7 +51,7 @@ export class RequestService {
         });
       });
     }
-    
+
   onRceiveNotification(): Observable<any> {
     return new Observable(observer => {
       this.connection.on("ReceiveNotification", (message) => {
@@ -68,6 +68,10 @@ export class RequestService {
     });
   }
 
+  getAllRequests(): Observable<any[]>{
+    return this.http.get<any[]>(`${this.apiUrl}/`)
+  }
+
   getRequestById(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
@@ -81,13 +85,13 @@ export class RequestService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  // Client Requests not Recommended to use, 
+  // Client Requests not Recommended to use,
   //ANCHOR -  use SendRequest instead
   createRequest(requestData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}`, requestData);
   }
 
-  getClientRequests(id : number): Observable<any[]> {
+  getClientRequests(id : string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/userId/${id}`);
   }
 
