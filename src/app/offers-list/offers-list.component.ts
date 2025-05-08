@@ -20,14 +20,28 @@ export class OffersListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadOffers();
-    this.acceptOffer();
+    this.acceptOffer(1); // Pass a valid offerId as an argument
+    this.completeOffer(1); 
 
   }
+  completeOffer(offerId: number) {
+    this.offersignalr.onOfferCompleted(offerId).subscribe({
+      next: (response) => {
+        console.log('Offer completed successfully:', response);
+        this.offersignalr.receivereview() ;
+  
+      },
+      error: (err) => {
+        console.error('Error completing offer:', err);
+      }
+    });
+  }
   acceptOffer(offerId: number) {
-    this.offersignalr.OnOfferAccepted(offerId).subscribe({
+    this.offersignalr.onOfferAccepted(offerId).subscribe({
       next: (response) => {
         console.log('Offer accepted successfully:', response);
-        this.offersignalr.receivereview() ;
+        alert('تم قبول العرض بنجاح!');
+        
       },
       error: (err) => {
         console.error('Error accepting offer:', err);
@@ -35,7 +49,7 @@ export class OffersListComponent implements OnInit {
     });
   }
   canceloffer(offerid : number) {
-   this.offersService.OnOfferCanceled(offerid).subscribe({
+   this.offersService.onOfferCanceled(offerid).subscribe({
       next: (response) => {
         console.log('Offer cancelled successfully:', response);
         this.loadOffers(); // Reload offers after cancellation
