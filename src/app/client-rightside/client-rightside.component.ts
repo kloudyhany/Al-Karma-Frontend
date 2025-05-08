@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ComponentLoaderService } from '../technical-profile/ComponentLoaderService';
 import { ClientinfoComponent } from '../clientinfo/clientinfo.component';
 import { OfferClientrequestComponent } from '../offer-clientrequest/offer-clientrequest.component';
@@ -27,10 +27,14 @@ import{Router}from '@angular/router';
   `
 
 })
-export class ClientRightsideComponent implements OnInit {
+export class ClientRightsideComponent implements OnInit, AfterViewInit {
+ 
 constructor(private loaderService: ComponentLoaderService,private Router:Router) {}
   ngOnInit(): void {
   this.sideBar();
+  }
+  ngAfterViewInit(): void {
+    this.open(ClientinfoComponent);
   }
 
   sideBar(){
@@ -61,7 +65,7 @@ constructor(private loaderService: ComponentLoaderService,private Router:Router)
 }
 logout() {
     console.log('Logging out...');
-    localStorage.removeItem('token');
+    localStorage.removeItem('BackData');
     this.Router.navigate(['/login']);
 
 }
