@@ -27,6 +27,22 @@ export class RequestsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadRequests();
+
+    // Add form validation logic
+    const form = document.querySelector('form');
+    if (form) {
+      form.addEventListener('submit', (event) => {
+      const isValid = form.checkValidity();
+      if (!isValid) {
+        event.preventDefault();
+        event.stopPropagation();
+        console.error('Form validation failed.');
+      } else {
+        console.log('Form is valid.');
+      }
+      form.classList.add('was-validated');
+      });
+    }
   }
 
   // Fetch requests from the API
@@ -97,6 +113,9 @@ export class RequestsPageComponent implements OnInit {
   redirectToRequestPage(): void {
     this.router.navigate(['/myrequests']);
   
+  }
+  GoToRequest(): void {
+    this.router.navigate(['/requests']);
   }
 }
 

@@ -1,8 +1,16 @@
 <div class="container py-4" dir="rtl" >
+    <div class="text-center mb-4">
+      <button class="btn btn-success" style="background-color: rgb(211, 126, 29);" (click)="GoToRequest()">إنشاء طلب جديد</button>
+      <button class="btn btn-primary" style="position: fixed; bottom: 0; left: 0; right: 0; background-color: rgb(202, 124, 21); text-align: center;" routerLink="/">الذهاب إلى الصفحة الرئيسية</button> 
+
+    </div>
+  
+
     <h3 class="mb-4 text-center text-white">طلباتي</h3>
   
     <!-- Tabs -->
     <ul class="nav nav-pills justify-content-center mb-4">
+
       <li class="nav-item">
         <button class="nav-link" [class.active]="selectedTab === 'all'" (click)="setTab('all')">الكل</button>
       </li>
