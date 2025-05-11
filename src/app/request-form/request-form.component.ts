@@ -57,4 +57,26 @@ export class RequestFormComponent implements OnInit {
 
     this.reqsignalrService.onreceiveOffer(); 
   }
+  createRequest(requestData: any) {
+    this.http.post('/api/requests', requestData).subscribe(
+      response => {
+        console.log('Request created successfully:', response);
+      },
+      error => {
+        console.error('Error creating request:', error);
+      }
+    );
+  }
+  getClientRequests() {
+    this.http.get('/api/requests/client').subscribe(
+      (response: any) => {
+
+        console.log('Client requests:', response);
+      },
+      error => {
+        console.error('خطا ', error);
+      }
+    );
+  }
+
 }

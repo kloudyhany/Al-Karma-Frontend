@@ -27,7 +27,7 @@ export class RegComponent {
       service: [''],
       // previousworkname: [''],
       // previousworkimgs: [''],
-      nationalIdImages: ['', Validators.required],
+      // nationalIdImages: ['', Validators.required],
       phone: ['', [Validators.required, Validators.pattern(/^01[2,5,0,1]\d{8}$/)]], 
       whatsapp: ['', [Validators.required, Validators.pattern(/^01[2,5,0,1]\d{8}$/)]], 
       address: ['']

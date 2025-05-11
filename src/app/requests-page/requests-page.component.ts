@@ -45,27 +45,24 @@ export class RequestsPageComponent implements OnInit {
     }
   }
 
-  // Fetch requests from the API
   loadRequests(): void {
     this.requestsService.getAvailableRequests().subscribe(
       (data: Request[]) => {
         this.allRequests = data;
         this.filterRequests();
+        
       },
       (error) => {
         console.error('Error fetching requests:', error);
-        // Handle error (e.g., show a notification or fallback)
       }
     );
   }
 
-  // Set the selected tab and filter the requests accordingly
   setTab(tab: 'all' | 'inProgress' | 'completed' | 'cancelled'): void {
     this.selectedTab = tab;
     this.filterRequests();
   }
 
-  // Filter requests based on the selected tab
   filterRequests(): void {
     if (this.selectedTab === 'all') {
       this.filteredRequests = this.allRequests;
@@ -83,7 +80,6 @@ export class RequestsPageComponent implements OnInit {
     }
   }
 
-  // Get the label for each request status
   getStatusLabel(status: string): string {
     switch (status) {
       case 'inProgress':
